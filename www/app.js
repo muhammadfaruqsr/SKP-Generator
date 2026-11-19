@@ -139,6 +139,9 @@ function getGoogleToken() {
     _tokenClient.requestAccessToken();
   });
 }
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('sw.js').catch(console.warn);
+}
 
 /* ============ SISA LOGIKA ============ */
 /* Salin dari versi GAS: go(), buildFields(), fillSelects(), renderThumbs(), collect(),
