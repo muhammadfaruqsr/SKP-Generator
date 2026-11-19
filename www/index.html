@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Generator SKP Harian Otomatis</title>
+<meta name="theme-color" content="#0f766e">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="boot"><div><div class="spin"></div><div id="boot-t">Menyiapkan aplikasi…</div></div></div>
+
+<header class="top"><div class="wrap">
+  <div class="brand-ic" data-ic="file"></div>
+  <div><h1>Generator SKP Harian Otomatis</h1><p>Offline · PDF di perangkat · Data tersimpan lokal</p></div>
+</div></header>
+
+<main class="wrap">
+
+<!-- ===== TAB BUAT ===== -->
+<section class="tab on" id="tab-buat">
+  <div class="who"><div class="brand-ic" style="background:#fff;color:var(--brand)" data-ic="user"></div>
+    <div><b id="w-nama">–</b><small id="w-nip">–</small></div><a id="w-edit">Ubah profil</a></div>
+
+  <div class="card">
+    <h2>Tanggal</h2><p class="sub">Tanggal pelaksanaan (juga dipakai sebagai tanggal surat).</p>
+    <div class="grid">
+      <div class="field"><label for="f-tanggal">Tanggal pelaksanaan</label><input type="date" id="f-tanggal"></div>
+      <div class="field"><label for="f-tempat">Tempat surat</label><input type="text" id="f-tempat" placeholder="Contoh: Sumedang"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Isi laporan</h2><p class="sub">Pilih kalimat dari daftar (diatur di menu Setting). Isinya tetap bisa diedit.</p>
+    <div id="fields"></div>
+  </div>
+
+  <div class="card">
+    <h2>Dokumentasi</h2><p class="sub">Foto kegiatan, maksimal 6. Tampil di halaman 2.</p>
+    <div class="thumbs" id="thumbs"></div>
+    <label class="btn ghost sm" style="display:inline-flex;margin:0"><i data-ic="image"></i><span id="photo-lbl">Tambah foto</span>
+      <input type="file" id="photo-in" accept="image/*" multiple hidden></label>
+    <label class="chk" style="margin-top:14px!important"><input type="checkbox" id="f-ttd" checked> Sertakan tanda tangan</label>
+  </div>
+
+  <div class="genrow">
+    <button class="btn ghost block" id="btn-prev"><i data-ic="eye"></i><span>Pratinjau</span></button>
+    <button class="btn pri block" id="btn-gen"><i data-ic="file"></i><span>Buat PDF</span></button>
+  </div>
+
+  <div class="card result" id="result" style="display:none;margin-top:14px">
+    <div class="ok"><span data-ic="check"></span>PDF berhasil dibuat</div>
+    <small id="r-name" style="color:var(--mute)"></small>
+    <div class="row" style="margin-top:10px">
+      <button class="btn pri sm" id="r-download"><i data-ic="ext"></i>Unduh PDF</button>
+      <button class="btn ghost sm" id="r-drive"><i data-ic="copy"></i>Simpan ke Drive</button>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TAB RIWAYAT ===== -->
+<section class="tab" id="tab-riwayat">
+  <div class="card">
+    <div class="hmon">
+      <button class="ib" id="h-prev"><i data-ic="chl"></i></button>
+      <div class="calt"><b id="h-title">–</b><small id="h-sub"></small></div>
+      <button class="ib" id="h-next"><i data-ic="chr"></i></button>
+    </div>
+    <div class="row" style="justify-content:space-between;margin-bottom:10px">
+      <button class="btn ghost sm" id="h-today">Bulan ini</button>
+      <button class="btn ghost sm" id="h-ref"><i data-ic="refresh"></i>Muat ulang</button>
+    </div>
+    <div id="h-list"></div>
+  </div>
+</section>
+
+<!-- ===== TAB JADWAL ===== -->
+<section class="tab" id="tab-absen">
+  <div class="jtabs" id="jtabs">
+    <button data-j="absen" class="on"><i data-ic="clock"></i>Jadwal Absen</button>
+    <button data-j="masuk"><i data-ic="cal"></i>Jadwal Masuk</button>
+  </div>
+  <div class="jpanel on" id="jp-absen">
+    <div class="card">
+      <h2 style="margin-bottom:12px">Kalender Absen</h2>
+      <div class="calh">
+        <button class="ib" id="ab-prev"><i data-ic="chl"></i></button>
+        <div class="calt"><b id="ab-title">–</b><small id="ab-sub"></small></div>
+        <button class="ib" id="ab-next"><i data-ic="chr"></i></button>
+      </div>
+      <div class="legend" id="ab-legend"></div>
+      <div class="dow"><span>Sen</span><span>Sel</span><span>Rab</span><span>Kam</span><span>Jum</span><span>Sab</span><span>Min</span></div>
+      <div class="cal" id="ab-cal"></div>
+    </div>
+    <div class="card">
+      <h2 id="ab-edt">Pilih tanggal</h2>
+      <p class="sub" id="ab-edsub">Ketuk tanggal pada kalender, lalu pilih shift-nya.</p>
+      <div class="chips" id="ab-chips"></div>
+      <button class="btn ghost block" id="ab-del">Kosongkan tanggal ini</button>
+    </div>
+  </div>
+  <div class="jpanel" id="jp-masuk">
+    <div class="card">
+      <h2 style="margin-bottom:12px">Kalender Masuk</h2>
+      <div class="calh">
+        <button class="ib" id="mk-prev"><i data-ic="chl"></i></button>
+        <div class="calt"><b id="mk-title">–</b><small id="mk-sub"></small></div>
+        <button class="ib" id="mk-next"><i data-ic="chr"></i></button>
+      </div>
+      <div class="legend" id="mk-legend"></div>
+      <div class="dow"><span>Sen</span><span>Sel</span><span>Rab</span><span>Kam</span><span>Jum</span><span>Sab</span><span>Min</span></div>
+      <div class="cal" id="mk-cal"></div>
+    </div>
+    <div class="card">
+      <h2 id="mk-edt">Pilih tanggal</h2>
+      <p class="sub" id="mk-edsub">Ketuk tanggal pada kalender, lalu pilih status masuknya.</p>
+      <div class="chips" id="mk-chips"></div>
+      <button class="btn ghost block" id="mk-del">Kosongkan tanggal ini</button>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TAB SETTING ===== -->
+<section class="tab" id="tab-setting">
+  <div class="card">
+    <h2>Daftar kalimat</h2>
+    <p class="sub">Daftar ini menjadi pilihan saat membuat SKP. Tiap RHK punya jenis kegiatan dan output sendiri.</p>
+    <div class="seg" id="seg"></div>
+    <div id="s-list"></div>
+    <div class="row" style="margin-top:6px">
+      <button class="btn ghost sm" id="s-add"><i data-ic="plus"></i>Tambah kalimat</button>
+    </div>
+  </div>
+  <button class="btn pri block" id="s-save"><i data-ic="check"></i>Simpan setting</button>
+</section>
+
+<!-- ===== TAB PROFIL ===== -->
+<section class="tab" id="tab-profil">
+  <div class="card">
+    <h2>Data pegawai</h2><p class="sub">Terisi otomatis di setiap laporan.</p>
+    <div class="field"><label for="p-nama">Nama</label><input type="text" id="p-nama"></div>
+    <div class="grid">
+      <div class="field"><label for="p-nip">NIP</label><input type="text" id="p-nip" inputmode="numeric"></div>
+      <div class="field"><label for="p-pangkat">Pangkat/Gol. Ruang</label><input type="text" id="p-pangkat"></div>
+    </div>
+    <div class="field"><label for="p-jabatan">Jabatan</label><input type="text" id="p-jabatan"></div>
+    <div class="field"><label for="p-unit">Unit Kerja</label><input type="text" id="p-unit"></div>
+    <div class="field"><label for="p-atasan">Atasan</label><input type="text" id="p-atasan"></div>
+    <div class="field"><label for="p-tempat">Tempat surat (default)</label><input type="text" id="p-tempat"></div>
+  </div>
+  <div class="card">
+    <h2>Logo &amp; tanda tangan</h2>
+    <div class="up"><div class="prev" id="logo-prev"></div><div><b>Logo</b><small>Kolom kiri tabel profil</small>
+      <div class="row"><label class="btn ghost sm" style="margin:0">Pilih gambar<input type="file" id="logo-in" accept="image/*" hidden></label><button class="btn ghost sm" id="logo-rm">Hapus</button></div></div></div>
+    <div class="up"><div class="prev" id="ttd-prev"></div><div><b>Tanda tangan</b><small>Di atas nama &amp; NIP</small>
+      <div class="row"><label class="btn ghost sm" style="margin:0">Pilih gambar<input type="file" id="ttd-in" accept="image/*" hidden></label><button class="btn ghost sm" id="ttd-rm">Hapus</button></div></div></div>
+  </div>
+  <button class="btn pri block" id="p-save"><i data-ic="check"></i>Simpan profil</button>
+</section>
+
+</main>
+
+<nav id="nav">
+  <button data-tab="riwayat"><i data-ic="clock"></i>Riwayat</button>
+  <button data-tab="setting"><i data-ic="sliders"></i>Setting</button>
+  <button class="nav-fab" data-tab="buat" aria-label="Buat SKP">
+    <div class="fab"><i data-ic="plus"></i></div>
+    <span>Buat SKP</span>
+  </button>
+  <button data-tab="absen"><i data-ic="cal"></i>Jadwal</button>
+  <button data-tab="profil"><i data-ic="user"></i>Profil</button>
+</nav>
+
+<div id="pv">
+  <div class="pv-h"><b>Pratinjau SKP<small>Perkiraan tampilan</small></b><button class="ib" id="pv-x"><i data-ic="x"></i></button></div>
+  <div id="pv-box"><div id="pv-sizer"><div id="pv-inner"></div></div></div>
+  <div class="pv-f"><button class="btn ghost" id="pv-edit">Edit lagi</button><button class="btn pri" id="pv-save"><i data-ic="check"></i>Buat PDF</button></div>
+</div>
+<div class="modal" id="modal"></div>
+<div class="toast" id="toast"></div>
+
+<script src="app.js"></script>
+<script src="db.js"></script>
+<script src="pdf.js"></script>
+</body>
+</html>
