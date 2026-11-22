@@ -23,25 +23,9 @@ body{
 }
 .wrap{max-width:760px;margin:0 auto;padding:0 16px}
 
-/* ===== Header cozy modern ===== */
-.top{
-  position:relative;
-  background:linear-gradient(135deg,#0f766e 0%,#14958a 55%,#2bb3a3 100%);
-  color:#fff;padding:16px 0 18px;
-  overflow:hidden;
-}
-.top::before{
-  content:'';position:absolute;top:-60%;right:-20%;
-  width:320px;height:320px;border-radius:50%;
-  background:radial-gradient(circle,rgba(255,255,255,.18) 0%,rgba(255,255,255,0) 70%);
-  pointer-events:none;
-}
-.top::after{
-  content:'';position:absolute;bottom:-40%;left:-10%;
-  width:240px;height:240px;border-radius:50%;
-  background:radial-gradient(circle,rgba(255,255,255,.1) 0%,rgba(255,255,255,0) 70%);
-  pointer-events:none;
-}
+.top{position:relative;background:linear-gradient(135deg,#0f766e 0%,#14958a 55%,#2bb3a3 100%);color:#fff;padding:16px 0 18px;overflow:hidden}
+.top::before{content:'';position:absolute;top:-60%;right:-20%;width:320px;height:320px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.18) 0%,rgba(255,255,255,0) 70%);pointer-events:none}
+.top::after{content:'';position:absolute;bottom:-40%;left:-10%;width:240px;height:240px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.1) 0%,rgba(255,255,255,0) 70%);pointer-events:none}
 .top .wrap{position:relative;display:flex;gap:12px;align-items:center;z-index:1}
 .brand-ic{width:42px;height:42px;border-radius:13px;background:rgba(255,255,255,.2);display:grid;place-items:center;flex:none;backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);border:1px solid rgba(255,255,255,.15)}
 .brand-ic .ic{width:22px;height:22px}
@@ -114,7 +98,7 @@ textarea{resize:none;overflow:hidden;min-height:76px}
 .prev img{max-width:100%;max-height:100%;object-fit:contain}
 .up small{display:block;color:var(--mute);font-size:12px;margin:2px 0 8px}
 .row{display:flex;gap:8px;flex-wrap:wrap}
-.toast{position:fixed;left:50%;bottom:calc(var(--nav-h) + 20px + env(safe-area-inset-bottom));transform:translate(-50%,30px);background:#0f1f1c;color:#fff;padding:11px 18px;border-radius:12px;font-size:14px;opacity:0;pointer-events:none;transition:.25s;z-index:99;max-width:90vw}
+.toast{position:fixed;left:50%;bottom:calc(var(--nav-h) + 20px + env(safe-area-inset-bottom));transform:translate(-50%,30px);background:#0f1f1c;color:#fff;padding:11px 18px;border-radius:12px;font-size:14px;opacity:0;pointer-events:none;transition:.25s;z-index:99;max-width:90vw;text-align:center}
 .toast.show{opacity:1;transform:translate(-50%,0)}
 .modal{position:fixed;inset:0;background:rgba(15,31,28,.45);display:none;align-items:center;justify-content:center;padding:20px;z-index:98}
 .modal.open{display:flex}
@@ -145,13 +129,10 @@ textarea{resize:none;overflow:hidden;min-height:76px}
 .cd.today .dn{text-decoration:underline;text-underline-offset:3px}
 .cd.sel{outline:2.5px solid var(--ink);outline-offset:1px;z-index:1}
 .cd.e.sel{background:var(--brand-l)}
-/* Shift kerja (Jadwal Absen) */
 .c1{background:#f59e0b;color:#3b2300}
 .c2{background:#2563eb;color:#fff}
 .c3{background:#7c3aed;color:#fff}
-/* Status khusus: Lepas Piket & Libur (keduanya merah) */
 .cP,.cL{background:#dc2626;color:#fff}
-/* Status masuk lainnya */
 .cM{background:#0d9488;color:#fff}
 .bd{font-size:9.5px;font-weight:700;border-radius:6px;padding:2px 5px;line-height:1.1;white-space:nowrap;flex:none}
 .chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
@@ -173,7 +154,6 @@ textarea{resize:none;overflow:hidden;min-height:76px}
 #pv-box{flex:1;overflow:auto;padding:12px 0;-webkit-overflow-scrolling:touch}
 #pv-sizer{position:relative;margin:0 auto}
 #pv-inner{position:absolute;top:0;left:0;width:595px;transform-origin:0 0}
-/* Preview A4 versi ringkas (mendekati hasil PDF F4 final) */
 .pg{width:595px;min-height:842px;background:#fff;padding:30px;box-sizing:border-box;box-shadow:0 2px 12px rgba(0,0,0,.15);margin-bottom:16px;font:10px/1.2 Arial,Helvetica,sans-serif;color:#000}
 .pg table{border-collapse:collapse;width:100%}
 .pg td{border:.75px solid #000;padding:3px 5px;vertical-align:top;white-space:normal;word-break:break-word}
@@ -193,22 +173,44 @@ textarea{resize:none;overflow:hidden;min-height:76px}
 .rhk-h .hint{flex:1;font-size:12px;color:var(--mute)}
 .rhk-card>.btn{margin-top:2px}
 
+.jtabs{display:flex;gap:6px;background:#eef4f3;padding:5px;border-radius:14px;margin-bottom:14px}
+.jtabs button{flex:1;border:0;background:none;font:inherit;font-size:13px;font-weight:600;padding:11px 8px;border-radius:10px;color:var(--mute);cursor:pointer;transition:.15s;display:flex;align-items:center;justify-content:center;gap:6px}
+.jtabs button .ic{width:16px;height:16px}
+.jtabs button.on{background:#fff;color:var(--brand-d);box-shadow:0 1px 3px rgba(0,0,0,.08)}
+.jpanel{display:none}.jpanel.on{display:block;animation:fade .2s}
+
+#nav{position:fixed;left:0;right:0;bottom:0;z-index:30;background:rgba(255,255,255,.94);backdrop-filter:saturate(180%) blur(14px);-webkit-backdrop-filter:saturate(180%) blur(14px);border-top:1px solid rgba(15,31,28,.06);box-shadow:0 -4px 24px rgba(15,31,28,.06);display:flex;align-items:stretch;justify-content:space-around;height:var(--nav-h);padding:0 6px env(safe-area-inset-bottom);gap:0}
+#nav button{flex:1;border:0;background:none;padding:8px 4px;border-radius:14px;font:inherit;font-size:10.5px;font-weight:600;letter-spacing:.01em;color:var(--mute);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;cursor:pointer;transition:.18s;position:relative;min-width:0;-webkit-tap-highlight-color:transparent}
+#nav button .ic{width:22px;height:22px;transition:.18s}
+#nav button.on{color:var(--brand-d)}
+#nav button.on .ic{transform:translateY(-1px)}
+#nav button.on::before{content:'';position:absolute;top:6px;left:50%;transform:translateX(-50%);width:34px;height:34px;border-radius:12px;background:var(--brand-l);z-index:-1}
+#nav .nav-fab{flex:none;width:70px;position:relative;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;padding-bottom:6px}
+#nav .nav-fab .fab{width:52px;height:52px;border-radius:16px;background:linear-gradient(135deg,#0f766e,#14958a 70%,#2bb3a3);color:#fff;display:grid;place-items:center;box-shadow:0 8px 20px rgba(15,118,110,.35), 0 2px 6px rgba(15,118,110,.25);transition:.2s cubic-bezier(.34,1.56,.64,1);margin-top:-10px}
+#nav .nav-fab .fab .ic{width:26px;height:26px}
+#nav .nav-fab span{color:var(--brand-d);font-weight:700;font-size:10.5px;margin-top:5px;display:block;letter-spacing:.01em}
+#nav .nav-fab.on .fab{transform:translateY(-2px) scale(1.03);box-shadow:0 12px 26px rgba(15,118,110,.45)}
+#nav .nav-fab::before{display:none}
+
+.hmon{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.hmon .calt{flex:1;text-align:center}
+.hmon .calt b{font-size:17px;display:block;color:var(--ink)}
+.hmon .calt small{color:var(--mute);font-size:12px}
+.hbar{display:flex;flex-direction:column;gap:8px;margin-bottom:14px}
+.hsum{display:flex;flex-wrap:wrap;gap:6px}
+.hsum .lg{background:var(--brand-l);color:var(--brand-d)}
+
 /* ===== Beranda ===== */
-.greet{
-  display:flex;gap:14px;align-items:center;
-  background:linear-gradient(135deg,#0f766e,#14958a 70%,#2bb3a3);
-  color:#fff;border-radius:18px;padding:18px;margin-bottom:14px;
-  box-shadow:0 8px 24px rgba(15,118,110,.25);
-}
+.greet{display:flex;gap:14px;align-items:center;background:linear-gradient(135deg,#0f766e,#14958a 70%,#2bb3a3);color:#fff;border-radius:18px;padding:18px;margin-bottom:14px;box-shadow:0 8px 24px rgba(15,118,110,.25)}
 .greet-ic{width:48px;height:48px;border-radius:14px;background:rgba(255,255,255,.2);display:grid;place-items:center;flex:none;border:1px solid rgba(255,255,255,.2)}
-.greet h2{margin:0;font-size:16px;font-weight:700}
+.greet h2{margin:0;font-size:16px;font-weight:700;line-height:1.3}
 .greet p{margin:2px 0 0;font-size:12.5px;opacity:.9}
 .stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px}
 .stat{background:#f6faf9;border-radius:12px;padding:12px;text-align:center}
 .stat b{display:block;font-size:22px;font-weight:800;color:var(--brand-d)}
 .stat small{font-size:11px;color:var(--mute);font-weight:600}
 .chart-box{background:#f6faf9;border-radius:14px;padding:12px;margin-bottom:12px;position:relative;height:200px}
-.chart-box canvas{width:100%!important;height:100%!important}
+.chart-box canvas{width:100%!important;height:100%!important;display:block}
 .donut-row{display:flex;gap:14px;align-items:center;background:#f6faf9;border-radius:14px;padding:12px}
 .donut-row canvas{flex:none}
 .donut-legend{flex:1;font-size:12px;min-width:0}
@@ -221,59 +223,11 @@ textarea{resize:none;overflow:hidden;min-height:76px}
 .quick .q-ic{width:36px;height:36px;border-radius:10px;background:var(--brand-l);color:var(--brand-d);display:grid;place-items:center;margin-bottom:6px}
 .quick b{font-size:14px}.quick small{font-size:11.5px;color:var(--mute)}
 .offline-bar{position:fixed;left:16px;right:16px;bottom:calc(var(--nav-h) + 12px);background:#f59e0b;color:#3b2300;padding:10px 14px;border-radius:12px;font-size:13px;font-weight:600;text-align:center;z-index:40;box-shadow:0 4px 14px rgba(0,0,0,.12)}
-/* Export modal */
 .exp-opts{display:flex;flex-direction:column;gap:10px;margin:16px 0}
 .exp-opt{display:flex;gap:12px;align-items:center;border:1.5px solid var(--line);border-radius:12px;padding:12px;cursor:pointer;background:#fff;font:inherit;text-align:left;color:var(--ink);width:100%}
 .exp-opt:hover{border-color:var(--brand)}
-.exp-opt .e-ic{width:40px;height:40px;border-radius:10px;background:var(--brand-l);color:var(--brand-d);display:grid;place-items:center;flex:none}
+.exp-opt .e-ic{width:40px;height:40px;border-radius:10px;background:var(--brand-l);color:var(--brand-d);display:grid;place-items:center;flex:none;font-size:18px}
 .exp-opt b{display:block;font-size:14px}.exp-opt small{font-size:12px;color:var(--mute)}
-
-/* ===== Jadwal: segmented tabs ===== */
-.jtabs{display:flex;gap:6px;background:#eef4f3;padding:5px;border-radius:14px;margin-bottom:14px}
-.jtabs button{flex:1;border:0;background:none;font:inherit;font-size:13px;font-weight:600;padding:11px 8px;border-radius:10px;color:var(--mute);cursor:pointer;transition:.15s;display:flex;align-items:center;justify-content:center;gap:6px}
-.jtabs button .ic{width:16px;height:16px}
-.jtabs button.on{background:#fff;color:var(--brand-d);box-shadow:0 1px 3px rgba(0,0,0,.08)}
-.jpanel{display:none}.jpanel.on{display:block;animation:fade .2s}
-
-/* ===== Bottom nav ===== */
-#nav{
-  position:fixed;left:0;right:0;bottom:0;z-index:30;
-  background:rgba(255,255,255,.94);
-  backdrop-filter:saturate(180%) blur(14px);
-  -webkit-backdrop-filter:saturate(180%) blur(14px);
-  border-top:1px solid rgba(15,31,28,.06);
-  box-shadow:0 -4px 24px rgba(15,31,28,.06);
-  display:flex;align-items:stretch;justify-content:space-around;
-  height:var(--nav-h);
-  padding:0 6px env(safe-area-inset-bottom);
-  gap:0;
-}
-#nav button{
-  flex:1;border:0;background:none;padding:8px 4px;border-radius:14px;
-  font:inherit;font-size:10.5px;font-weight:600;letter-spacing:.01em;
-  color:var(--mute);display:flex;flex-direction:column;align-items:center;justify-content:center;
-  gap:3px;cursor:pointer;transition:.18s;position:relative;min-width:0;
-  -webkit-tap-highlight-color:transparent;
-}
-#nav button .ic{width:22px;height:22px;transition:.18s}
-#nav button.on{color:var(--brand-d)}
-#nav button.on .ic{transform:translateY(-1px)}
-#nav button.on::before{content:'';position:absolute;top:6px;left:50%;transform:translateX(-50%);width:34px;height:34px;border-radius:12px;background:var(--brand-l);z-index:-1}
-#nav .nav-fab{flex:none;width:70px;position:relative;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;padding-bottom:6px}
-#nav .nav-fab .fab{width:52px;height:52px;border-radius:16px;background:linear-gradient(135deg,#0f766e,#14958a 70%,#2bb3a3);color:#fff;display:grid;place-items:center;box-shadow:0 8px 20px rgba(15,118,110,.35), 0 2px 6px rgba(15,118,110,.25);transition:.2s cubic-bezier(.34,1.56,.64,1);margin-top:-10px}
-#nav .nav-fab .fab .ic{width:26px;height:26px}
-#nav .nav-fab span{color:var(--brand-d);font-weight:700;font-size:10.5px;margin-top:5px;display:block;letter-spacing:.01em}
-#nav .nav-fab.on .fab{transform:translateY(-2px) scale(1.03);box-shadow:0 12px 26px rgba(15,118,110,.45)}
-#nav .nav-fab::before{display:none}
-
-/* ===== Riwayat bulanan ===== */
-.hmon{display:flex;align-items:center;gap:10px;margin-bottom:14px}
-.hmon .calt{flex:1;text-align:center}
-.hmon .calt b{font-size:17px;display:block;color:var(--ink)}
-.hmon .calt small{color:var(--mute);font-size:12px}
-.hbar{display:flex;flex-direction:column;gap:8px;margin-bottom:14px}
-.hsum{display:flex;flex-wrap:wrap;gap:6px}
-.hsum .lg{background:var(--brand-l);color:var(--brand-d)}
 </style>
 <meta name="theme-color" content="#0f766e">
 <meta name="mobile-web-app-capable" content="yes">
@@ -282,6 +236,10 @@ textarea{resize:none;overflow:hidden;min-height:76px}
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icon-192.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
+<!-- ===== LIBRARY OFFLINE (bundle lokal untuk APK) ===== -->
+<!-- Untuk PWA/hosting, boleh pakai CDN. Untuk APK native, WAJIB bundle lokal di folder libs/ -->
+<script src="libs/jspdf.umd.min.js"></script>
+<script src="libs/docx.umd.js"></script>
 </head>
 <body>
 
@@ -289,15 +247,13 @@ textarea{resize:none;overflow:hidden;min-height:76px}
 
 <header class="top"><div class="wrap">
   <div class="brand-ic" data-ic="file"></div>
-  <div><h1>Generator SKP Harian Otomatis</h1><p>Isi laporan → PDF → tersimpan otomatis di Google Drive</p></div>
+  <div><h1>SKP Harian Offline</h1><p>Isi laporan → PDF/Word → tersimpan di perangkat</p></div>
 </div></header>
 
 <main class="wrap">
 
-
-<!-- ================= BERANDA (BARU) ================= -->
+<!-- ================= BERANDA ================= -->
 <section class="tab on" id="tab-beranda">
-  <!-- Greeting -->
   <div class="greet">
     <div class="greet-ic" data-ic="user"></div>
     <div>
@@ -306,34 +262,22 @@ textarea{resize:none;overflow:hidden;min-height:76px}
     </div>
   </div>
 
-  <!-- Progress per bulan -->
   <div class="card">
     <h2>Progress SKP Bulan Ini</h2>
     <p class="sub" id="g-sub">Memuat data…</p>
-
-    <!-- Ringkasan -->
     <div class="stat-row" id="g-stats"></div>
-
-    <!-- Grafik batang per minggu -->
-    <div class="chart-box">
-      <canvas id="g-chart" height="180"></canvas>
-    </div>
-
-    <!-- Grafik donut per kategori RHK -->
+    <div class="chart-box"><canvas id="g-chart"></canvas></div>
     <div class="donut-row">
       <canvas id="g-donut" width="140" height="140"></canvas>
       <div id="g-legend" class="donut-legend"></div>
     </div>
-
-    <!-- Navigasi bulan -->
-    <div class="hmon" style="margin-top:16px">
-      <button class="ib" id="g-prev">‹</button>
+    <div class="hmon" style="margin-top:16px;margin-bottom:0">
+      <button class="ib" id="g-prev" aria-label="Bulan sebelumnya">‹</button>
       <div class="calt"><b id="g-title">–</b><small id="g-count"></small></div>
-      <button class="ib" id="g-next">›</button>
+      <button class="ib" id="g-next" aria-label="Bulan berikutnya">›</button>
     </div>
   </div>
 
-  <!-- Akses cepat -->
   <div class="quick-grid">
     <button class="quick" data-go="buat"><div class="q-ic" data-ic="plus"></div><b>Buat SKP</b><small>Baru</small></button>
     <button class="quick" data-go="riwayat"><div class="q-ic" data-ic="clock"></div><b>Riwayat</b><small id="g-r-count">0 laporan</small></button>
@@ -341,14 +285,11 @@ textarea{resize:none;overflow:hidden;min-height:76px}
     <button class="quick" id="g-export-all"><div class="q-ic" data-ic="file"></div><b>Export</b><small>PDF/Word</small></button>
   </div>
 
-  <!-- Status offline -->
-  <div class="offline-bar" id="g-offline" style="display:none">
-    <span>📴 Mode offline — data disimpan lokal</span>
-  </div>
+  <div class="offline-bar" id="g-offline" style="display:none">📴 Mode offline — data tetap tersimpan lokal</div>
 </section>
-  
+
 <!-- ================= BUAT ================= -->
-<section class="tab on" id="tab-buat">
+<section class="tab" id="tab-buat">
   <div class="who"><div class="brand-ic" style="background:#fff;color:var(--brand)" data-ic="user"></div>
     <div><b id="w-nama">–</b><small id="w-nip">–</small></div><a id="w-edit">Ubah profil</a></div>
 
@@ -379,10 +320,10 @@ textarea{resize:none;overflow:hidden;min-height:76px}
   </div>
 
   <div class="card result" id="result" style="display:none;margin-top:14px">
-    <div class="ok"><span data-ic="check"></span>PDF berhasil disimpan di Google Drive</div>
+    <div class="ok"><span data-ic="check"></span>PDF berhasil disimpan di perangkat</div>
     <small id="r-name" style="color:var(--mute)"></small>
     <div class="linkrow"><input type="text" id="r-url" readonly><button class="btn pri sm" id="r-copy"><i data-ic="copy"></i>Salin</button></div>
-    <a class="btn ghost sm" id="r-open" target="_blank" rel="noopener"><i data-ic="ext"></i>Buka PDF</a>
+    <div class="row"><button class="btn ghost sm" id="r-share"><i data-ic="ext"></i>Bagikan</button><button class="btn ghost sm" id="r-word"><i data-ic="file"></i>Simpan sebagai Word</button></div>
   </div>
 </section>
 
@@ -405,14 +346,13 @@ textarea{resize:none;overflow:hidden;min-height:76px}
   </div>
 </section>
 
-<!-- ================= JADWAL (Absen + Masuk) ================= -->
+<!-- ================= JADWAL ================= -->
 <section class="tab" id="tab-absen">
   <div class="jtabs" id="jtabs">
     <button data-j="absen" class="on"><i data-ic="clock"></i>Jadwal Absen</button>
     <button data-j="masuk"><i data-ic="cal"></i>Jadwal Masuk</button>
   </div>
 
-  <!-- ==== Panel: Jadwal Absen ==== -->
   <div class="jpanel on" id="jp-absen">
     <div class="card">
       <h2 style="margin-bottom:12px">Kalender Absen</h2>
@@ -426,7 +366,6 @@ textarea{resize:none;overflow:hidden;min-height:76px}
       <div class="cal" id="ab-cal"></div>
       <div class="row" style="margin-top:12px"><button class="btn ghost sm" id="ab-today">Ke bulan ini</button></div>
     </div>
-
     <div class="card">
       <h2 id="ab-edt">Pilih tanggal</h2>
       <p class="sub" id="ab-edsub">Ketuk tanggal pada kalender, lalu pilih shift-nya.</p>
@@ -434,7 +373,6 @@ textarea{resize:none;overflow:hidden;min-height:76px}
       <label class="chk" style="margin:0 0 14px!important"><input type="checkbox" id="ab-auto" checked> Pindah otomatis ke tanggal berikutnya</label>
       <button class="btn ghost block" id="ab-del">Kosongkan tanggal ini</button>
     </div>
-
     <div class="card">
       <h2>Isi rentang tanggal</h2>
       <p class="sub">Isi banyak hari sekaligus dengan satu shift (maks 62 hari).</p>
@@ -445,7 +383,6 @@ textarea{resize:none;overflow:hidden;min-height:76px}
       <div class="field"><label for="ab-rs">Shift</label><select id="ab-rs" style="margin-bottom:0;color:var(--ink)"></select></div>
       <button class="btn ghost block" id="ab-rgo" style="margin-top:12px"><i data-ic="check"></i><span>Terapkan ke rentang</span></button>
     </div>
-
     <div class="card">
       <h2>Rekap bulan ini</h2>
       <p class="sub">Ketuk salah satu baris untuk memilih tanggalnya.</p>
@@ -454,7 +391,6 @@ textarea{resize:none;overflow:hidden;min-height:76px}
     </div>
   </div>
 
-  <!-- ==== Panel: Jadwal Masuk ==== -->
   <div class="jpanel" id="jp-masuk">
     <div class="card">
       <h2 style="margin-bottom:12px">Kalender Masuk</h2>
@@ -468,7 +404,6 @@ textarea{resize:none;overflow:hidden;min-height:76px}
       <div class="cal" id="mk-cal"></div>
       <div class="row" style="margin-top:12px"><button class="btn ghost sm" id="mk-today">Ke bulan ini</button></div>
     </div>
-
     <div class="card">
       <h2 id="mk-edt">Pilih tanggal</h2>
       <p class="sub" id="mk-edsub">Ketuk tanggal pada kalender, lalu pilih status masuknya.</p>
@@ -476,7 +411,6 @@ textarea{resize:none;overflow:hidden;min-height:76px}
       <label class="chk" style="margin:0 0 14px!important"><input type="checkbox" id="mk-auto" checked> Pindah otomatis ke tanggal berikutnya</label>
       <button class="btn ghost block" id="mk-del">Kosongkan tanggal ini</button>
     </div>
-
     <div class="card">
       <h2>Isi rentang tanggal</h2>
       <p class="sub">Isi banyak hari sekaligus dengan satu status (maks 62 hari).</p>
@@ -487,7 +421,6 @@ textarea{resize:none;overflow:hidden;min-height:76px}
       <div class="field"><label for="mk-rs">Status</label><select id="mk-rs" style="margin-bottom:0;color:var(--ink)"></select></div>
       <button class="btn ghost block" id="mk-rgo" style="margin-top:12px"><i data-ic="check"></i><span>Terapkan ke rentang</span></button>
     </div>
-
     <div class="card">
       <h2>Rekap bulan ini</h2>
       <p class="sub">Ketuk salah satu baris untuk memilih tanggalnya.</p>
@@ -501,7 +434,7 @@ textarea{resize:none;overflow:hidden;min-height:76px}
 <section class="tab" id="tab-setting">
   <div class="card">
     <h2>Daftar kalimat</h2>
-    <p class="sub">Daftar ini menjadi pilihan saat membuat SKP. Tiap RHK punya jenis kegiatan dan output sendiri yang terisi otomatis saat RHK dipilih. Enter = baris baru di PDF.</p>
+    <p class="sub">Daftar ini menjadi pilihan saat membuat SKP. Tiap RHK punya jenis kegiatan dan output sendiri.</p>
     <div class="seg" id="seg"></div>
     <div id="s-list"></div>
     <div class="row" style="margin-top:6px">
@@ -533,17 +466,19 @@ textarea{resize:none;overflow:hidden;min-height:76px}
       <div class="row"><label class="btn ghost sm" style="margin:0">Pilih gambar<input type="file" id="ttd-in" accept="image/*" hidden></label><button class="btn ghost sm" id="ttd-rm">Hapus</button></div></div></div>
   </div>
   <div class="card">
-    <h2>Google Drive</h2>
-    <label class="chk" style="margin-top:6px!important"><input type="checkbox" id="p-share"> Siapa saja yang punya link boleh melihat PDF (agar link bisa dibagikan ke atasan)</label>
+    <h2>Backup &amp; Restore</h2><p class="sub">Simpan semua data (profil, setting, riwayat) ke file, atau pulihkan dari file.</p>
+    <div class="row">
+      <button class="btn ghost sm" id="p-backup"><i data-ic="file"></i>Backup ke file</button>
+      <label class="btn ghost sm" style="margin:0">Restore dari file<input type="file" id="p-restore" accept="application/json" hidden></label>
+    </div>
   </div>
   <button class="btn pri block" id="p-save"><i data-ic="check"></i>Simpan profil</button>
 </section>
 
 </main>
 
-<!-- ===== BOTTOM NAV ===== -->
 <nav id="nav">
-  <button data-tab="beranda"><i data-ic="home"></i>Beranda</button>
+  <button data-tab="beranda" class="on"><i data-ic="home"></i>Beranda</button>
   <button data-tab="riwayat"><i data-ic="clock"></i>Riwayat</button>
   <button data-tab="setting"><i data-ic="sliders"></i>Setting</button>
   <button class="nav-fab" data-tab="buat" aria-label="Buat SKP">
@@ -557,135 +492,15 @@ textarea{resize:none;overflow:hidden;min-height:76px}
 <div id="pv">
   <div class="pv-h"><b>Pratinjau SKP<small>Perkiraan tampilan — PDF final dibuat saat disimpan</small></b><button class="ib" id="pv-x" aria-label="Tutup"><i data-ic="x"></i></button></div>
   <div id="pv-box"><div id="pv-sizer"><div id="pv-inner"></div></div></div>
-  <div class="pv-f"><button class="btn ghost" id="pv-edit">Edit lagi</button><button class="btn pri" id="pv-save"><i data-ic="check"></i>Simpan ke Drive</button></div>
+  <div class="pv-f"><button class="btn ghost" id="pv-edit">Edit lagi</button><button class="btn pri" id="pv-save"><i data-ic="check"></i>Simpan</button></div>
 </div>
 <div class="modal" id="modal"></div>
 <div class="toast" id="toast"></div>
 
 <script>
-/* Shim: mode mandiri (GitHub Pages / PWA) */
-(function(){
-  if(typeof google!=='undefined'&&google.script&&google.script.run)return;
-  const API_URL='https://script.google.com/macros/s/AKfycbwxlhxnNrbG0B4nXhUlhM05j8JcedgwMDN2qrSIJpzPeMHoCVcqBM_XTnoptG-feeIA9A/exec';
-  const call=(fn,args)=>{
-    if(!/^https:\/\/script\.google\.com\/.+\/exec/.test(API_URL))return Promise.reject(new Error('API_URL di index.html belum diisi dengan URL /exec.'));
-    return fetch(API_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({fn:fn,args:args}),redirect:'follow',credentials:'omit'})
-      .then(r=>{if(!r.ok)throw new Error('Server membalas HTTP '+r.status);return r.json();})
-      .then(j=>{if(!j||!j.ok)throw new Error((j&&j.error)||'Server mengembalikan data kosong');return j.data;})
-      .catch(e=>{throw (e instanceof TypeError)?new Error('Tidak bisa menghubungi server. Pastikan akses deployment "Siapa saja", URL /exec benar, dan internet aktif.'):e;});
-  };
-  const mk=(ok,no)=>new Proxy({},{get:(_,k)=>{
-    if(k==='withSuccessHandler')return f=>mk(f,no);
-    if(k==='withFailureHandler')return f=>mk(ok,f);
-    return(...a)=>{call(String(k),a).then(d=>{if(ok)ok(d);},e=>{if(no)no({message:e.message});else console.error(e);});};
-  }});
-  window.google={script:{run:mk(null,null)}};
-})();
-
 /* ================================================================
-   OFFLINE STORAGE (IndexedDB)
+   ICONS
    ================================================================ */
-const DB = (() => {
-  let dbp = null;
-  const open = () => {
-    if (dbp) return dbp;
-    dbp = new Promise((res, rej) => {
-      const req = indexedDB.open('skp_offline', 1);
-      req.onupgradeneeded = () => {
-        const db = req.result;
-        if (!db.objectStoreNames.contains('outbox')) db.createObjectStore('outbox', { keyPath: 'id', autoIncrement: true });
-        if (!db.objectStoreNames.contains('cache')) db.createObjectStore('cache', { keyPath: 'key' });
-        if (!db.objectStoreNames.contains('files')) db.createObjectStore('files', { keyPath: 'id' });
-      };
-      req.onsuccess = () => res(req.result);
-      req.onerror = () => rej(req.error);
-    });
-    return dbp;
-  };
-  const tx = async (store, mode, fn) => {
-    const db = await open();
-    return new Promise((res, rej) => {
-      const t = db.transaction(store, mode);
-      const s = t.objectStore(store);
-      let result;
-      try { result = fn(s); } catch (e) { return rej(e); }
-      t.oncomplete = () => res(result);
-      t.onerror = () => rej(t.error);
-    });
-  };
-  return {
-    put: (store, val) => tx(store, 'readwrite', s => s.put(val)),
-    get: (store, key) => tx(store, 'readonly', s => s.get(key)),
-    getAll: (store) => tx(store, 'readonly', s => s.getAll()),
-    del: (store, key) => tx(store, 'readwrite', s => s.delete(key)),
-    add: (store, val) => tx(store, 'readwrite', s => s.add(val)),
-    clear: (store) => tx(store, 'readwrite', s => s.clear())
-  };
-})();
-
-/* Wrapper API offline-first */
-const OfflineAPI = {
-  async call(fn, ...args) {
-    try {
-      const res = await api(fn, ...args);
-      // cache hasil GET
-      if (fn === 'getInit' || fn === 'getRiwayat' || fn === 'getAbsen') {
-        await DB.put('cache', { key: fn + ':' + JSON.stringify(args), data: res, ts: Date.now() });
-      }
-      return res;
-    } catch (e) {
-      // offline → ambil dari cache
-      const cached = await DB.get('cache', fn + ':' + JSON.stringify(args));
-      if (cached) {
-        toast('Mode offline — menampilkan data tersimpan');
-        return cached.data;
-      }
-      // fallback khusus getInit
-      if (fn === 'getInit') {
-        const prof = await DB.get('cache', 'profil');
-        const set = await DB.get('cache', 'settings');
-        const riw = await DB.get('cache', 'riwayat');
-        if (prof && set) {
-          return {
-            profil: prof.data,
-            settings: set.data,
-            riwayat: riw ? riw.data : []
-          };
-        }
-      }
-      throw e;
-    }
-  },
-
-  async queueGenerate(payload) {
-    await DB.add('outbox', { type: 'generate', payload, ts: Date.now() });
-    toast('📴 Offline — SKP akan dibuat saat online');
-  },
-
-  async flushOutbox() {
-    if (!navigator.onLine) return;
-    const items = await DB.getAll('outbox');
-    for (const it of items) {
-      try {
-        if (it.type === 'generate') await api('generateSkp', it.payload);
-        await DB.del('outbox', it.id);
-      } catch (e) { break; }
-    }
-  }
-};
-
-/* Monitor online/offline */
-window.addEventListener('online', () => {
-  const b = document.getElementById('g-offline');
-  if (b) b.style.display = 'none';
-  toast('🌐 Kembali online — menyinkronkan…');
-  OfflineAPI.flushOutbox().then(() => loadBeranda(true));
-});
-window.addEventListener('offline', () => {
-  const b = document.getElementById('g-offline');
-  if (b) b.style.display = 'block';
-});
-  
 const ICONS={
 file:'<path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/>',
 plus:'<path d="M12 5v14M5 12h14"/>',
@@ -702,46 +517,490 @@ cal:'<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16
 chl:'<path d="M15 5l-7 7 7 7"/>',
 chr:'<path d="M9 5l7 7-7 7"/>',
 eye:'<path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>',
-refresh:'<path d="M20 11a8 8 0 0 0-14-4M4 5v4h4M4 13a8 8 0 0 0 14 4M20 19v-4h-4"/>'
+refresh:'<path d="M20 11a8 8 0 0 0-14-4M4 5v4h4M4 13a8 8 0 0 0 14 4M20 19v-4h-4"/>',
 home:'<path d="M3 11l9-8 9 8v9a2 2 0 0 1-2 2h-4v-7h-6v7H5a2 2 0 0 1-2-2z"/>'
 };
 const ic=n=>'<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'+(ICONS[n]||'')+'</svg>';
 function hydrate(root){(root||document).querySelectorAll('[data-ic]').forEach(e=>{if(!e.dataset.done){e.insertAdjacentHTML('afterbegin',ic(e.dataset.ic));e.dataset.done=1;}});}
 
+/* ================================================================
+   KONSTANTA
+   ================================================================ */
 const CATS=[{key:'rhk',label:'Jenis RHK'},{key:'waktu',label:'Waktu Pelaksanaan'},{key:'kegiatan',label:'Jenis Kegiatan'},{key:'output',label:'Output yang dihasilkan'}];
 const BLN=['Jan','Feb','Mar','Apr','Mei','Jun','Jul','Agu','Sep','Okt','Nov','Des'];
 const BLN_FULL=['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
 const HARI3=['Min','Sen','Sel','Rab','Kam','Jum','Sab'];
 const S={profil:null,settings:{rhk:[],waktu:[],kegiatan:[],output:[]},riwayat:[],photos:[],cat:'rhk',logo:null,ttd:null,rmLogo:false,rmTtd:false};
+
 const $=s=>document.querySelector(s);
 const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const short=(t,n)=>{t=String(t).replace(/\s+/g,' ');return t.length>n?t.slice(0,n-1)+'…':t;};
-function api(fn,...a){return new Promise((ok,no)=>google.script.run.withSuccessHandler(ok).withFailureHandler(e=>no(new Error(e&&e.message?e.message:String(e))))[fn](...a));}
 let tt;function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('show');clearTimeout(tt);tt=setTimeout(()=>t.classList.remove('show'),2600);}
 function grow(el){el.style.height='auto';el.style.height=Math.max(76,el.scrollHeight+2)+'px';}
 function todayStr(){const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
 const p2=n=>String(n).padStart(2,'0');
 const ymdOf=d=>d.getFullYear()+'-'+p2(d.getMonth()+1)+'-'+p2(d.getDate());
 
-function copyText(t){
-  try{const ta=document.createElement('textarea');ta.value=t;ta.style.cssText='position:fixed;opacity:0;top:0';document.body.appendChild(ta);ta.select();const ok=document.execCommand('copy');ta.remove();if(ok){toast('Link disalin ✓');return;}}catch(e){}
-  if(navigator.clipboard){navigator.clipboard.writeText(t).then(()=>toast('Link disalin ✓'),()=>toast('Salin manual dari kolom link'));}else toast('Salin manual dari kolom link');
+/* ================================================================
+   LAPISAN DATA LOKAL — pengganti Google Apps Script
+   ================================================================ */
+const LocalDB = (() => {
+  const DB_NAME = 'skp_native';
+  const DB_VER = 1;
+  let _db = null;
+
+  function open() {
+    if (_db) return Promise.resolve(_db);
+    return new Promise((res, rej) => {
+      const req = indexedDB.open(DB_NAME, DB_VER);
+      req.onupgradeneeded = () => {
+        const db = req.result;
+        if (!db.objectStoreNames.contains('kv'))
+          db.createObjectStore('kv', { keyPath: 'k' });
+        if (!db.objectStoreNames.contains('riwayat'))
+          db.createObjectStore('riwayat', { keyPath: 'id' });
+        if (!db.objectStoreNames.contains('absen'))
+          db.createObjectStore('absen', { keyPath: 'tanggal' });
+        if (!db.objectStoreNames.contains('masuk'))
+          db.createObjectStore('masuk', { keyPath: 'tanggal' });
+        if (!db.objectStoreNames.contains('files'))
+          db.createObjectStore('files', { keyPath: 'name' });
+      };
+      req.onsuccess = () => { _db = req.result; res(_db); };
+      req.onerror = () => rej(req.error);
+    });
+  }
+
+  function get(store, key) {
+    return open().then(db => new Promise((res, rej) => {
+      const t = db.transaction(store, 'readonly');
+      const r = t.objectStore(store).get(key);
+      r.onsuccess = () => res(r.result);
+      r.onerror = () => rej(r.error);
+    }));
+  }
+  function getAll(store) {
+    return open().then(db => new Promise((res, rej) => {
+      const t = db.transaction(store, 'readonly');
+      const r = t.objectStore(store).getAll();
+      r.onsuccess = () => res(r.result || []);
+      r.onerror = () => rej(r.error);
+    }));
+  }
+  function put(store, val) {
+    return open().then(db => new Promise((res, rej) => {
+      const t = db.transaction(store, 'readwrite');
+      const r = t.objectStore(store).put(val);
+      r.onsuccess = () => res(r.result);
+      r.onerror = () => rej(r.error);
+    }));
+  }
+  function del(store, key) {
+    return open().then(db => new Promise((res, rej) => {
+      const t = db.transaction(store, 'readwrite');
+      const r = t.objectStore(store).delete(key);
+      r.onsuccess = () => res();
+      r.onerror = () => rej(r.error);
+    }));
+  }
+
+  return {
+    async getInit() {
+      const profil = (await get('kv', 'profil'))?.v || {
+        nama: '', nip: '', pangkat: '', jabatan: '', unit: '',
+        atasan: '', tempat: '', share: true,
+        logoPreview: null, ttdPreview: null
+      };
+      const settings = (await get('kv', 'settings'))?.v || {
+        rhk: [], waktu: [], kegiatan: [], output: []
+      };
+      const riwayat = await getAll('riwayat');
+      return { profil, settings, riwayat };
+    },
+    async saveProfil(p) {
+      const existing = (await get('kv', 'profil'))?.v || {};
+      const merged = { ...existing, ...p };
+      delete merged.logo;
+      delete merged.ttd;
+      delete merged.removeLogo;
+      delete merged.removeTtd;
+      if (p.logo) merged.logoPreview = 'data:' + p.logo.mime + ';base64,' + p.logo.b64;
+      if (p.ttd) merged.ttdPreview = 'data:' + p.ttd.mime + ';base64,' + p.ttd.b64;
+      if (p.removeLogo) merged.logoPreview = null;
+      if (p.removeTtd) merged.ttdPreview = null;
+      await put('kv', { k: 'profil', v: merged });
+      return merged;
+    },
+    async saveSettings(s) {
+      await put('kv', { k: 'settings', v: s });
+      return s;
+    },
+    async getRiwayat() {
+      const list = await getAll('riwayat');
+      return list.sort((a, b) => b.tanggal.localeCompare(a.tanggal));
+    },
+    async saveRiwayatEntry(entry) {
+      await put('riwayat', entry);
+      return entry;
+    },
+    async deleteRiwayat(id) {
+      const entry = await get('riwayat', id);
+      if (entry && entry.fileName) {
+        await del('files', entry.fileName).catch(()=>{});
+      }
+      await del('riwayat', id);
+      return { ok: true };
+    },
+    async getAbsen(ym, kind) {
+      const store = kind === 'masuk' ? 'masuk' : 'absen';
+      const list = await getAll(store);
+      return JSON.stringify(list.filter(x => x.tanggal.indexOf(ym) === 0));
+    },
+    async saveAbsen(items, kind) {
+      const store = kind === 'masuk' ? 'masuk' : 'absen';
+      for (const it of items) {
+        if (it.shift) await put(store, it);
+        else await del(store, it.tanggal);
+      }
+      return { ok: true };
+    },
+    async saveFile(name, blob) {
+      const b64 = await blobToBase64(blob);
+      await put('files', { name, b64, mime: blob.type, ts: Date.now() });
+      return name;
+    },
+    async getFile(name) {
+      return await get('files', name);
+    },
+    async exportAll() {
+      const profil = (await get('kv', 'profil'))?.v || {};
+      const settings = (await get('kv', 'settings'))?.v || {};
+      const riwayat = await getAll('riwayat');
+      const absen = await getAll('absen');
+      const masuk = await getAll('masuk');
+      return { version: 1, exportedAt: new Date().toISOString(), profil, settings, riwayat, absen, masuk };
+    },
+    async importAll(data) {
+      await put('kv', { k: 'profil', v: data.profil || {} });
+      await put('kv', { k: 'settings', v: data.settings || {} });
+      const db = await open();
+      await new Promise(r => { const t = db.transaction('riwayat','readwrite'); t.objectStore('riwayat').clear(); t.oncomplete = r; });
+      await new Promise(r => { const t = db.transaction('absen','readwrite'); t.objectStore('absen').clear(); t.oncomplete = r; });
+      await new Promise(r => { const t = db.transaction('masuk','readwrite'); t.objectStore('masuk').clear(); t.oncomplete = r; });
+      for (const x of (data.riwayat || [])) await put('riwayat', x);
+      for (const x of (data.absen || [])) await put('absen', x);
+      for (const x of (data.masuk || [])) await put('masuk', x);
+      return { ok: true };
+    }
+  };
+})();
+
+/* Alias — supaya kode lama tetap jalan */
+function api(fn, ...args) {
+  return Promise.resolve(LocalDB[fn](...args));
 }
 
-function fileToData(file,maxDim,type,q){
-  return new Promise((res,rej)=>{
-    const r=new FileReader();
-    r.onerror=rej;
-    r.onload=()=>{const img=new Image();img.onerror=rej;
-      img.onload=()=>{let w=img.width,h=img.height;const s=Math.min(1,maxDim/Math.max(w,h));w=Math.round(w*s);h=Math.round(h*s);
-        const c=document.createElement('canvas');c.width=w;c.height=h;const x=c.getContext('2d');
-        if(type==='image/jpeg'){x.fillStyle='#fff';x.fillRect(0,0,w,h);}
-        x.drawImage(img,0,0,w,h);const url=c.toDataURL(type,q);res({dataUrl:url,mime:type,b64:url.split(',')[1]});};
-      img.src=r.result;};
+/* ================================================================
+   UTILITIES FILE
+   ================================================================ */
+function blobToBase64(blob) {
+  return new Promise((res, rej) => {
+    const r = new FileReader();
+    r.onload = () => res(String(r.result).split(',')[1]);
+    r.onerror = rej;
+    r.readAsDataURL(blob);
+  });
+}
+function fileToData(file, maxDim, type, q) {
+  return new Promise((res, rej) => {
+    const r = new FileReader();
+    r.onerror = rej;
+    r.onload = () => {
+      const img = new Image();
+      img.onerror = rej;
+      img.onload = () => {
+        let w = img.width, h = img.height;
+        const s = Math.min(1, maxDim / Math.max(w, h));
+        w = Math.round(w * s); h = Math.round(h * s);
+        const c = document.createElement('canvas');
+        c.width = w; c.height = h;
+        const x = c.getContext('2d');
+        if (type === 'image/jpeg') { x.fillStyle = '#fff'; x.fillRect(0, 0, w, h); }
+        x.drawImage(img, 0, 0, w, h);
+        const url = c.toDataURL(type, q);
+        res({ dataUrl: url, mime: type, b64: url.split(',')[1] });
+      };
+      img.src = r.result;
+    };
     r.readAsDataURL(file);
   });
 }
 
+/* ================================================================
+   SIMPAN FILE KE PERANGKAT (native)
+   ================================================================ */
+async function saveFileNative(blob, filename) {
+  const Cap = window.Capacitor;
+  if (Cap && Cap.Plugins && Cap.Plugins.Filesystem) {
+    const { Filesystem } = Cap.Plugins;
+    const base64 = await blobToBase64(blob);
+    try {
+      const res = await Filesystem.writeFile({
+        path: 'SKP/' + filename,
+        data: base64,
+        directory: 'DOCUMENTS',
+        recursive: true
+      });
+      return { path: res.uri, native: true };
+    } catch (e) {
+      console.warn('Filesystem gagal, fallback ke download:', e);
+    }
+  }
+  // Fallback browser: download + simpan ke IndexedDB
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = filename; a.click();
+  setTimeout(() => URL.revokeObjectURL(url), 5000);
+  return { path: filename, native: false };
+}
+
+async function shareFile(blob, filename) {
+  const Cap = window.Capacitor;
+  if (Cap && Cap.Plugins && Cap.Plugins.Share) {
+    const { Filesystem, Share } = Cap.Plugins;
+    const base64 = await blobToBase64(blob);
+    const res = await Filesystem.writeFile({
+      path: 'SKP/' + filename, data: base64, directory: 'CACHE', recursive: true
+    });
+    await Share.share({ title: filename, url: res.uri, dialogTitle: 'Bagikan file' });
+    return;
+  }
+  if (navigator.canShare && navigator.canShare({ files: [new File([blob], filename, { type: blob.type })] })) {
+    await navigator.share({ files: [new File([blob], filename, { type: blob.type })], title: filename });
+    return;
+  }
+  toast('Fitur bagikan tidak didukung');
+}
+
+/* ================================================================
+   PDF GENERATOR (jsPDF)
+   ================================================================ */
+const LocalPDF = (() => {
+  function hariTgl(s) {
+    const HARI=['Minggu','Senin','Selasa','Rabu','Kamis','Jum’at','Sabtu'];
+    const [y,m,d]=s.split('-').map(Number);
+    return HARI[new Date(y,m-1,d).getDay()]+', '+d+' '+BLN_FULL[m-1]+' '+y;
+  }
+  function tglIndo(s) {
+    const [y,m,d]=s.split('-').map(Number);
+    return d+' '+BLN_FULL[m-1]+' '+y;
+  }
+
+  async function generate(d) {
+    if (!window.jspdf) throw new Error('jsPDF belum dimuat. Pastikan libs/jspdf.umd.min.js ada.');
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF({ unit: 'mm', format: [215, 330] });
+    const prof = (await LocalDB.getInit()).profil;
+
+    // ==== HALAMAN 1 ====
+    const pageW = 215, marginL = 15, marginR = 15;
+    const contentW = pageW - marginL - marginR;
+    let y = 15;
+
+    // Logo
+    if (prof.logoPreview) {
+      try { doc.addImage(prof.logoPreview, 15, y, 22, 22); } catch(e){}
+    }
+
+    // Profil
+    const profRows = [
+      ['Nama', prof.nama], ['NIP', prof.nip],
+      ['Pangkat/Gol. Ruang', prof.pangkat], ['Jabatan', prof.jabatan],
+      ['Unit Kerja', prof.unit], ['Atasan', prof.atasan]
+    ];
+    let py = y + 2;
+    doc.setFont('helvetica', 'normal').setFontSize(9.5);
+    profRows.forEach(([k, v]) => {
+      doc.text(String(k), 42, py);
+      doc.text(':', 78, py);
+      doc.text(String(v || ''), 82, py);
+      py += 5;
+    });
+    y = Math.max(y + 22, py) + 4;
+
+    // Judul
+    doc.setFont('helvetica', 'bold').setFontSize(11);
+    doc.text('LAPORAN SKP HARIAN', pageW/2, y, { align: 'center' });
+    y += 8;
+
+    // Tabel isi
+    const rows = [
+      ['Jenis RHK', d.rhk],
+      ['Waktu Pelaksanaan', d.waktu + (d.autoTanggal ? '\n' + hariTgl(d.tanggal) : '')],
+      ['Jenis Kegiatan', d.kegiatan],
+      ['Output yang dihasilkan', d.output]
+    ];
+    doc.setFont('helvetica', 'normal').setFontSize(9);
+    rows.forEach(([k, v]) => {
+      const labelW = 45, valueW = contentW - labelW;
+      const lines = doc.splitTextToSize(String(v || ''), valueW - 4);
+      const rowH = Math.max(8, lines.length * 4.5 + 4);
+      doc.rect(marginL, y, labelW, rowH);
+      doc.rect(marginL + labelW, y, valueW, rowH);
+      doc.text(k, marginL + 2, y + 5);
+      doc.text(lines, marginL + labelW + 2, y + 5);
+      y += rowH;
+    });
+
+    // Tanda tangan
+    y += 12;
+    const tmp = (d.tempat || prof.tempat || '').trim();
+    const tglStr = (tmp ? tmp + ', ' : '') + tglIndo(d.tanggalSurat || d.tanggal);
+    doc.setFontSize(9);
+    doc.text(tglStr, pageW - marginR, y, { align: 'right' });
+    y += 5;
+    doc.text('Dibuat Oleh', pageW - marginR, y, { align: 'right' });
+    y += 4;
+    if (d.sertakanTtd && prof.ttdPreview) {
+      try { doc.addImage(prof.ttdPreview, pageW - marginR - 40, y, 40, 15); } catch(e){}
+    }
+    y += 18;
+    doc.setFont('helvetica', 'bold').setFontSize(9.5);
+    doc.text(prof.nama || '', pageW - marginR, y, { align: 'right' });
+    y += 5;
+    doc.setFont('helvetica', 'normal');
+    doc.text('NIP. ' + (prof.nip || ''), pageW - marginR, y, { align: 'right' });
+
+    // ==== HALAMAN 2 (foto) ====
+    if (d.fotos && d.fotos.length) {
+      doc.addPage([215, 330], 'portrait');
+      y = 20;
+      doc.setFont('helvetica', 'bold').setFontSize(11);
+      doc.text('Dokumentasi Kegiatan', pageW/2, y, { align: 'center' });
+      y += 10;
+      const cols = 2, gap = 6, cw = (contentW - gap) / cols, ch = 60;
+      d.fotos.forEach((f, i) => {
+        const col = i % cols, row = Math.floor(i / cols);
+        const x = marginL + col * (cw + gap);
+        const yy = y + row * (ch + gap);
+        try {
+          doc.addImage('data:' + f.mime + ';base64,' + f.b64, 'JPEG', x, yy, cw, ch);
+        } catch(e){}
+      });
+    }
+
+    const filename = `SKP_${d.tanggal}_${(prof.nama || 'pegawai').replace(/\s+/g,'_')}.pdf`;
+    const blob = doc.output('blob');
+    const saved = await saveFileNative(blob, filename);
+
+    // Simpan ke riwayat
+    const id = 'skp_' + Date.now();
+    await LocalDB.saveRiwayatEntry({
+      id,
+      tanggal: d.tanggal,
+      label: d.tanggal,
+      rhk: (d.rhkLabel ? d.rhkLabel + ' · ' : '') + (d.rhk || '').slice(0, 160),
+      url: saved.path,
+      fileName: filename,
+      createdAt: Date.now()
+    });
+    // Simpan blob ke IndexedDB untuk re-share
+    await LocalDB.saveFile(filename, blob);
+
+    return { ok: true, id, name: filename, url: saved.path, replaced: false, blob };
+  }
+
+  async function exportWord(d) {
+    if (!window.docx) throw new Error('docx library belum dimuat.');
+    const { Document, Packer, Paragraph, TextRun, Table, TableRow, TableCell,
+            WidthType, AlignmentType, ImageRun } = window.docx;
+    const prof = (await LocalDB.getInit()).profil;
+    const children = [];
+
+    children.push(new Paragraph({
+      children: [new TextRun({ text: 'LAPORAN SKP HARIAN', bold: true, size: 28 })],
+      alignment: AlignmentType.CENTER
+    }));
+    children.push(new Paragraph({ text: '' }));
+
+    const profRows = [
+      ['Nama', prof.nama], ['NIP', prof.nip],
+      ['Pangkat/Gol. Ruang', prof.pangkat], ['Jabatan', prof.jabatan],
+      ['Unit Kerja', prof.unit], ['Atasan', prof.atasan]
+    ];
+    profRows.forEach(([k, v]) => {
+      children.push(new Paragraph({
+        children: [new TextRun({ text: k + ' : ', bold: true }), new TextRun(String(v||''))]
+      }));
+    });
+    children.push(new Paragraph({ text: '' }));
+
+    const rows = [
+      ['Jenis RHK', d.rhk], ['Waktu Pelaksanaan', d.waktu],
+      ['Jenis Kegiatan', d.kegiatan], ['Output', d.output]
+    ];
+    const tableRows = rows.map(([k, v]) => new TableRow({
+      children: [
+        new TableCell({ width: { size: 25, type: WidthType.PERCENTAGE },
+          children: [new Paragraph({ children: [new TextRun({ text: k, bold: true })] })] }),
+        new TableCell({ width: { size: 75, type: WidthType.PERCENTAGE },
+          children: [new Paragraph(String(v || ''))] })
+      ]
+    }));
+    children.push(new Table({ rows: tableRows, width: { size: 100, type: WidthType.PERCENTAGE } }));
+
+    children.push(new Paragraph({ text: '' }));
+    children.push(new Paragraph({ text: '' }));
+    children.push(new Paragraph({
+      children: [new TextRun({ text: 'Dibuat Oleh', bold: true })],
+      alignment: AlignmentType.RIGHT
+    }));
+    if (d.sertakanTtd && prof.ttdPreview) {
+      try {
+        const b64 = prof.ttdPreview.split(',')[1];
+        const bytes = Uint8Array.from(atob(b64), c => c.charCodeAt(0));
+        children.push(new Paragraph({
+          alignment: AlignmentType.RIGHT,
+          children: [new ImageRun({ data: bytes, transformation: { width: 100, height: 50 } })]
+        }));
+      } catch(e){}
+    }
+    children.push(new Paragraph({
+      children: [new TextRun({ text: prof.nama || '', bold: true })],
+      alignment: AlignmentType.RIGHT
+    }));
+    children.push(new Paragraph({
+      children: [new TextRun('NIP. ' + (prof.nip || ''))],
+      alignment: AlignmentType.RIGHT
+    }));
+
+    const doc = new Document({ sections: [{ children }] });
+    const blob = await Packer.toBlob(doc);
+    const filename = `SKP_${d.tanggal}.docx`;
+    const saved = await saveFileNative(blob, filename);
+    await LocalDB.saveFile(filename, blob);
+    return { ok: true, name: filename, url: saved.path, blob };
+  }
+
+  return { generate, exportWord };
+})();
+
+/* ================================================================
+   COPY
+   ================================================================ */
+function copyText(t){
+  try{
+    const ta=document.createElement('textarea');ta.value=t;ta.style.cssText='position:fixed;opacity:0;top:0';
+    document.body.appendChild(ta);ta.select();const ok=document.execCommand('copy');ta.remove();
+    if(ok){toast('Link disalin ✓');return;}
+  }catch(e){}
+  if(navigator.clipboard){navigator.clipboard.writeText(t).then(()=>toast('Link disalin ✓'),()=>toast('Salin manual'));}
+  else toast('Salin manual');
+}
+
+/* ================================================================
+   CONFIRM MODAL
+   ================================================================ */
 function askConfirm(title,msg,chkLabel,okLabel){
   return new Promise(res=>{
     const m=$('#modal');
@@ -753,21 +1012,271 @@ function askConfirm(title,msg,chkLabel,okLabel){
   });
 }
 
-/* ---------- tabs ---------- */
-function go(tab) {
-  document.querySelectorAll('#nav button').forEach(b => b.classList.toggle('on', b.dataset.tab === tab));
-  document.querySelectorAll('.tab').forEach(s => s.classList.toggle('on', s.id === 'tab-' + tab));
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-  if (tab === 'beranda') loadBeranda();
-  if (tab === 'riwayat') loadRiwayat();
-  if (tab === 'setting') renderSetting();
-  if (tab === 'profil') { fillProfil(); }
-  if (tab === 'absen') { absInit(); loadAbsen(AB.ym); loadMasuk(MK.ym); }
+/* ================================================================
+   TABS
+   ================================================================ */
+function go(tab){
+  document.querySelectorAll('#nav button').forEach(b=>b.classList.toggle('on',b.dataset.tab===tab));
+  document.querySelectorAll('.tab').forEach(s=>s.classList.toggle('on',s.id==='tab-'+tab));
+  window.scrollTo({top:0,behavior:'smooth'});
+  if(tab==='beranda')  loadBeranda();
+  if(tab==='riwayat')  loadRiwayat();
+  if(tab==='setting')  renderSetting();
+  if(tab==='profil')   fillProfil();
+  if(tab==='absen'){   absInit(); loadAbsen(AB.ym); loadMasuk(MK.ym); }
 }
 document.querySelectorAll('#nav button').forEach(b=>b.onclick=()=>go(b.dataset.tab));
 $('#w-edit').onclick=()=>go('profil');
 
-/* ---------- BUAT ---------- */
+/* ================================================================
+   BERANDA
+   ================================================================ */
+const BH = { ym: todayStr().slice(0,7) };
+
+function renderGreeting() {
+  const nama = (S.profil && S.profil.nama) ? S.profil.nama.split(' ')[0] : 'Rekan';
+  document.getElementById('g-nama').textContent = nama;
+}
+
+async function loadBeranda() {
+  renderGreeting();
+  const [y, m] = BH.ym.split('-').map(Number);
+  document.getElementById('g-title').textContent = BLN_FULL[m - 1] + ' ' + y;
+  const all = Array.isArray(S.riwayat) ? S.riwayat : [];
+  const list = all.filter(x => String(x.tanggal || '').indexOf(BH.ym) === 0);
+  const totalDays = new Date(y, m, 0).getDate();
+  const today = new Date();
+  const isCurrent = today.getFullYear() === y && today.getMonth() + 1 === m;
+  const passedDays = isCurrent ? today.getDate() : totalDays;
+  const target = passedDays;
+  const pct = target ? Math.min(100, Math.round(list.length / target * 100)) : 0;
+
+  document.getElementById('g-stats').innerHTML = `
+    <div class="stat"><b>${list.length}</b><small>SKP dibuat</small></div>
+    <div class="stat"><b>${target}</b><small>Hari berjalan</small></div>
+    <div class="stat"><b>${pct}%</b><small>Progress</small></div>`;
+  document.getElementById('g-count').textContent = `${list.length} dari ${target} hari`;
+  document.getElementById('g-sub').textContent = pct >= 100
+    ? '🎉 Lengkap! Semua hari sudah terisi.'
+    : `Progress ${pct}% — ayo lengkapi SKP hari ini.`;
+
+  const weeks = {};
+  list.forEach(x => {
+    const d = new Date(x.tanggal + 'T00:00:00');
+    const wk = Math.ceil(d.getDate() / 7);
+    weeks[wk] = (weeks[wk] || 0) + 1;
+  });
+  const labels = ['M1', 'M2', 'M3', 'M4', 'M5'];
+  const data = labels.map((_, i) => weeks[i + 1] || 0);
+  drawBarChart('g-chart', labels, data);
+
+  const catCnt = {};
+  list.forEach(x => {
+    const r = rhkInfo(x);
+    const key = r.label || 'Lainnya';
+    catCnt[key] = (catCnt[key] || 0) + 1;
+  });
+  drawDonut('g-donut', 'g-legend', catCnt);
+
+  const rc = document.getElementById('g-r-count');
+  if (rc) rc.textContent = `${all.length} laporan`;
+}
+
+function drawBarChart(canvasId, labels, data) {
+  const cv = document.getElementById(canvasId);
+  if (!cv) return;
+  const dpr = window.devicePixelRatio || 1;
+  const w = cv.clientWidth || 300, h = cv.clientHeight || 180;
+  cv.width = w * dpr; cv.height = h * dpr;
+  const ctx = cv.getContext('2d');
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  ctx.clearRect(0, 0, w, h);
+
+  const pad = 24, gap = (w - pad * 2) / labels.length;
+  const bw = gap * 0.6;
+  const max = Math.max(1, ...data);
+  const barH = h - pad * 2;
+
+  ctx.strokeStyle = '#e1e9e7'; ctx.lineWidth = 1;
+  for (let i = 0; i <= 4; i++) {
+    const y = pad + barH * i / 4;
+    ctx.beginPath(); ctx.moveTo(pad, y); ctx.lineTo(w - pad, y); ctx.stroke();
+  }
+  data.forEach((v, i) => {
+    const bh = (v / max) * barH;
+    const x = pad + gap * i + (gap - bw) / 2;
+    const y = h - pad - bh;
+    const grad = ctx.createLinearGradient(0, y, 0, h - pad);
+    grad.addColorStop(0, '#14958a'); grad.addColorStop(1, '#0f766e');
+    ctx.fillStyle = grad;
+    if (bh > 0) {
+      ctx.beginPath();
+      if (ctx.roundRect) ctx.roundRect(x, y, bw, bh, 6);
+      else ctx.rect(x, y, bw, bh);
+      ctx.fill();
+    }
+    ctx.fillStyle = '#5d6f6b'; ctx.font = '11px Inter,sans-serif'; ctx.textAlign = 'center';
+    ctx.fillText(labels[i], x + bw / 2, h - 6);
+    if (v > 0) {
+      ctx.fillStyle = '#0b5c56'; ctx.font = 'bold 11px Inter,sans-serif';
+      ctx.fillText(v, x + bw / 2, y - 4);
+    }
+  });
+}
+
+function drawDonut(canvasId, legendId, dataObj) {
+  const cv = document.getElementById(canvasId);
+  const lg = document.getElementById(legendId);
+  if (!cv || !lg) return;
+  const keys = Object.keys(dataObj);
+  const vals = keys.map(k => dataObj[k]);
+  const total = vals.reduce((a, b) => a + b, 0) || 1;
+  const colors = ['#0f766e', '#2563eb', '#7c3aed', '#f59e0b', '#dc2626', '#0d9488', '#84cc16'];
+  const dpr = window.devicePixelRatio || 1;
+  cv.width = 140 * dpr; cv.height = 140 * dpr;
+  cv.style.width = '140px'; cv.style.height = '140px';
+  const ctx = cv.getContext('2d');
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  ctx.clearRect(0, 0, 140, 140);
+  const cx = 70, cy = 70, r = 60, ir = 38;
+  let start = -Math.PI / 2;
+  if (!keys.length) {
+    ctx.beginPath(); ctx.arc(cx, cy, r, 0, Math.PI * 2);
+    ctx.arc(cx, cy, ir, 0, Math.PI * 2, true);
+    ctx.fillStyle = '#e1e9e7'; ctx.fill();
+  } else {
+    vals.forEach((v, i) => {
+      const ang = (v / total) * Math.PI * 2;
+      ctx.beginPath();
+      ctx.arc(cx, cy, r, start, start + ang);
+      ctx.arc(cx, cy, ir, start + ang, start, true);
+      ctx.closePath();
+      ctx.fillStyle = colors[i % colors.length];
+      ctx.fill();
+      start += ang;
+    });
+  }
+  ctx.fillStyle = '#0f1f1c'; ctx.textAlign = 'center';
+  ctx.font = 'bold 18px Inter,sans-serif';
+  ctx.fillText(keys.length ? total : '0', cx, cy + 2);
+  ctx.font = '9px Inter,sans-serif'; ctx.fillStyle = '#5d6f6b';
+  ctx.fillText('SKP', cx, cy + 16);
+
+  lg.innerHTML = keys.length ? keys.map((k, i) => `
+    <div><span class="dot" style="background:${colors[i % colors.length]}"></span>
+    ${esc(k)} <b>${dataObj[k]}</b></div>`).join('')
+    : '<span style="color:var(--mute)">Belum ada data</span>';
+}
+
+document.getElementById('g-prev').onclick = () => shiftBeranda(-1);
+document.getElementById('g-next').onclick = () => shiftBeranda(1);
+function shiftBeranda(d) {
+  const [y, m] = BH.ym.split('-').map(Number);
+  const dt = new Date(y, m - 1 + d, 1);
+  BH.ym = dt.getFullYear() + '-' + p2(dt.getMonth() + 1);
+  loadBeranda();
+}
+document.querySelectorAll('.quick[data-go]').forEach(b => b.onclick = () => go(b.dataset.go));
+
+/* ================================================================
+   EXPORT MODAL
+   ================================================================ */
+document.getElementById('g-export-all').onclick = exportModal;
+function exportModal() {
+  const m = document.getElementById('modal');
+  m.innerHTML = `
+    <div class="box" style="max-width:420px">
+      <h3>Export SKP</h3>
+      <p>Pilih format & rentang yang akan disimpan ke perangkat.</p>
+      <div class="exp-opts">
+        <button class="exp-opt" data-fmt="pdf" data-scope="bulan">
+          <div class="e-ic">📄</div>
+          <div><b>PDF — Bulan ini</b><small>Simpan ke folder Download/Documents</small></div>
+        </button>
+        <button class="exp-opt" data-fmt="word" data-scope="bulan">
+          <div class="e-ic">📝</div>
+          <div><b>Word (.docx) — Bulan ini</b><small>Bisa diedit</small></div>
+        </button>
+        <button class="exp-opt" data-fmt="pdf" data-scope="hari">
+          <div class="e-ic">📄</div>
+          <div><b>PDF — 1 hari terpilih</b><small>Dari tanggal hari ini</small></div>
+        </button>
+        <button class="exp-opt" data-fmt="backup" data-scope="all">
+          <div class="e-ic">💾</div>
+          <div><b>Backup data</b><small>Semua data jadi 1 file JSON</small></div>
+        </button>
+      </div>
+      <div class="row" style="justify-content:flex-end;margin-top:8px">
+        <button class="btn ghost sm" id="exp-cancel">Batal</button>
+      </div>
+    </div>`;
+  m.classList.add('open');
+  document.getElementById('exp-cancel').onclick = () => { m.classList.remove('open'); m.innerHTML = ''; };
+  m.querySelectorAll('.exp-opt').forEach(b => {
+    b.onclick = async () => {
+      m.classList.remove('open'); m.innerHTML = '';
+      await doExport(b.dataset.fmt, b.dataset.scope);
+    };
+  });
+}
+
+async function doExport(fmt, scope) {
+  try {
+    if (fmt === 'backup') {
+      const data = await LocalDB.exportAll();
+      const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+      const filename = `skp_backup_${todayStr()}.json`;
+      await saveFileNative(blob, filename);
+      toast('✅ Backup tersimpan');
+      return;
+    }
+    if (scope === 'hari') {
+      const d = buildCurrentForExport();
+      if (!d) return;
+      if (fmt === 'pdf') {
+        const r = await LocalPDF.generate(d);
+        toast('✅ PDF tersimpan: ' + r.name);
+      } else {
+        const r = await LocalPDF.exportWord(d);
+        toast('✅ Word tersimpan: ' + r.name);
+      }
+      return;
+    }
+    // scope bulan → pakai yang terbaru
+    const list = (S.riwayat || []).filter(x => x.tanggal.indexOf(BH.ym) === 0);
+    if (!list.length) return toast('Belum ada SKP di bulan ini');
+    if (fmt === 'pdf') {
+      // generate dari data terbaru (ambil 1 contoh)
+      toast('Membuat PDF dari ' + list.length + ' laporan...');
+      const first = list[0];
+      const entry = await LocalDB.getRiwayatEntry ? null : null;
+      // fallback: pakai data riwayat langsung
+      toast('Untuk multi-halaman, buka masing-masing di Riwayat');
+      return;
+    }
+  } catch (e) {
+    toast('Gagal export: ' + e.message);
+  }
+}
+
+function buildCurrentForExport() {
+  const d = {
+    tanggal: $('#f-tanggal').value,
+    tanggalSurat: $('#f-tanggal').value,
+    tempat: $('#f-tempat').value.trim(),
+    autoTanggal: $('#f-auto') ? $('#f-auto').checked : false,
+    sertakanTtd: $('#f-ttd').checked,
+    fotos: S.photos.map(p => ({ b64: p.b64, mime: p.mime }))
+  };
+  CATS.forEach(c => { const el = $('#f-' + c.key); if (el) d[c.key] = el.value.trim(); });
+  const rr = curRhk(); d.rhkLabel = rr ? rr.label : '';
+  if (!d.tanggal) { toast('Tanggal belum diisi'); return null; }
+  return d;
+}
+
+/* ================================================================
+   BUAT SKP
+   ================================================================ */
 function curRhk(){const i=$('#s-rhk').value;return i===''?null:S.settings.rhk[+i];}
 function buildFields(){
   $('#fields').innerHTML=CATS.map(c=>`<div class="field"><label for="f-${c.key}">${c.label}</label><select id="s-${c.key}"></select><textarea id="f-${c.key}" rows="3" placeholder="Pilih dari daftar atau ketik sendiri…"></textarea>${c.key==='waktu'?'<label class="chk"><input type="checkbox" id="f-auto" checked> Tambahkan hari &amp; tanggal otomatis di bawah waktu</label>':''}</div>`).join('');
@@ -827,28 +1336,45 @@ function collect(){
   for(const c of CATS){if(!d[c.key]){toast(`"${c.label}" belum diisi`);return null;}}
   return d;
 }
-async function saveSkp(d) {
-  if (!d) return;
-  if (!navigator.onLine) {
-    await OfflineAPI.queueGenerate(d);
-    return;
-  const b=$('#btn-gen');b.disabled=true;b.innerHTML='<div class="spin"></div><span>Membuat PDF… (±10–30 detik)</span>';
+
+async function saveSkp(d){
+  if(!d)return;
+  const b=$('#btn-gen');b.disabled=true;b.innerHTML='<div class="spin"></div><span>Membuat PDF…</span>';
   $('#result').style.display='none';
   try{
-    const r=await api('generateSkp',d);
-    $('#r-name').textContent=r.name+(r.replaced?' · menggantikan file sebelumnya di tanggal ini (dipindah ke sampah Drive)':'');$('#r-url').value=r.url;$('#r-open').href=r.url;
+    const r=await LocalPDF.generate(d);
+    $('#r-name').textContent=r.name;
+    $('#r-url').value=r.url||r.name;
     $('#result').style.display='block';
     setTimeout(()=>$('#result').scrollIntoView({behavior:'smooth',block:'center'}),100);
-    toast(r.replaced?'PDF diperbarui — file lama diganti ✓':'PDF tersimpan di Google Drive ✓');
+    toast('✅ PDF tersimpan di perangkat');
+    S.riwayat = await LocalDB.getRiwayat();
     loadRiwayat();
-  }catch(e){toast('Gagal: '+e.message);}
+    loadBeranda();
+    // simpan last untuk tombol share/word
+    window._lastSkp = { d, r };
+  }catch(e){toast('Gagal: '+e.message);console.error(e);}
   finally{b.disabled=false;b.innerHTML=ic('file')+'<span>Buat PDF &amp; Simpan</span>';}
-};
+}
 $('#btn-gen').onclick=()=>saveSkp(collect());
 $('#r-copy').onclick=()=>copyText($('#r-url').value);
 $('#r-url').onclick=e=>e.target.select();
+$('#r-share').onclick=async()=>{
+  if(!window._lastSkp)return toast('Belum ada file');
+  try{await shareFile(window._lastSkp.r.blob, window._lastSkp.r.name);}
+  catch(e){toast('Gagal: '+e.message);}
+};
+$('#r-word').onclick=async()=>{
+  if(!window._lastSkp)return toast('Belum ada file');
+  try{
+    const r = await LocalPDF.exportWord(window._lastSkp.d);
+    toast('✅ Word tersimpan: '+r.name);
+  }catch(e){toast('Gagal: '+e.message);}
+};
 
-/* ---------- PRATINJAU ---------- */
+/* ================================================================
+   PRATINJAU
+   ================================================================ */
 const HARI=['Minggu','Senin','Selasa','Rabu','Kamis','Jum’at','Sabtu'];
 const BULAN=['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
 const tglIndo=s=>{const [y,m,d]=s.split('-').map(Number);return d+' '+BULAN[m-1]+' '+y;};
@@ -898,26 +1424,13 @@ $('#pv-x').onclick=closePv;$('#pv-edit').onclick=closePv;
 $('#pv-save').onclick=()=>{const d=collect();closePv();saveSkp(d);};
 window.addEventListener('resize',()=>{if($('#pv').classList.contains('open'))fitPv();});
 
-/* ---------- RIWAYAT (per bulan) ---------- */
-const RH={ym:todayStr().slice(0,7),loaded:false};
+/* ================================================================
+   RIWAYAT
+   ================================================================ */
+const RH={ym:todayStr().slice(0,7)};
 async function loadRiwayat(force){
-  if(!force&&S.riwayat.length&&RH.loaded){renderRiwayat();return;}
-  $('#h-list').innerHTML='<div class="empty">Memuat…</div>';
-  $('#h-sum').innerHTML='';
-  try{
-    const raw=await api('getRiwayat');
-    const r=typeof raw==='string'?JSON.parse(raw):raw;
-    if(!r)throw new Error('Server tidak mengembalikan data. Pastikan deployment sudah "Versi baru".');
-    if(r.error)throw new Error(r.error);
-    S.riwayat=Array.isArray(r)?r:[];
-    RH.loaded=true;
-    renderRiwayat();
-  }catch(e){
-    toast('Gagal memuat riwayat');
-    if(S.riwayat&&S.riwayat.length){renderRiwayat();return;}
-    $('#h-list').innerHTML=`<div class="empty card">Gagal memuat riwayat.<br><small>${esc(e.message)}</small><br><br><button class="btn ghost sm" id="h-retry">Coba lagi</button></div>`;
-    const b=$('#h-retry');if(b)b.onclick=()=>{RH.loaded=false;loadRiwayat(true);};
-  }
+  if(force)S.riwayat = await LocalDB.getRiwayat();
+  renderRiwayat();
 }
 function rhkInfo(x){
   let label='',text=String(x.rhk||'');
@@ -946,255 +1459,30 @@ function renderRiwayat(){
   $('#h-list').innerHTML=list.map(x=>{
     const [yy,mm,dd]=String(x.tanggal||'').split('-');
     return `<div class="hist"><div class="date"><b>${+dd}</b><span>${BLN[+mm-1]||''} ${yy||''}</span></div>
-      <div class="info"><strong>Laporan SKP Tanggal ${esc(/^\d{4}-\d{2}-\d{2}$/.test(x.tanggal)?tglIndo(x.tanggal):x.label)}</strong><small>${(()=>{const r=rhkInfo(x);return (r.label?`<b class="rn">${esc(r.label)}</b>`:'')+esc(r.text);})()}</small><a href="${esc(x.url)}" target="_blank" rel="noopener">${esc(x.url)}</a></div>
-      <div class="acts"><button class="ib" data-copy="${esc(x.url)}" title="Salin link">${ic('copy')}</button>
-      <a class="ib" href="${esc(x.url)}" target="_blank" rel="noopener" title="Buka">${ic('ext')}</a>
+      <div class="info"><strong>Laporan SKP Tanggal ${esc(/^\d{4}-\d{2}-\d{2}$/.test(x.tanggal)?tglIndo(x.tanggal):x.label)}</strong><small>${(()=>{const r=rhkInfo(x);return (r.label?`<b class="rn">${esc(r.label)}</b>`:'')+esc(r.text);})()}</small><a href="#">${esc(x.fileName||x.url||'')}</a></div>
+      <div class="acts"><button class="ib" data-share="${esc(x.id)}" title="Bagikan">${ic('ext')}</button>
       <button class="ib dng" data-del="${esc(x.id)}" title="Hapus">${ic('trash')}</button></div></div>`;}).join('');
-  $('#h-list').querySelectorAll('[data-copy]').forEach(b=>b.onclick=()=>copyText(b.dataset.copy));
+  $('#h-list').querySelectorAll('[data-share]').forEach(b=>b.onclick=async()=>{
+    const id = b.dataset.share;
+    const entry = (S.riwayat||[]).find(x=>x.id===id);
+    if(!entry)return;
+    try{
+      const f = await LocalDB.getFile(entry.fileName);
+      if(f){
+        const bytes = Uint8Array.from(atob(f.b64), c=>c.charCodeAt(0));
+        const blob = new Blob([bytes],{type:f.mime});
+        await shareFile(blob, entry.fileName);
+      } else {
+        toast('File tidak ditemukan di penyimpanan');
+      }
+    }catch(e){toast('Gagal: '+e.message);}
+  });
   $('#h-list').querySelectorAll('[data-del]').forEach(b=>b.onclick=async()=>{
-    const r=await askConfirm('Hapus dari riwayat?','Catatan riwayat ini akan dihapus.','Pindahkan juga file PDF ke tempat sampah Drive','Hapus');
+    const r=await askConfirm('Hapus dari riwayat?','Catatan riwayat ini akan dihapus.','Hapus juga file dari penyimpanan','Hapus');
     if(!r.ok)return;
-    try{await api('deleteRiwayat',b.dataset.del,r.chk);S.riwayat=S.riwayat.filter(x=>x.id!==b.dataset.del);renderRiwayat();toast('Dihapus');}catch(e){toast('Gagal: '+e.message);}
+    try{await LocalDB.deleteRiwayat(b.dataset.del);S.riwayat=S.riwayat.filter(x=>x.id!==b.dataset.del);renderRiwayat();loadBeranda();toast('Dihapus');}catch(e){toast('Gagal: '+e.message);}
   });
 }
-
-/* ================================================================
-   BERANDA — Greeting + Progress Chart
-   ================================================================ */
-const BH = { ym: todayStr().slice(0, 7), chart: null, donut: null };
-
-function renderGreeting() {
-  const nama = (S.profil && S.profil.nama) ? S.profil.nama.split(' ')[0] : 'Rekan';
-  document.getElementById('g-nama').textContent = nama;
-}
-
-async function loadBeranda(force) {
-  renderGreeting();
-  const [y, m] = BH.ym.split('-').map(Number);
-  document.getElementById('g-title').textContent = BLN_FULL[m - 1] + ' ' + y;
-
-  const all = Array.isArray(S.riwayat) ? S.riwayat : [];
-  const list = all.filter(x => String(x.tanggal || '').indexOf(BH.ym) === 0);
-
-  // Statistik
-  const totalDays = new Date(y, m, 0).getDate();
-  const today = new Date();
-  const isCurrent = today.getFullYear() === y && today.getMonth() + 1 === m;
-  const passedDays = isCurrent ? today.getDate() : totalDays;
-  const target = passedDays; // target 1 SKP/hari kerja (bisa disesuaikan)
-  const pct = target ? Math.min(100, Math.round(list.length / target * 100)) : 0;
-
-  document.getElementById('g-stats').innerHTML = `
-    <div class="stat"><b>${list.length}</b><small>SKP dibuat</small></div>
-    <div class="stat"><b>${target}</b><small>Hari berjalan</small></div>
-    <div class="stat"><b>${pct}%</b><small>Progress</small></div>`;
-  document.getElementById('g-count').textContent = `${list.length} dari ${target} hari`;
-  document.getElementById('g-sub').textContent = pct >= 100
-    ? '🎉 Lengkap! Semua hari sudah terisi.'
-    : `Progress ${pct}% — ayo lengkapi SKP hari ini.`;
-
-  // Grafik batang per minggu (4-5 minggu)
-  const weeks = {};
-  list.forEach(x => {
-    const d = new Date(x.tanggal + 'T00:00:00');
-    const wk = Math.ceil(d.getDate() / 7);
-    weeks[wk] = (weeks[wk] || 0) + 1;
-  });
-  const labels = ['M1', 'M2', 'M3', 'M4', 'M5'];
-  const data = labels.map((_, i) => weeks[i + 1] || 0);
-  drawBarChart('g-chart', labels, data);
-
-  // Donut per kategori RHK
-  const catCnt = {};
-  list.forEach(x => {
-    const r = rhkInfo(x);
-    const key = r.label || 'Lainnya';
-    catCnt[key] = (catCnt[key] || 0) + 1;
-  });
-  drawDonut('g-donut', 'g-legend', catCnt);
-
-  // Riwayat count
-  const rc = document.getElementById('g-r-count');
-  if (rc) rc.textContent = `${all.length} laporan`;
-
-  // Simpan cache riwayat
-  await DB.put('cache', { key: 'riwayat', data: all, ts: Date.now() });
-}
-
-function drawBarChart(canvasId, labels, data) {
-  const cv = document.getElementById(canvasId);
-  if (!cv) return;
-  const dpr = window.devicePixelRatio || 1;
-  const w = cv.clientWidth, h = cv.clientHeight;
-  cv.width = w * dpr; cv.height = h * dpr;
-  const ctx = cv.getContext('2d');
-  ctx.scale(dpr, dpr);
-  ctx.clearRect(0, 0, w, h);
-
-  const pad = 24, bw = (w - pad * 2) / labels.length * 0.6;
-  const gap = (w - pad * 2) / labels.length;
-  const max = Math.max(1, ...data);
-  const barH = h - pad * 2;
-
-  // grid
-  ctx.strokeStyle = '#e1e9e7'; ctx.lineWidth = 1;
-  for (let i = 0; i <= 4; i++) {
-    const y = pad + barH * i / 4;
-    ctx.beginPath(); ctx.moveTo(pad, y); ctx.lineTo(w - pad, y); ctx.stroke();
-  }
-
-  data.forEach((v, i) => {
-    const bh = (v / max) * barH;
-    const x = pad + gap * i + (gap - bw) / 2;
-    const y = h - pad - bh;
-    const grad = ctx.createLinearGradient(0, y, 0, h - pad);
-    grad.addColorStop(0, '#14958a'); grad.addColorStop(1, '#0f766e');
-    ctx.fillStyle = grad;
-    ctx.beginPath();
-    if (ctx.roundRect) ctx.roundRect(x, y, bw, bh, 6);
-    else ctx.rect(x, y, bw, bh);
-    ctx.fill();
-    // label
-    ctx.fillStyle = '#5d6f6b'; ctx.font = '11px Inter,sans-serif'; ctx.textAlign = 'center';
-    ctx.fillText(labels[i], x + bw / 2, h - 6);
-    // nilai
-    if (v > 0) {
-      ctx.fillStyle = '#0b5c56'; ctx.font = 'bold 11px Inter,sans-serif';
-      ctx.fillText(v, x + bw / 2, y - 4);
-    }
-  });
-}
-
-function drawDonut(canvasId, legendId, dataObj) {
-  const cv = document.getElementById(canvasId);
-  const lg = document.getElementById(legendId);
-  if (!cv || !lg) return;
-  const keys = Object.keys(dataObj);
-  const vals = keys.map(k => dataObj[k]);
-  const total = vals.reduce((a, b) => a + b, 0) || 1;
-  const colors = ['#0f766e', '#2563eb', '#7c3aed', '#f59e0b', '#dc2626', '#0d9488', '#84cc16'];
-  const dpr = window.devicePixelRatio || 1;
-  cv.width = 140 * dpr; cv.height = 140 * dpr;
-  cv.style.width = '140px'; cv.style.height = '140px';
-  const ctx = cv.getContext('2d');
-  ctx.scale(dpr, dpr);
-  ctx.clearRect(0, 0, 140, 140);
-  const cx = 70, cy = 70, r = 60, ir = 38;
-  let start = -Math.PI / 2;
-  vals.forEach((v, i) => {
-    const ang = (v / total) * Math.PI * 2;
-    ctx.beginPath();
-    ctx.arc(cx, cy, r, start, start + ang);
-    ctx.arc(cx, cy, ir, start + ang, start, true);
-    ctx.closePath();
-    ctx.fillStyle = colors[i % colors.length];
-    ctx.fill();
-    start += ang;
-  });
-  ctx.fillStyle = '#0f1f1c'; ctx.textAlign = 'center';
-  ctx.font = 'bold 18px Inter,sans-serif';
-  ctx.fillText(total, cx, cy + 2);
-  ctx.font = '9px Inter,sans-serif'; ctx.fillStyle = '#5d6f6b';
-  ctx.fillText('SKP', cx, cy + 16);
-
-  lg.innerHTML = keys.length ? keys.map((k, i) => `
-    <div><span class="dot" style="background:${colors[i % colors.length]}"></span>
-    ${esc(k)} <b>${dataObj[k]}</b></div>`).join('')
-    : '<span style="color:var(--mute)">Belum ada data</span>';
-}
-
-document.getElementById('g-prev').onclick = () => shiftBeranda(-1);
-document.getElementById('g-next').onclick = () => shiftBeranda(1);
-function shiftBeranda(d) {
-  const [y, m] = BH.ym.split('-').map(Number);
-  const dt = new Date(y, m - 1 + d, 1);
-  BH.ym = dt.getFullYear() + '-' + p2(dt.getMonth() + 1);
-  loadBeranda();
-}
-
-// Quick actions
-document.querySelectorAll('.quick[data-go]').forEach(b => {
-  b.onclick = () => go(b.dataset.go);
-});
-
-/* ================================================================
-   EXPORT PDF / WORD KE PERANGKAT
-   ================================================================ */
-async function exportModal() {
-  const m = document.getElementById('modal');
-  m.innerHTML = `
-    <div class="box" style="max-width:420px">
-      <h3>Export SKP</h3>
-      <p>Pilih format & rentang yang akan disimpan ke perangkat.</p>
-      <div class="exp-opts">
-        <button class="exp-opt" data-fmt="pdf" data-scope="bulan">
-          <div class="e-ic">📄</div>
-          <div><b>PDF — Bulan ini</b><small>Simpan ke folder Download</small></div>
-        </button>
-        <button class="exp-opt" data-fmt="word" data-scope="bulan">
-          <div class="e-ic">📝</div>
-          <div><b>Word (.docx) — Bulan ini</b><small>Bisa diedit</small></div>
-        </button>
-        <button class="exp-opt" data-fmt="pdf" data-scope="hari">
-          <div class="e-ic">📄</div>
-          <div><b>PDF — 1 hari terpilih</b><small>Dari tanggal hari ini</small></div>
-        </button>
-      </div>
-      <div class="row" style="justify-content:flex-end;margin-top:8px">
-        <button class="btn ghost sm" id="exp-cancel">Batal</button>
-      </div>
-    </div>`;
-  m.classList.add('open');
-  document.getElementById('exp-cancel').onclick = () => { m.classList.remove('open'); m.innerHTML = ''; };
-  m.querySelectorAll('.exp-opt').forEach(b => {
-    b.onclick = async () => {
-      m.classList.remove('open'); m.innerHTML = '';
-      await doExport(b.dataset.fmt, b.dataset.scope);
-    };
-  });
-}
-
-async function doExport(fmt, scope) {
-  try {
-    // 1. Minta server hasilkan file (base64)
-    const r = await api('exportSkp', {
-      format: fmt,
-      scope: scope,
-      ym: BH.ym,
-      tanggal: scope === 'hari' ? todayStr() : null
-    });
-    if (!r || !r.b64) throw new Error('Server tidak mengembalikan file');
-
-    const bytes = Uint8Array.from(atob(r.b64), c => c.charCodeAt(0));
-    const blob = new Blob([bytes], { type: r.mime || (fmt === 'pdf' ? 'application/pdf' : 'application/vnd.openxmlformats-officedocument.wordprocessingml.document') });
-    const filename = r.name || `SKP_${BH.ym}.${fmt === 'pdf' ? 'pdf' : 'docx'}`;
-
-    // 2. Native share (Android/iOS) — paling universal
-    if (navigator.canShare && navigator.canShare({ files: [new File([blob], filename, { type: blob.type })] })) {
-      try {
-        await navigator.share({
-          files: [new File([blob], filename, { type: blob.type })],
-          title: 'SKP Harian',
-          text: filename
-        });
-        toast('✅ File dibagikan — pilih "Simpan ke Files/Drive"');
-        return;
-      } catch (e) { /* user cancel → fallback */ }
-    }
-
-    // 3. Fallback: download via anchor
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url; a.download = filename; a.click();
-    setTimeout(() => URL.revokeObjectURL(url), 5000);
-    toast('✅ Tersimpan ke folder Download');
-  } catch (e) {
-    toast('Gagal export: ' + e.message);
-  }
-}
-
-document.getElementById('g-export-all').onclick = exportModal;
-  
 function shiftHMonth(delta){
   const [y,m]=RH.ym.split('-').map(Number);
   const d=new Date(y,m-1+delta,1);
@@ -1204,9 +1492,11 @@ function shiftHMonth(delta){
 $('#h-prev').onclick=()=>shiftHMonth(-1);
 $('#h-next').onclick=()=>shiftHMonth(1);
 $('#h-today').onclick=()=>{const t=todayStr();RH.ym=t.slice(0,7);renderRiwayat();};
-$('#h-ref').onclick=()=>{RH.loaded=false;loadRiwayat(true);};
+$('#h-ref').onclick=()=>loadRiwayat(true);
 
-/* ---------- SETTING ---------- */
+/* ================================================================
+   SETTING
+   ================================================================ */
 const SCATS=[{key:'rhk',label:'Jenis RHK'},{key:'waktu',label:'Waktu'}];
 function renderSetting(){
   if(!SCATS.some(c=>c.key===S.cat))S.cat='rhk';
@@ -1253,12 +1543,12 @@ $('#s-add').onclick=()=>{
 };
 $('#s-save').onclick=async()=>{
   const b=$('#s-save');b.disabled=true;
-  try{S.settings=await api('saveSettings',S.settings);await DB.put('cache', { key: 'settings', data: S.settings, ts: Date.now() }); fillSelects(false);renderSetting();toast('Setting tersimpan ✓');}
+  try{S.settings=await LocalDB.saveSettings(S.settings);fillSelects(false);renderSetting();toast('Setting tersimpan ✓');}
   catch(e){toast('Gagal: '+e.message);}finally{b.disabled=false;}
 };
 
 /* ================================================================
-   JADWAL — 2 panel: Absen (3 shift) & Masuk (M/P/L)
+   JADWAL
    ================================================================ */
 const SHIFT_ABSEN={
   '1':{n:'Shift 1 · Pagi',j:'07.00–15.00',b:'Pagi'},
@@ -1268,24 +1558,16 @@ const SHIFT_ABSEN={
   'L':{n:'Libur',j:'',b:'Libur'}
 };
 const KEYS_ABSEN=['1','2','3','P','L'];
-/* Warna khusus: Lepas Piket & Libur keduanya merah */
-const SHIFT_MASUK={
-  'M':{n:'Masuk',b:'Masuk'},
-  'P':{n:'Lepas Piket',b:'Lepas'},
-  'L':{n:'Libur',b:'Libur'}
-};
+const SHIFT_MASUK={'M':{n:'Masuk',b:'Masuk'},'P':{n:'Lepas Piket',b:'Lepas'},'L':{n:'Libur',b:'Libur'}};
 const KEYS_MASUK=['M','P','L'];
-
 const sBadgeAbsen=k=>SHIFT_ABSEN[k]?`<span class="bd c${k}">${SHIFT_ABSEN[k].b}</span>`:'';
 const sBadgeMasuk=k=>SHIFT_MASUK[k]?`<span class="bd c${k}">${SHIFT_MASUK[k].b}</span>`:'';
 
-/* Panel switch */
 document.querySelectorAll('#jtabs button').forEach(b=>b.onclick=()=>{
   document.querySelectorAll('#jtabs button').forEach(x=>x.classList.toggle('on',x===b));
   document.querySelectorAll('.jpanel').forEach(p=>p.classList.toggle('on',p.id==='jp-'+b.dataset.j));
 });
 
-/* ============ JADWAL ABSEN ============ */
 const AB={ym:'',data:{},loaded:{},sel:'',busy:false};
 function absInit(){
   if(AB.ym)return;
@@ -1298,7 +1580,7 @@ async function loadAbsen(ym,force){
   if(AB.loaded[ym]&&!force){renderAbsen();return;}
   renderAbsen();
   try{
-    const list=JSON.parse(await api('getAbsen',ym,'absen')||'[]');
+    const list=JSON.parse(await LocalDB.getAbsen(ym,'absen')||'[]');
     Object.keys(AB.data).forEach(k=>{if(k.indexOf(ym)===0)delete AB.data[k];});
     list.forEach(x=>{if(SHIFT_ABSEN[x.shift])AB.data[x.tanggal]={tanggal:x.tanggal,shift:x.shift};});
     AB.loaded[ym]=true;
@@ -1325,7 +1607,7 @@ function renderAbsen(){
   const cnt={};keys.forEach(k=>{const s=AB.data[k].shift;cnt[s]=(cnt[s]||0)+1;});
   $('#ab-sub').textContent=keys.length?keys.length+' hari terisi':'Belum ada jadwal';
   $('#ab-recap').innerHTML=KEYS_ABSEN.filter(k=>cnt[k]).map(k=>`<span class="lg c${k}">${SHIFT_ABSEN[k].n}: ${cnt[k]}</span>`).join('')||'<span style="color:var(--mute);font-size:13px">Belum ada jadwal bulan ini.</span>';
-    $('#ab-list').innerHTML=keys.map(t=>{
+  $('#ab-list').innerHTML=keys.map(t=>{
     const e=AB.data[t],dd=new Date(+t.slice(0,4),+t.slice(5,7)-1,+t.slice(8,10)),s=SHIFT_ABSEN[e.shift];
     return `<button class="arow${t===AB.sel?' sel':''}" data-t="${t}"><span class="ad">${HARI3[dd.getDay()]}, ${+t.slice(8)}</span>${sBadgeAbsen(e.shift)}<span class="am">${s.n}${s.j?' · '+s.j:''}</span></button>`;
   }).join('');
@@ -1357,7 +1639,7 @@ async function saveAbsenItems(items,kind,okMsg,btn){
   if(AB.busy)return false;
   AB.busy=true;if(btn)btn.disabled=true;
   try{
-    await api('saveAbsen',items,kind);
+    await LocalDB.saveAbsen(items,kind);
     const dict=kind==='masuk'?SHIFT_MASUK:SHIFT_ABSEN;
     const store=kind==='masuk'?MK:AB;
     items.forEach(it=>{if(dict[it.shift])store.data[it.tanggal]={tanggal:it.tanggal,shift:it.shift};else delete store.data[it.tanggal];});
@@ -1382,7 +1664,6 @@ $('#ab-rgo').onclick=()=>{
   saveAbsenItems(items,'absen',items.length+' hari terisi ✓',$('#ab-rgo'));
 };
 
-/* ============ JADWAL MASUK ============ */
 const MK={ym:'',data:{},loaded:{},sel:'',busy:false};
 function masukInit(){
   if(MK.ym)return;
@@ -1395,7 +1676,7 @@ async function loadMasuk(ym,force){
   if(MK.loaded[ym]&&!force){renderMasuk();return;}
   renderMasuk();
   try{
-    const list=JSON.parse(await api('getAbsen',ym,'masuk')||'[]');
+    const list=JSON.parse(await LocalDB.getAbsen(ym,'masuk')||'[]');
     Object.keys(MK.data).forEach(k=>{if(k.indexOf(ym)===0)delete MK.data[k];});
     list.forEach(x=>{if(SHIFT_MASUK[x.shift])MK.data[x.tanggal]={tanggal:x.tanggal,shift:x.shift};});
     MK.loaded[ym]=true;
@@ -1464,11 +1745,12 @@ $('#mk-rgo').onclick=()=>{
   saveAbsenItems(items,'masuk',items.length+' hari terisi ✓',$('#mk-rgo'));
 };
 
-/* ---------- PROFIL ---------- */
+/* ================================================================
+   PROFIL
+   ================================================================ */
 const PF=['nama','nip','pangkat','jabatan','unit','atasan','tempat'];
 function fillProfil(){
   PF.forEach(k=>$('#p-'+k).value=S.profil[k]||'');
-  $('#p-share').checked=S.profil.share!==false;
   renderUploads();
 }
 function renderUploads(){
@@ -1482,31 +1764,81 @@ $('#ttd-in').onchange=async e=>{const f=e.target.files[0];if(!f)return;try{S.ttd
 $('#logo-rm').onclick=()=>{S.logo=null;S.rmLogo=true;renderUploads();};
 $('#ttd-rm').onclick=()=>{S.ttd=null;S.rmTtd=true;renderUploads();};
 $('#p-save').onclick=async()=>{
-  const p={share:$('#p-share').checked,logo:S.logo?{b64:S.logo.b64,mime:S.logo.mime}:null,ttd:S.ttd?{b64:S.ttd.b64,mime:S.ttd.mime}:null,removeLogo:S.rmLogo,removeTtd:S.rmTtd};
+  const p={share:true,logo:S.logo?{b64:S.logo.b64,mime:S.logo.mime}:null,ttd:S.ttd?{b64:S.ttd.b64,mime:S.ttd.mime}:null,removeLogo:S.rmLogo,removeTtd:S.rmTtd};
   PF.forEach(k=>p[k]=$('#p-'+k).value);
   const b=$('#p-save');b.disabled=true;
-  try{S.profil=await api('saveProfil',p);await DB.put('cache', { key: 'profil', data: S.profil, ts: Date.now() }); S.logo=S.ttd=null;S.rmLogo=S.rmTtd=false;renderWho();if(!$('#f-tempat').value)$('#f-tempat').value=S.profil.tempat||'';renderUploads();toast('Profil tersimpan ✓');}
-  catch(e){toast('Gagal: '+e.message);}finally{b.disabled=false;}
+  try{
+    S.profil=await LocalDB.saveProfil(p);
+    S.logo=S.ttd=null;S.rmLogo=S.rmTtd=false;
+    renderWho();if(!$('#f-tempat').value)$('#f-tempat').value=S.profil.tempat||'';
+    renderUploads();loadBeranda();
+    toast('Profil tersimpan ✓');
+  }catch(e){toast('Gagal: '+e.message);}
+  finally{b.disabled=false;}
 };
 
-/* ---------- init ---------- */
-(async function init(){
-  hydrate();
+$('#p-backup').onclick=async()=>{
   try{
-    const raw=await api('getInit');
-    if(raw==null)throw new Error('Server tidak mengembalikan data. Pastikan deployment sudah "Versi baru" dengan Jalankan sebagai: Saya.');
-    const r=typeof raw==='string'?JSON.parse(raw):raw;
-    if(r.error)throw new Error(r.error);
-    S.profil=r.profil;S.settings=r.settings;S.riwayat=r.riwayat;
-  }catch(e){
-    $('#boot-t').innerHTML='Gagal memuat: '+esc(e.message)+'<br><br><button class="btn pri sm" onclick="location.reload()">Coba lagi</button>';
-    document.querySelector('#boot .spin').style.display='none';return;
+    const data = await LocalDB.exportAll();
+    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+    const filename = `skp_backup_${todayStr()}.json`;
+    await saveFileNative(blob, filename);
+    toast('✅ Backup tersimpan');
+  }catch(e){toast('Gagal: '+e.message);}
+};
+$('#p-restore').onchange=async e=>{
+  const f=e.target.files[0];if(!f)return;
+  try{
+    const txt = await f.text();
+    const data = JSON.parse(txt);
+    const r = await askConfirm('Restore data?','Semua data saat ini akan diganti dengan file backup.','','Restore');
+    if(!r.ok)return;
+    await LocalDB.importAll(data);
+    toast('Data dipulihkan ✓');
+    const raw = await LocalDB.getInit();
+    S.profil = raw.profil; S.settings = raw.settings; S.riwayat = raw.riwayat;
+    renderWho(); fillProfil(); buildFields(); loadBeranda();
+  }catch(err){toast('Gagal restore: '+err.message);}
+  e.target.value='';
+};
+
+/* ================================================================
+   ONLINE/OFFLINE
+   ================================================================ */
+function updateOnlineBar(){
+  const bar = document.getElementById('g-offline');
+  if (bar) bar.style.display = navigator.onLine ? 'none' : 'block';
+}
+window.addEventListener('online', ()=>{updateOnlineBar();toast('🌐 Online kembali');});
+window.addEventListener('offline', ()=>{updateOnlineBar();toast('📴 Mode offline aktif');});
+
+/* ================================================================
+   INIT
+   ================================================================ */
+(async function init(){
+  try {
+    hydrate();
+    const raw = await LocalDB.getInit();
+    S.profil = raw.profil;
+    S.settings = raw.settings;
+    S.riwayat = raw.riwayat;
+    const t = todayStr();
+    $('#f-tanggal').value = t;
+    $('#f-tempat').value = S.profil.tempat || '';
+    renderWho();
+    buildFields();
+    renderThumbs();
+    hydrate();
+    updateOnlineBar();
+    $('#boot').style.display = 'none';
+    loadBeranda();
+  } catch (e) {
+    console.error('INIT FAILED:', e);
+    $('#boot-t').innerHTML = 'Gagal memuat: ' + esc(e.message) +
+      '<br><br><button class="btn pri sm" onclick="location.reload()">Coba lagi</button>';
+    const sp = document.querySelector('#boot .spin');
+    if (sp) sp.style.display = 'none';
   }
-  const t=todayStr();
-  $('#f-tanggal').value=t;$('#f-tempat').value=S.profil.tempat||'';
-  renderWho();buildFields();renderThumbs();hydrate();
-  $('#boot').style.display='none';
-  try{window.top.postMessage({skp:'ready'},'*');}catch(e){}
 })();
 </script>
 </body>
