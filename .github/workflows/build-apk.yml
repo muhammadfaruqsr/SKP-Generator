@@ -1,0 +1,75 @@
+name: Build Android APK
+
+on:
+  push:
+    branches: [ main, master ]
+    tags: [ 'v*' ]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Setup Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Copy Capacitor plugin JS → www/libs
+        run: |
+          mkdir -p www/libs
+          cp node_modules/@capacitor/core/dist/capacitor.js              www/libs/capacitor.js
+          cp node_modules/@capacitor/filesystem/dist/plugin.js           www/libs/plugin-filesystem.js
+          cp node_modules/@capacitor/share/dist/plugin.js                www/libs/plugin-share.js
+          cp node_modules/@capacitor/file-opener/dist/plugin.js          www/libs/plugin-file-opener.js
+
+      - name: Add Android platform (sekali saja, cache via build)
+        run: |
+          if [ ! -d android ]; then npx cap add android; fi
+          npx cap sync android
+
+      - name: Build Debug APK
+        run: |
+          cd android
+          chmod +x gradlew
+          ./gradlew assembleDebug --no-daemon
+
+      - name: Rename & collect
+        run: |
+          mkdir -p artifacts
+          cp android/app/build/outputs/apk/debug/app-debug.apk \
+             artifacts/SKPHarian-debug.apk
+          ls -la artifacts/
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: SKPHarian-APK
+          path: artifacts/*.apk
+          retention-days: 30
+
+      # Otomatis buat GitHub Release kalau push tag v* (mis. v1.0.0)
+      - name: Publish Release
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: artifacts/*.apk
+          generate_release_notes: true
