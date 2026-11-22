@@ -193,6 +193,41 @@ textarea{resize:none;overflow:hidden;min-height:76px}
 .rhk-h .hint{flex:1;font-size:12px;color:var(--mute)}
 .rhk-card>.btn{margin-top:2px}
 
+/* ===== Beranda ===== */
+.greet{
+  display:flex;gap:14px;align-items:center;
+  background:linear-gradient(135deg,#0f766e,#14958a 70%,#2bb3a3);
+  color:#fff;border-radius:18px;padding:18px;margin-bottom:14px;
+  box-shadow:0 8px 24px rgba(15,118,110,.25);
+}
+.greet-ic{width:48px;height:48px;border-radius:14px;background:rgba(255,255,255,.2);display:grid;place-items:center;flex:none;border:1px solid rgba(255,255,255,.2)}
+.greet h2{margin:0;font-size:16px;font-weight:700}
+.greet p{margin:2px 0 0;font-size:12.5px;opacity:.9}
+.stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px}
+.stat{background:#f6faf9;border-radius:12px;padding:12px;text-align:center}
+.stat b{display:block;font-size:22px;font-weight:800;color:var(--brand-d)}
+.stat small{font-size:11px;color:var(--mute);font-weight:600}
+.chart-box{background:#f6faf9;border-radius:14px;padding:12px;margin-bottom:12px;position:relative;height:200px}
+.chart-box canvas{width:100%!important;height:100%!important}
+.donut-row{display:flex;gap:14px;align-items:center;background:#f6faf9;border-radius:14px;padding:12px}
+.donut-row canvas{flex:none}
+.donut-legend{flex:1;font-size:12px;min-width:0}
+.donut-legend div{display:flex;align-items:center;gap:6px;margin-bottom:5px}
+.donut-legend .dot{width:10px;height:10px;border-radius:3px;flex:none}
+.donut-legend b{margin-left:auto;color:var(--brand-d)}
+.quick-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
+.quick{display:flex;flex-direction:column;align-items:flex-start;gap:2px;background:#fff;border:1.5px solid var(--line);border-radius:14px;padding:14px;text-align:left;cursor:pointer;font:inherit;color:var(--ink);transition:.15s}
+.quick:hover{border-color:var(--brand);background:#f8fbfa}
+.quick .q-ic{width:36px;height:36px;border-radius:10px;background:var(--brand-l);color:var(--brand-d);display:grid;place-items:center;margin-bottom:6px}
+.quick b{font-size:14px}.quick small{font-size:11.5px;color:var(--mute)}
+.offline-bar{position:fixed;left:16px;right:16px;bottom:calc(var(--nav-h) + 12px);background:#f59e0b;color:#3b2300;padding:10px 14px;border-radius:12px;font-size:13px;font-weight:600;text-align:center;z-index:40;box-shadow:0 4px 14px rgba(0,0,0,.12)}
+/* Export modal */
+.exp-opts{display:flex;flex-direction:column;gap:10px;margin:16px 0}
+.exp-opt{display:flex;gap:12px;align-items:center;border:1.5px solid var(--line);border-radius:12px;padding:12px;cursor:pointer;background:#fff;font:inherit;text-align:left;color:var(--ink);width:100%}
+.exp-opt:hover{border-color:var(--brand)}
+.exp-opt .e-ic{width:40px;height:40px;border-radius:10px;background:var(--brand-l);color:var(--brand-d);display:grid;place-items:center;flex:none}
+.exp-opt b{display:block;font-size:14px}.exp-opt small{font-size:12px;color:var(--mute)}
+
 /* ===== Jadwal: segmented tabs ===== */
 .jtabs{display:flex;gap:6px;background:#eef4f3;padding:5px;border-radius:14px;margin-bottom:14px}
 .jtabs button{flex:1;border:0;background:none;font:inherit;font-size:13px;font-weight:600;padding:11px 8px;border-radius:10px;color:var(--mute);cursor:pointer;transition:.15s;display:flex;align-items:center;justify-content:center;gap:6px}
@@ -259,6 +294,59 @@ textarea{resize:none;overflow:hidden;min-height:76px}
 
 <main class="wrap">
 
+
+<!-- ================= BERANDA (BARU) ================= -->
+<section class="tab on" id="tab-beranda">
+  <!-- Greeting -->
+  <div class="greet">
+    <div class="greet-ic" data-ic="user"></div>
+    <div>
+      <h2>Selamat Bertugas, <span id="g-nama">–</span></h2>
+      <p>Semoga sehat dan berkah selalu 🤲</p>
+    </div>
+  </div>
+
+  <!-- Progress per bulan -->
+  <div class="card">
+    <h2>Progress SKP Bulan Ini</h2>
+    <p class="sub" id="g-sub">Memuat data…</p>
+
+    <!-- Ringkasan -->
+    <div class="stat-row" id="g-stats"></div>
+
+    <!-- Grafik batang per minggu -->
+    <div class="chart-box">
+      <canvas id="g-chart" height="180"></canvas>
+    </div>
+
+    <!-- Grafik donut per kategori RHK -->
+    <div class="donut-row">
+      <canvas id="g-donut" width="140" height="140"></canvas>
+      <div id="g-legend" class="donut-legend"></div>
+    </div>
+
+    <!-- Navigasi bulan -->
+    <div class="hmon" style="margin-top:16px">
+      <button class="ib" id="g-prev">‹</button>
+      <div class="calt"><b id="g-title">–</b><small id="g-count"></small></div>
+      <button class="ib" id="g-next">›</button>
+    </div>
+  </div>
+
+  <!-- Akses cepat -->
+  <div class="quick-grid">
+    <button class="quick" data-go="buat"><div class="q-ic" data-ic="plus"></div><b>Buat SKP</b><small>Baru</small></button>
+    <button class="quick" data-go="riwayat"><div class="q-ic" data-ic="clock"></div><b>Riwayat</b><small id="g-r-count">0 laporan</small></button>
+    <button class="quick" data-go="absen"><div class="q-ic" data-ic="cal"></div><b>Jadwal</b><small>Absen & Masuk</small></button>
+    <button class="quick" id="g-export-all"><div class="q-ic" data-ic="file"></div><b>Export</b><small>PDF/Word</small></button>
+  </div>
+
+  <!-- Status offline -->
+  <div class="offline-bar" id="g-offline" style="display:none">
+    <span>📴 Mode offline — data disimpan lokal</span>
+  </div>
+</section>
+  
 <!-- ================= BUAT ================= -->
 <section class="tab on" id="tab-buat">
   <div class="who"><div class="brand-ic" style="background:#fff;color:var(--brand)" data-ic="user"></div>
@@ -455,6 +543,7 @@ textarea{resize:none;overflow:hidden;min-height:76px}
 
 <!-- ===== BOTTOM NAV ===== -->
 <nav id="nav">
+  <button data-tab="beranda"><i data-ic="home"></i>Beranda</button>
   <button data-tab="riwayat"><i data-ic="clock"></i>Riwayat</button>
   <button data-tab="setting"><i data-ic="sliders"></i>Setting</button>
   <button class="nav-fab" data-tab="buat" aria-label="Buat SKP">
@@ -492,6 +581,111 @@ textarea{resize:none;overflow:hidden;min-height:76px}
   }});
   window.google={script:{run:mk(null,null)}};
 })();
+
+/* ================================================================
+   OFFLINE STORAGE (IndexedDB)
+   ================================================================ */
+const DB = (() => {
+  let dbp = null;
+  const open = () => {
+    if (dbp) return dbp;
+    dbp = new Promise((res, rej) => {
+      const req = indexedDB.open('skp_offline', 1);
+      req.onupgradeneeded = () => {
+        const db = req.result;
+        if (!db.objectStoreNames.contains('outbox')) db.createObjectStore('outbox', { keyPath: 'id', autoIncrement: true });
+        if (!db.objectStoreNames.contains('cache')) db.createObjectStore('cache', { keyPath: 'key' });
+        if (!db.objectStoreNames.contains('files')) db.createObjectStore('files', { keyPath: 'id' });
+      };
+      req.onsuccess = () => res(req.result);
+      req.onerror = () => rej(req.error);
+    });
+    return dbp;
+  };
+  const tx = async (store, mode, fn) => {
+    const db = await open();
+    return new Promise((res, rej) => {
+      const t = db.transaction(store, mode);
+      const s = t.objectStore(store);
+      let result;
+      try { result = fn(s); } catch (e) { return rej(e); }
+      t.oncomplete = () => res(result);
+      t.onerror = () => rej(t.error);
+    });
+  };
+  return {
+    put: (store, val) => tx(store, 'readwrite', s => s.put(val)),
+    get: (store, key) => tx(store, 'readonly', s => s.get(key)),
+    getAll: (store) => tx(store, 'readonly', s => s.getAll()),
+    del: (store, key) => tx(store, 'readwrite', s => s.delete(key)),
+    add: (store, val) => tx(store, 'readwrite', s => s.add(val)),
+    clear: (store) => tx(store, 'readwrite', s => s.clear())
+  };
+})();
+
+/* Wrapper API offline-first */
+const OfflineAPI = {
+  async call(fn, ...args) {
+    try {
+      const res = await api(fn, ...args);
+      // cache hasil GET
+      if (fn === 'getInit' || fn === 'getRiwayat' || fn === 'getAbsen') {
+        await DB.put('cache', { key: fn + ':' + JSON.stringify(args), data: res, ts: Date.now() });
+      }
+      return res;
+    } catch (e) {
+      // offline → ambil dari cache
+      const cached = await DB.get('cache', fn + ':' + JSON.stringify(args));
+      if (cached) {
+        toast('Mode offline — menampilkan data tersimpan');
+        return cached.data;
+      }
+      // fallback khusus getInit
+      if (fn === 'getInit') {
+        const prof = await DB.get('cache', 'profil');
+        const set = await DB.get('cache', 'settings');
+        const riw = await DB.get('cache', 'riwayat');
+        if (prof && set) {
+          return {
+            profil: prof.data,
+            settings: set.data,
+            riwayat: riw ? riw.data : []
+          };
+        }
+      }
+      throw e;
+    }
+  },
+
+  async queueGenerate(payload) {
+    await DB.add('outbox', { type: 'generate', payload, ts: Date.now() });
+    toast('📴 Offline — SKP akan dibuat saat online');
+  },
+
+  async flushOutbox() {
+    if (!navigator.onLine) return;
+    const items = await DB.getAll('outbox');
+    for (const it of items) {
+      try {
+        if (it.type === 'generate') await api('generateSkp', it.payload);
+        await DB.del('outbox', it.id);
+      } catch (e) { break; }
+    }
+  }
+};
+
+/* Monitor online/offline */
+window.addEventListener('online', () => {
+  const b = document.getElementById('g-offline');
+  if (b) b.style.display = 'none';
+  toast('🌐 Kembali online — menyinkronkan…');
+  OfflineAPI.flushOutbox().then(() => loadBeranda(true));
+});
+window.addEventListener('offline', () => {
+  const b = document.getElementById('g-offline');
+  if (b) b.style.display = 'block';
+});
+  
 const ICONS={
 file:'<path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/>',
 plus:'<path d="M12 5v14M5 12h14"/>',
@@ -509,6 +703,7 @@ chl:'<path d="M15 5l-7 7 7 7"/>',
 chr:'<path d="M9 5l7 7-7 7"/>',
 eye:'<path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>',
 refresh:'<path d="M20 11a8 8 0 0 0-14-4M4 5v4h4M4 13a8 8 0 0 0 14 4M20 19v-4h-4"/>'
+home:'<path d="M3 11l9-8 9 8v9a2 2 0 0 1-2 2h-4v-7h-6v7H5a2 2 0 0 1-2-2z"/>'
 };
 const ic=n=>'<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'+(ICONS[n]||'')+'</svg>';
 function hydrate(root){(root||document).querySelectorAll('[data-ic]').forEach(e=>{if(!e.dataset.done){e.insertAdjacentHTML('afterbegin',ic(e.dataset.ic));e.dataset.done=1;}});}
@@ -559,14 +754,15 @@ function askConfirm(title,msg,chkLabel,okLabel){
 }
 
 /* ---------- tabs ---------- */
-function go(tab){
-  document.querySelectorAll('#nav button').forEach(b=>b.classList.toggle('on',b.dataset.tab===tab));
-  document.querySelectorAll('.tab').forEach(s=>s.classList.toggle('on',s.id==='tab-'+tab));
-  window.scrollTo({top:0,behavior:'smooth'});
-  if(tab==='riwayat')loadRiwayat();
-  if(tab==='setting')renderSetting();
-  if(tab==='profil'){fillProfil();}
-  if(tab==='absen'){absInit();loadAbsen(AB.ym);loadMasuk(MK.ym);}
+function go(tab) {
+  document.querySelectorAll('#nav button').forEach(b => b.classList.toggle('on', b.dataset.tab === tab));
+  document.querySelectorAll('.tab').forEach(s => s.classList.toggle('on', s.id === 'tab-' + tab));
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  if (tab === 'beranda') loadBeranda();
+  if (tab === 'riwayat') loadRiwayat();
+  if (tab === 'setting') renderSetting();
+  if (tab === 'profil') { fillProfil(); }
+  if (tab === 'absen') { absInit(); loadAbsen(AB.ym); loadMasuk(MK.ym); }
 }
 document.querySelectorAll('#nav button').forEach(b=>b.onclick=()=>go(b.dataset.tab));
 $('#w-edit').onclick=()=>go('profil');
@@ -631,8 +827,11 @@ function collect(){
   for(const c of CATS){if(!d[c.key]){toast(`"${c.label}" belum diisi`);return null;}}
   return d;
 }
-async function saveSkp(d){
-  if(!d)return;
+async function saveSkp(d) {
+  if (!d) return;
+  if (!navigator.onLine) {
+    await OfflineAPI.queueGenerate(d);
+    return;
   const b=$('#btn-gen');b.disabled=true;b.innerHTML='<div class="spin"></div><span>Membuat PDF… (±10–30 detik)</span>';
   $('#result').style.display='none';
   try{
@@ -758,6 +957,244 @@ function renderRiwayat(){
     try{await api('deleteRiwayat',b.dataset.del,r.chk);S.riwayat=S.riwayat.filter(x=>x.id!==b.dataset.del);renderRiwayat();toast('Dihapus');}catch(e){toast('Gagal: '+e.message);}
   });
 }
+
+/* ================================================================
+   BERANDA — Greeting + Progress Chart
+   ================================================================ */
+const BH = { ym: todayStr().slice(0, 7), chart: null, donut: null };
+
+function renderGreeting() {
+  const nama = (S.profil && S.profil.nama) ? S.profil.nama.split(' ')[0] : 'Rekan';
+  document.getElementById('g-nama').textContent = nama;
+}
+
+async function loadBeranda(force) {
+  renderGreeting();
+  const [y, m] = BH.ym.split('-').map(Number);
+  document.getElementById('g-title').textContent = BLN_FULL[m - 1] + ' ' + y;
+
+  const all = Array.isArray(S.riwayat) ? S.riwayat : [];
+  const list = all.filter(x => String(x.tanggal || '').indexOf(BH.ym) === 0);
+
+  // Statistik
+  const totalDays = new Date(y, m, 0).getDate();
+  const today = new Date();
+  const isCurrent = today.getFullYear() === y && today.getMonth() + 1 === m;
+  const passedDays = isCurrent ? today.getDate() : totalDays;
+  const target = passedDays; // target 1 SKP/hari kerja (bisa disesuaikan)
+  const pct = target ? Math.min(100, Math.round(list.length / target * 100)) : 0;
+
+  document.getElementById('g-stats').innerHTML = `
+    <div class="stat"><b>${list.length}</b><small>SKP dibuat</small></div>
+    <div class="stat"><b>${target}</b><small>Hari berjalan</small></div>
+    <div class="stat"><b>${pct}%</b><small>Progress</small></div>`;
+  document.getElementById('g-count').textContent = `${list.length} dari ${target} hari`;
+  document.getElementById('g-sub').textContent = pct >= 100
+    ? '🎉 Lengkap! Semua hari sudah terisi.'
+    : `Progress ${pct}% — ayo lengkapi SKP hari ini.`;
+
+  // Grafik batang per minggu (4-5 minggu)
+  const weeks = {};
+  list.forEach(x => {
+    const d = new Date(x.tanggal + 'T00:00:00');
+    const wk = Math.ceil(d.getDate() / 7);
+    weeks[wk] = (weeks[wk] || 0) + 1;
+  });
+  const labels = ['M1', 'M2', 'M3', 'M4', 'M5'];
+  const data = labels.map((_, i) => weeks[i + 1] || 0);
+  drawBarChart('g-chart', labels, data);
+
+  // Donut per kategori RHK
+  const catCnt = {};
+  list.forEach(x => {
+    const r = rhkInfo(x);
+    const key = r.label || 'Lainnya';
+    catCnt[key] = (catCnt[key] || 0) + 1;
+  });
+  drawDonut('g-donut', 'g-legend', catCnt);
+
+  // Riwayat count
+  const rc = document.getElementById('g-r-count');
+  if (rc) rc.textContent = `${all.length} laporan`;
+
+  // Simpan cache riwayat
+  await DB.put('cache', { key: 'riwayat', data: all, ts: Date.now() });
+}
+
+function drawBarChart(canvasId, labels, data) {
+  const cv = document.getElementById(canvasId);
+  if (!cv) return;
+  const dpr = window.devicePixelRatio || 1;
+  const w = cv.clientWidth, h = cv.clientHeight;
+  cv.width = w * dpr; cv.height = h * dpr;
+  const ctx = cv.getContext('2d');
+  ctx.scale(dpr, dpr);
+  ctx.clearRect(0, 0, w, h);
+
+  const pad = 24, bw = (w - pad * 2) / labels.length * 0.6;
+  const gap = (w - pad * 2) / labels.length;
+  const max = Math.max(1, ...data);
+  const barH = h - pad * 2;
+
+  // grid
+  ctx.strokeStyle = '#e1e9e7'; ctx.lineWidth = 1;
+  for (let i = 0; i <= 4; i++) {
+    const y = pad + barH * i / 4;
+    ctx.beginPath(); ctx.moveTo(pad, y); ctx.lineTo(w - pad, y); ctx.stroke();
+  }
+
+  data.forEach((v, i) => {
+    const bh = (v / max) * barH;
+    const x = pad + gap * i + (gap - bw) / 2;
+    const y = h - pad - bh;
+    const grad = ctx.createLinearGradient(0, y, 0, h - pad);
+    grad.addColorStop(0, '#14958a'); grad.addColorStop(1, '#0f766e');
+    ctx.fillStyle = grad;
+    ctx.beginPath();
+    if (ctx.roundRect) ctx.roundRect(x, y, bw, bh, 6);
+    else ctx.rect(x, y, bw, bh);
+    ctx.fill();
+    // label
+    ctx.fillStyle = '#5d6f6b'; ctx.font = '11px Inter,sans-serif'; ctx.textAlign = 'center';
+    ctx.fillText(labels[i], x + bw / 2, h - 6);
+    // nilai
+    if (v > 0) {
+      ctx.fillStyle = '#0b5c56'; ctx.font = 'bold 11px Inter,sans-serif';
+      ctx.fillText(v, x + bw / 2, y - 4);
+    }
+  });
+}
+
+function drawDonut(canvasId, legendId, dataObj) {
+  const cv = document.getElementById(canvasId);
+  const lg = document.getElementById(legendId);
+  if (!cv || !lg) return;
+  const keys = Object.keys(dataObj);
+  const vals = keys.map(k => dataObj[k]);
+  const total = vals.reduce((a, b) => a + b, 0) || 1;
+  const colors = ['#0f766e', '#2563eb', '#7c3aed', '#f59e0b', '#dc2626', '#0d9488', '#84cc16'];
+  const dpr = window.devicePixelRatio || 1;
+  cv.width = 140 * dpr; cv.height = 140 * dpr;
+  cv.style.width = '140px'; cv.style.height = '140px';
+  const ctx = cv.getContext('2d');
+  ctx.scale(dpr, dpr);
+  ctx.clearRect(0, 0, 140, 140);
+  const cx = 70, cy = 70, r = 60, ir = 38;
+  let start = -Math.PI / 2;
+  vals.forEach((v, i) => {
+    const ang = (v / total) * Math.PI * 2;
+    ctx.beginPath();
+    ctx.arc(cx, cy, r, start, start + ang);
+    ctx.arc(cx, cy, ir, start + ang, start, true);
+    ctx.closePath();
+    ctx.fillStyle = colors[i % colors.length];
+    ctx.fill();
+    start += ang;
+  });
+  ctx.fillStyle = '#0f1f1c'; ctx.textAlign = 'center';
+  ctx.font = 'bold 18px Inter,sans-serif';
+  ctx.fillText(total, cx, cy + 2);
+  ctx.font = '9px Inter,sans-serif'; ctx.fillStyle = '#5d6f6b';
+  ctx.fillText('SKP', cx, cy + 16);
+
+  lg.innerHTML = keys.length ? keys.map((k, i) => `
+    <div><span class="dot" style="background:${colors[i % colors.length]}"></span>
+    ${esc(k)} <b>${dataObj[k]}</b></div>`).join('')
+    : '<span style="color:var(--mute)">Belum ada data</span>';
+}
+
+document.getElementById('g-prev').onclick = () => shiftBeranda(-1);
+document.getElementById('g-next').onclick = () => shiftBeranda(1);
+function shiftBeranda(d) {
+  const [y, m] = BH.ym.split('-').map(Number);
+  const dt = new Date(y, m - 1 + d, 1);
+  BH.ym = dt.getFullYear() + '-' + p2(dt.getMonth() + 1);
+  loadBeranda();
+}
+
+// Quick actions
+document.querySelectorAll('.quick[data-go]').forEach(b => {
+  b.onclick = () => go(b.dataset.go);
+});
+
+/* ================================================================
+   EXPORT PDF / WORD KE PERANGKAT
+   ================================================================ */
+async function exportModal() {
+  const m = document.getElementById('modal');
+  m.innerHTML = `
+    <div class="box" style="max-width:420px">
+      <h3>Export SKP</h3>
+      <p>Pilih format & rentang yang akan disimpan ke perangkat.</p>
+      <div class="exp-opts">
+        <button class="exp-opt" data-fmt="pdf" data-scope="bulan">
+          <div class="e-ic">📄</div>
+          <div><b>PDF — Bulan ini</b><small>Simpan ke folder Download</small></div>
+        </button>
+        <button class="exp-opt" data-fmt="word" data-scope="bulan">
+          <div class="e-ic">📝</div>
+          <div><b>Word (.docx) — Bulan ini</b><small>Bisa diedit</small></div>
+        </button>
+        <button class="exp-opt" data-fmt="pdf" data-scope="hari">
+          <div class="e-ic">📄</div>
+          <div><b>PDF — 1 hari terpilih</b><small>Dari tanggal hari ini</small></div>
+        </button>
+      </div>
+      <div class="row" style="justify-content:flex-end;margin-top:8px">
+        <button class="btn ghost sm" id="exp-cancel">Batal</button>
+      </div>
+    </div>`;
+  m.classList.add('open');
+  document.getElementById('exp-cancel').onclick = () => { m.classList.remove('open'); m.innerHTML = ''; };
+  m.querySelectorAll('.exp-opt').forEach(b => {
+    b.onclick = async () => {
+      m.classList.remove('open'); m.innerHTML = '';
+      await doExport(b.dataset.fmt, b.dataset.scope);
+    };
+  });
+}
+
+async function doExport(fmt, scope) {
+  try {
+    // 1. Minta server hasilkan file (base64)
+    const r = await api('exportSkp', {
+      format: fmt,
+      scope: scope,
+      ym: BH.ym,
+      tanggal: scope === 'hari' ? todayStr() : null
+    });
+    if (!r || !r.b64) throw new Error('Server tidak mengembalikan file');
+
+    const bytes = Uint8Array.from(atob(r.b64), c => c.charCodeAt(0));
+    const blob = new Blob([bytes], { type: r.mime || (fmt === 'pdf' ? 'application/pdf' : 'application/vnd.openxmlformats-officedocument.wordprocessingml.document') });
+    const filename = r.name || `SKP_${BH.ym}.${fmt === 'pdf' ? 'pdf' : 'docx'}`;
+
+    // 2. Native share (Android/iOS) — paling universal
+    if (navigator.canShare && navigator.canShare({ files: [new File([blob], filename, { type: blob.type })] })) {
+      try {
+        await navigator.share({
+          files: [new File([blob], filename, { type: blob.type })],
+          title: 'SKP Harian',
+          text: filename
+        });
+        toast('✅ File dibagikan — pilih "Simpan ke Files/Drive"');
+        return;
+      } catch (e) { /* user cancel → fallback */ }
+    }
+
+    // 3. Fallback: download via anchor
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = filename; a.click();
+    setTimeout(() => URL.revokeObjectURL(url), 5000);
+    toast('✅ Tersimpan ke folder Download');
+  } catch (e) {
+    toast('Gagal export: ' + e.message);
+  }
+}
+
+document.getElementById('g-export-all').onclick = exportModal;
+  
 function shiftHMonth(delta){
   const [y,m]=RH.ym.split('-').map(Number);
   const d=new Date(y,m-1+delta,1);
@@ -816,7 +1253,7 @@ $('#s-add').onclick=()=>{
 };
 $('#s-save').onclick=async()=>{
   const b=$('#s-save');b.disabled=true;
-  try{S.settings=await api('saveSettings',S.settings);fillSelects(false);renderSetting();toast('Setting tersimpan ✓');}
+  try{S.settings=await api('saveSettings',S.settings);await DB.put('cache', { key: 'settings', data: S.settings, ts: Date.now() }); fillSelects(false);renderSetting();toast('Setting tersimpan ✓');}
   catch(e){toast('Gagal: '+e.message);}finally{b.disabled=false;}
 };
 
@@ -1048,7 +1485,7 @@ $('#p-save').onclick=async()=>{
   const p={share:$('#p-share').checked,logo:S.logo?{b64:S.logo.b64,mime:S.logo.mime}:null,ttd:S.ttd?{b64:S.ttd.b64,mime:S.ttd.mime}:null,removeLogo:S.rmLogo,removeTtd:S.rmTtd};
   PF.forEach(k=>p[k]=$('#p-'+k).value);
   const b=$('#p-save');b.disabled=true;
-  try{S.profil=await api('saveProfil',p);S.logo=S.ttd=null;S.rmLogo=S.rmTtd=false;renderWho();if(!$('#f-tempat').value)$('#f-tempat').value=S.profil.tempat||'';renderUploads();toast('Profil tersimpan ✓');}
+  try{S.profil=await api('saveProfil',p);await DB.put('cache', { key: 'profil', data: S.profil, ts: Date.now() }); S.logo=S.ttd=null;S.rmLogo=S.rmTtd=false;renderWho();if(!$('#f-tempat').value)$('#f-tempat').value=S.profil.tempat||'';renderUploads();toast('Profil tersimpan ✓');}
   catch(e){toast('Gagal: '+e.message);}finally{b.disabled=false;}
 };
 
