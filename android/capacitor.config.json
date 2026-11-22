@@ -1,8 +1,0 @@
-{
-  "appId": "com.skp.harian",
-  "appName": "SKP Harian",
-  "webDir": "www",
-  "server": {
-    "androidScheme": "https"
-  }
-}
