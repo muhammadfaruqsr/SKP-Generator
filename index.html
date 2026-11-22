@@ -271,6 +271,11 @@ textarea{resize:none;overflow:hidden;min-height:76px}
       <canvas id="g-donut" width="140" height="140"></canvas>
       <div id="g-legend" class="donut-legend"></div>
     </div>
+    <div class="card" id="g-rhk-card" style="display:none">
+      <h2>Kelengkapan RHK Bulan Ini</h2>
+        <p class="sub">Setiap RHK yang terdaftar wajib ada minimal 1 laporan di bulan ini.</p>
+      <div id="g-rhk-check"></div>
+    </div>
     <div class="hmon" style="margin-top:16px;margin-bottom:0">
       <button class="ib" id="g-prev" aria-label="Bulan sebelumnya">‹</button>
       <div class="calt"><b id="g-title">–</b><small id="g-count"></small></div>
@@ -869,23 +874,49 @@ const LocalPDF = (() => {
     };
 
     // Profil (halaman pertama)
-    if (prof.logoPreview) {
-      try { doc.addImage(prof.logoPreview, marginL, y, 22, 22); } catch(e){}
-    }
-    const profRows = [
-      ['Nama', prof.nama], ['NIP', prof.nip],
-      ['Pangkat/Gol. Ruang', prof.pangkat], ['Jabatan', prof.jabatan],
-      ['Unit Kerja', prof.unit], ['Atasan', prof.atasan]
-    ];
-    let py = y + 2;
-    doc.setFont('helvetica', 'normal').setFontSize(9.5);
-    profRows.forEach(([k, v]) => {
-      doc.text(String(k), marginL + 27, py);
-      doc.text(':', marginL + 63, py);
-      doc.text(String(v || ''), marginL + 67, py);
-      py += 5;
-    });
-    y = Math.max(y + 22, py) + 4;
+// Profil (halaman pertama) — DENGAN BORDER TABEL
+const logoW = 30;
+const detailW = contentW - logoW;
+const profRows = [
+  ['Nama', prof.nama], ['NIP', prof.nip],
+  ['Pangkat/Gol. Ruang', prof.pangkat], ['Jabatan', prof.jabatan],
+  ['Unit Kerja', prof.unit], ['Atasan', prof.atasan]
+];
+const rowH = 5.5;
+const tableH = profRows.length * rowH;
+const labelW = 32, colonW = 6;
+const valueW = detailW - labelW - colonW;
+
+doc.setDrawColor(0, 0, 0);
+doc.setLineWidth(0.2);
+
+// Sel logo (kiri)
+doc.rect(marginL, y, logoW, tableH);
+// Sel detail (bingkai luar)
+doc.rect(marginL + logoW, y, detailW, tableH);
+
+// Baris-baris di dalam detail (tiap sel digambar sendiri)
+profRows.forEach(([k, v], i) => {
+  const ry = y + i * rowH;
+  doc.rect(marginL + logoW, ry, labelW, rowH);            // kolom label
+  doc.rect(marginL + logoW + labelW, ry, colonW, rowH);   // kolom titik dua
+  doc.rect(marginL + logoW + labelW + colonW, ry, valueW, rowH); // kolom isi
+
+  doc.setFont('helvetica', 'normal').setFontSize(9);
+  doc.text(String(k), marginL + logoW + 1.5, ry + 3.8);
+  doc.text(':', marginL + logoW + labelW + 1.5, ry + 3.8);
+  doc.text(String(v || ''), marginL + logoW + labelW + colonW + 1.5, ry + 3.8);
+});
+
+// Logo di tengah sel logo
+if (prof.logoPreview) {
+  try {
+    const imgW = 22, imgH = 22;
+    doc.addImage(prof.logoPreview, marginL + (logoW - imgW) / 2, y + (tableH - imgH) / 2, imgW, imgH);
+  } catch(e){}
+}
+
+y += tableH + 6;
 
     doc.setDrawColor(0,0,0);
     doc.line(marginL, y, pageW - marginR, y);
@@ -1159,18 +1190,63 @@ async function loadBeranda() {
   const today = new Date();
   const isCurrent = today.getFullYear() === y && today.getMonth() + 1 === m;
   const passedDays = isCurrent ? today.getDate() : totalDays;
-  const target = passedDays;
-  const pct = target ? Math.min(100, Math.round(list.length / target * 100)) : 0;
+  const target = 26;                     // ✅ Target tetap 26 SKP per bulan
+  const pct = Math.min(100, Math.round(list.length / target * 100));
 
-  document.getElementById('g-stats').innerHTML = `
-    <div class="stat"><b>${list.length}</b><small>SKP dibuat</small></div>
-    <div class="stat"><b>${target}</b><small>Hari berjalan</small></div>
-    <div class="stat"><b>${pct}%</b><small>Progress</small></div>`;
-  document.getElementById('g-count').textContent = `${list.length} dari ${target} hari`;
+document.getElementById('g-stats').innerHTML = `
+  <div class="stat"><b>${list.length}</b><small>SKP dibuat</small></div>
+  <div class="stat"><b>${passedDays}</b><small>Hari berjalan</small></div>
+  <div class="stat"><b>${pct}%</b><small>Progress</small></div>`;
+document.getElementById('g-count').textContent = `${list.length} dari ${target} hari`;
   document.getElementById('g-sub').textContent = pct >= 100
     ? '🎉 Lengkap! Semua hari sudah terisi.'
     : `Progress ${pct}% — ayo lengkapi SKP hari ini.`;
+  // ==== INDIKATOR KELENGKAPAN RHK ====
+const rhkList = (S.settings && S.settings.rhk) || [];
+const rhkCard = document.getElementById('g-rhk-card');
+const rhkCheckEl = document.getElementById('g-rhk-check');
+if (rhkCard && rhkCheckEl) {
+  if (!rhkList.length) {
+    rhkCard.style.display = 'none';
+  } else {
+    rhkCard.style.display = '';
+    const usedLabels = new Set();
+    list.forEach(x => {
+      if (x.fullData && Array.isArray(x.fullData.reports)) {
+        x.fullData.reports.forEach(rep => { if (rep.rhkLabel) usedLabels.add(rep.rhkLabel); });
+      }
+    });
+    const missing = rhkList.filter(r => !usedLabels.has(r.label));
+    const allDone = missing.length === 0;
 
+    rhkCheckEl.innerHTML = `
+      <div style="padding:12px;border-radius:12px;
+                  background:${allDone ? '#e0f3f0' : '#fef3c7'};
+                  border:1.5px solid ${allDone ? '#a7e3da' : '#fcd34d'}">
+        <div style="font-weight:700;font-size:13px;margin-bottom:8px;
+                    color:${allDone ? '#0b5c56' : '#92400e'}">
+          ${allDone ? '✅ Semua RHK sudah terpenuhi bulan ini'
+                    : '⚠️ Beberapa RHK belum terisi bulan ini'}
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:6px">
+          ${rhkList.map(r => {
+            const isUsed = usedLabels.has(r.label);
+            return `<span style="font-size:11px;font-weight:700;padding:3px 9px;
+                              border-radius:999px;
+                              background:${isUsed ? '#0f766e' : '#fee2e2'};
+                              color:${isUsed ? '#fff' : '#dc2626'}">
+              ${isUsed ? '✓' : '✗'} ${esc(r.label)}
+            </span>`;
+          }).join('')}
+        </div>
+        ${missing.length ? `
+          <div style="font-size:12px;color:#92400e;margin-top:10px">
+            RHK belum ada laporan: ${missing.map(r => esc(r.label)).join(', ')}
+          </div>` : ''}
+      </div>
+    `;
+  }
+}
   const weeks = {};
   list.forEach(x => {
     const d = new Date(x.tanggal + 'T00:00:00');
@@ -1769,11 +1845,22 @@ async function loadRiwayat(force){
 }
 function rhkInfo(x){
   let label='', text=String(x.rhk||'');
+  // Format 1: "Label · text"
   const i = text.indexOf(' · ');
-  if (i>0 && i<=24) { label=text.slice(0,i); text=text.slice(i+3); }
+  if (i>0 && i<=24) {
+    label = text.slice(0, i);
+    text  = text.slice(i+3);
+  }
+  // Format 2: "Laporan N: Label | Laporan N: Label"
   else {
-    const hit = ((S.settings&&S.settings.rhk)||[]).find(r => r.text && (r.text.slice(0,160)===text || text.indexOf(r.text.slice(0,80))===0));
-    if (hit) label = hit.label;
+    const m = text.match(/Laporan\s+\d+\s*:\s*([^|]+?)(?:\s*\||$)/);
+    if (m && m[1].trim()) {
+      label = m[1].trim();
+    } else {
+      const hit = ((S.settings && S.settings.rhk) || [])
+        .find(r => r.text && (r.text.slice(0,160)===text || text.indexOf(r.text.slice(0,80))===0));
+      if (hit) label = hit.label;
+    }
   }
   return { label, text };
 }
