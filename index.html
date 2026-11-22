@@ -11,7 +11,7 @@
   --bg:#f2f6f5;--card:#fff;--ink:#0f1f1c;--mute:#5d6f6b;--line:#e1e9e7;
   --brand:#0f766e;--brand-d:#0b5c56;--brand-l:#e0f3f0;--danger:#dc2626;
   --r:16px;--sh:0 1px 2px rgba(15,31,28,.05),0 8px 24px rgba(15,31,28,.06);
-  --nav-h:72px;
+  --nav-h:68px;
 }
 *{box-sizing:border-box}
 html,body{margin:0}
@@ -22,15 +22,6 @@ body{
   padding-bottom:calc(var(--nav-h) + 24px + env(safe-area-inset-bottom));
 }
 .wrap{max-width:760px;margin:0 auto;padding:0 16px}
-
-.top{position:relative;background:linear-gradient(135deg,#0f766e 0%,#14958a 55%,#2bb3a3 100%);color:#fff;padding:16px 0 18px;overflow:hidden}
-.top::before{content:'';position:absolute;top:-60%;right:-20%;width:320px;height:320px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.18) 0%,rgba(255,255,255,0) 70%);pointer-events:none}
-.top::after{content:'';position:absolute;bottom:-40%;left:-10%;width:240px;height:240px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.1) 0%,rgba(255,255,255,0) 70%);pointer-events:none}
-.top .wrap{position:relative;display:flex;gap:12px;align-items:center;z-index:1}
-.brand-ic{width:42px;height:42px;border-radius:13px;background:rgba(255,255,255,.2);display:grid;place-items:center;flex:none;backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);border:1px solid rgba(255,255,255,.15)}
-.brand-ic .ic{width:22px;height:22px}
-.top h1{margin:0;font-size:17px;font-weight:700;letter-spacing:-.01em}
-.top p{margin:1px 0 0;font-size:12px;opacity:.85}
 
 main{padding-top:16px;padding-bottom:12px}
 .tab{display:none}.tab.on{display:block;animation:fade .25s}
@@ -179,17 +170,46 @@ textarea{resize:none;overflow:hidden;min-height:76px}
 .jtabs button.on{background:#fff;color:var(--brand-d);box-shadow:0 1px 3px rgba(0,0,0,.08)}
 .jpanel{display:none}.jpanel.on{display:block;animation:fade .2s}
 
-#nav{position:fixed;left:0;right:0;bottom:0;z-index:30;background:rgba(255,255,255,.94);backdrop-filter:saturate(180%) blur(14px);-webkit-backdrop-filter:saturate(180%) blur(14px);border-top:1px solid rgba(15,31,28,.06);box-shadow:0 -4px 24px rgba(15,31,28,.06);display:flex;align-items:stretch;justify-content:space-around;height:var(--nav-h);padding:0 6px env(safe-area-inset-bottom);gap:0}
-#nav button{flex:1;border:0;background:none;padding:8px 4px;border-radius:14px;font:inherit;font-size:10.5px;font-weight:600;letter-spacing:.01em;color:var(--mute);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;cursor:pointer;transition:.18s;position:relative;min-width:0;-webkit-tap-highlight-color:transparent}
+/* ===== BOTTOM NAV — 5 tombol proporsional + FAB tengah ===== */
+#nav{
+  position:fixed;left:0;right:0;bottom:0;z-index:30;
+  background:rgba(255,255,255,.96);
+  backdrop-filter:saturate(180%) blur(14px);
+  -webkit-backdrop-filter:saturate(180%) blur(14px);
+  border-top:1px solid rgba(15,31,28,.06);
+  box-shadow:0 -4px 24px rgba(15,31,28,.06);
+  display:grid;
+  grid-template-columns:1fr 1fr 1.2fr 1fr 1fr;
+  align-items:end;
+  height:var(--nav-h);
+  padding:0 4px env(safe-area-inset-bottom);
+}
+#nav button{
+  border:0;background:none;padding:8px 2px;
+  font:inherit;font-size:10.5px;font-weight:600;letter-spacing:.01em;
+  color:var(--mute);display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:3px;cursor:pointer;transition:.18s;position:relative;min-width:0;height:100%;
+  -webkit-tap-highlight-color:transparent;
+}
 #nav button .ic{width:22px;height:22px;transition:.18s}
 #nav button.on{color:var(--brand-d)}
 #nav button.on .ic{transform:translateY(-1px)}
 #nav button.on::before{content:'';position:absolute;top:6px;left:50%;transform:translateX(-50%);width:34px;height:34px;border-radius:12px;background:var(--brand-l);z-index:-1}
-#nav .nav-fab{flex:none;width:70px;position:relative;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;padding-bottom:6px}
-#nav .nav-fab .fab{width:52px;height:52px;border-radius:16px;background:linear-gradient(135deg,#0f766e,#14958a 70%,#2bb3a3);color:#fff;display:grid;place-items:center;box-shadow:0 8px 20px rgba(15,118,110,.35), 0 2px 6px rgba(15,118,110,.25);transition:.2s cubic-bezier(.34,1.56,.64,1);margin-top:-10px}
+#nav .nav-fab{
+  position:relative;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;
+  padding:0 0 6px;height:100%;border:0;background:none;cursor:pointer;
+}
+#nav .nav-fab .fab{
+  width:52px;height:52px;border-radius:16px;
+  background:linear-gradient(135deg,#0f766e,#14958a 70%,#2bb3a3);color:#fff;
+  display:grid;place-items:center;
+  box-shadow:0 8px 20px rgba(15,118,110,.35), 0 2px 6px rgba(15,118,110,.25);
+  transition:.2s cubic-bezier(.34,1.56,.64,1);margin-top:-10px;
+}
 #nav .nav-fab .fab .ic{width:26px;height:26px}
 #nav .nav-fab span{color:var(--brand-d);font-weight:700;font-size:10.5px;margin-top:5px;display:block;letter-spacing:.01em}
 #nav .nav-fab.on .fab{transform:translateY(-2px) scale(1.03);box-shadow:0 12px 26px rgba(15,118,110,.45)}
+#nav .nav-fab.on span{color:var(--brand-d)}
 #nav .nav-fab::before{display:none}
 
 .hmon{display:flex;align-items:center;gap:10px;margin-bottom:14px}
@@ -236,19 +256,12 @@ textarea{resize:none;overflow:hidden;min-height:76px}
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icon-192.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
-<!-- ===== LIBRARY OFFLINE (bundle lokal untuk APK) ===== -->
-<!-- Untuk PWA/hosting, boleh pakai CDN. Untuk APK native, WAJIB bundle lokal di folder libs/ -->
 <script src="libs/jspdf.umd.min.js"></script>
 <script src="libs/docx.umd.js"></script>
 </head>
 <body>
 
 <div id="boot"><div><div class="spin"></div><div id="boot-t">Menyiapkan aplikasi…</div></div></div>
-
-<header class="top"><div class="wrap">
-  <div class="brand-ic" data-ic="file"></div>
-  <div><h1>SKP Harian Offline</h1><p>Isi laporan → PDF/Word → tersimpan di perangkat</p></div>
-</div></header>
 
 <main class="wrap">
 
@@ -430,63 +443,84 @@ textarea{resize:none;overflow:hidden;min-height:76px}
   </div>
 </section>
 
-<!-- ================= SETTING ================= -->
+<!-- ================= SETTING (gabungan Profil) ================= -->
 <section class="tab" id="tab-setting">
-  <div class="card">
-    <h2>Daftar kalimat</h2>
-    <p class="sub">Daftar ini menjadi pilihan saat membuat SKP. Tiap RHK punya jenis kegiatan dan output sendiri.</p>
-    <div class="seg" id="seg"></div>
-    <div id="s-list"></div>
-    <div class="row" style="margin-top:6px">
-      <button class="btn ghost sm" id="s-add"><i data-ic="plus"></i>Tambah kalimat</button>
-    </div>
+  <div class="jtabs" id="st-tabs">
+    <button data-s="rhk" class="on"><i data-ic="file"></i>Kalimat RHK</button>
+    <button data-s="waktu"><i data-ic="clock"></i>Waktu</button>
+    <button data-s="profil"><i data-ic="user"></i>Profil</button>
   </div>
-  <button class="btn pri block" id="s-save"><i data-ic="check"></i>Simpan setting</button>
-</section>
 
-<!-- ================= PROFIL ================= -->
-<section class="tab" id="tab-profil">
-  <div class="card">
-    <h2>Data pegawai</h2><p class="sub">Terisi otomatis di setiap laporan.</p>
-    <div class="field"><label for="p-nama">Nama</label><input type="text" id="p-nama"></div>
-    <div class="grid">
-      <div class="field"><label for="p-nip">NIP</label><input type="text" id="p-nip" inputmode="numeric"></div>
-      <div class="field"><label for="p-pangkat">Pangkat/Gol. Ruang</label><input type="text" id="p-pangkat"></div>
+  <!-- Panel: Kalimat RHK -->
+  <div class="jpanel on" id="sp-rhk">
+    <div class="card">
+      <h2>Daftar RHK</h2>
+      <p class="sub">Tiap RHK punya jenis kegiatan dan output sendiri. Label hanya penanda, tidak tampil di PDF.</p>
+      <div id="s-list-rhk"></div>
+      <div class="row" style="margin-top:6px">
+        <button class="btn ghost sm" id="s-add-rhk"><i data-ic="plus"></i>Tambah RHK</button>
+      </div>
     </div>
-    <div class="field"><label for="p-jabatan">Jabatan</label><input type="text" id="p-jabatan"></div>
-    <div class="field"><label for="p-unit">Unit Kerja</label><input type="text" id="p-unit"></div>
-    <div class="field"><label for="p-atasan">Atasan</label><input type="text" id="p-atasan"></div>
-    <div class="field"><label for="p-tempat">Tempat surat (default)</label><input type="text" id="p-tempat"></div>
+    <button class="btn pri block" id="s-save-rhk"><i data-ic="check"></i>Simpan RHK</button>
   </div>
-  <div class="card">
-    <h2>Logo &amp; tanda tangan</h2><p class="sub">Logo tampil di kotak profil. Tanda tangan di bagian bawah surat (disarankan PNG transparan).</p>
-    <div class="up"><div class="prev" id="logo-prev"></div><div><b>Logo</b><small>Kolom kiri tabel profil</small>
-      <div class="row"><label class="btn ghost sm" style="margin:0">Pilih gambar<input type="file" id="logo-in" accept="image/*" hidden></label><button class="btn ghost sm" id="logo-rm">Hapus</button></div></div></div>
-    <div class="up"><div class="prev" id="ttd-prev"></div><div><b>Tanda tangan</b><small>Di atas nama &amp; NIP</small>
-      <div class="row"><label class="btn ghost sm" style="margin:0">Pilih gambar<input type="file" id="ttd-in" accept="image/*" hidden></label><button class="btn ghost sm" id="ttd-rm">Hapus</button></div></div></div>
-  </div>
-  <div class="card">
-    <h2>Backup &amp; Restore</h2><p class="sub">Simpan semua data (profil, setting, riwayat) ke file, atau pulihkan dari file.</p>
-    <div class="row">
-      <button class="btn ghost sm" id="p-backup"><i data-ic="file"></i>Backup ke file</button>
-      <label class="btn ghost sm" style="margin:0">Restore dari file<input type="file" id="p-restore" accept="application/json" hidden></label>
+
+  <!-- Panel: Waktu -->
+  <div class="jpanel" id="sp-waktu">
+    <div class="card">
+      <h2>Daftar kalimat waktu</h2>
+      <p class="sub">Pilihan untuk field "Waktu Pelaksanaan".</p>
+      <div id="s-list-waktu"></div>
+      <div class="row" style="margin-top:6px">
+        <button class="btn ghost sm" id="s-add-waktu"><i data-ic="plus"></i>Tambah kalimat</button>
+      </div>
     </div>
+    <button class="btn pri block" id="s-save-waktu"><i data-ic="check"></i>Simpan Waktu</button>
   </div>
-  <button class="btn pri block" id="p-save"><i data-ic="check"></i>Simpan profil</button>
+
+  <!-- Panel: Profil -->
+  <div class="jpanel" id="sp-profil">
+    <div class="card">
+      <h2>Data pegawai</h2><p class="sub">Terisi otomatis di setiap laporan.</p>
+      <div class="field"><label for="p-nama">Nama</label><input type="text" id="p-nama"></div>
+      <div class="grid">
+        <div class="field"><label for="p-nip">NIP</label><input type="text" id="p-nip" inputmode="numeric"></div>
+        <div class="field"><label for="p-pangkat">Pangkat/Gol. Ruang</label><input type="text" id="p-pangkat"></div>
+      </div>
+      <div class="field"><label for="p-jabatan">Jabatan</label><input type="text" id="p-jabatan"></div>
+      <div class="field"><label for="p-unit">Unit Kerja</label><input type="text" id="p-unit"></div>
+      <div class="field"><label for="p-atasan">Atasan</label><input type="text" id="p-atasan"></div>
+      <div class="field"><label for="p-tempat">Tempat surat (default)</label><input type="text" id="p-tempat"></div>
+    </div>
+    <div class="card">
+      <h2>Logo &amp; tanda tangan</h2><p class="sub">Logo tampil di kotak profil. Tanda tangan di bagian bawah surat (disarankan PNG transparan).</p>
+      <div class="up"><div class="prev" id="logo-prev"></div><div><b>Logo</b><small>Kolom kiri tabel profil</small>
+        <div class="row"><label class="btn ghost sm" style="margin:0">Pilih gambar<input type="file" id="logo-in" accept="image/*" hidden></label><button class="btn ghost sm" id="logo-rm">Hapus</button></div></div></div>
+      <div class="up"><div class="prev" id="ttd-prev"></div><div><b>Tanda tangan</b><small>Di atas nama &amp; NIP</small>
+        <div class="row"><label class="btn ghost sm" style="margin:0">Pilih gambar<input type="file" id="ttd-in" accept="image/*" hidden></label><button class="btn ghost sm" id="ttd-rm">Hapus</button></div></div></div>
+    </div>
+    <div class="card">
+      <h2>Backup &amp; Restore</h2><p class="sub">Simpan semua data (profil, setting, riwayat) ke file, atau pulihkan dari file.</p>
+      <div class="row">
+        <button class="btn ghost sm" id="p-backup"><i data-ic="file"></i>Backup ke file</button>
+        <label class="btn ghost sm" style="margin:0">Restore dari file<input type="file" id="p-restore" accept="application/json" hidden></label>
+      </div>
+    </div>
+    <button class="btn pri block" id="p-save"><i data-ic="check"></i>Simpan profil</button>
+  </div>
 </section>
 
 </main>
 
+<!-- ================= BOTTOM NAV (proporsional, FAB tengah) ================= -->
 <nav id="nav">
-  <button data-tab="beranda" class="on"><i data-ic="home"></i>Beranda</button>
   <button data-tab="riwayat"><i data-ic="clock"></i>Riwayat</button>
   <button data-tab="setting"><i data-ic="sliders"></i>Setting</button>
-  <button class="nav-fab" data-tab="buat" aria-label="Buat SKP">
-    <div class="fab"><i data-ic="plus"></i></div>
-    <span>Buat SKP</span>
+  <button class="nav-fab on" data-tab="beranda" aria-label="Beranda">
+    <div class="fab"><i data-ic="home"></i></div>
+    <span>Beranda</span>
   </button>
   <button data-tab="absen"><i data-ic="cal"></i>Jadwal</button>
-  <button data-tab="profil"><i data-ic="user"></i>Profil</button>
+  <button data-tab="buat"><i data-ic="plus"></i>Buat SKP</button>
 </nav>
 
 <div id="pv">
@@ -542,7 +576,7 @@ const p2=n=>String(n).padStart(2,'0');
 const ymdOf=d=>d.getFullYear()+'-'+p2(d.getMonth()+1)+'-'+p2(d.getDate());
 
 /* ================================================================
-   LAPISAN DATA LOKAL — pengganti Google Apps Script
+   LAPISAN DATA LOKAL
    ================================================================ */
 const LocalDB = (() => {
   const DB_NAME = 'skp_native';
@@ -644,10 +678,6 @@ const LocalDB = (() => {
       return entry;
     },
     async deleteRiwayat(id) {
-      const entry = await get('riwayat', id);
-      if (entry && entry.fileName) {
-        await del('files', entry.fileName).catch(()=>{});
-      }
       await del('riwayat', id);
       return { ok: true };
     },
@@ -695,7 +725,6 @@ const LocalDB = (() => {
   };
 })();
 
-/* Alias — supaya kode lama tetap jalan */
 function api(fn, ...args) {
   return Promise.resolve(LocalDB[fn](...args));
 }
@@ -737,7 +766,7 @@ function fileToData(file, maxDim, type, q) {
 }
 
 /* ================================================================
-   SIMPAN FILE KE PERANGKAT (native)
+   SIMPAN FILE KE PERANGKAT
    ================================================================ */
 async function saveFileNative(blob, filename) {
   const Cap = window.Capacitor;
@@ -756,7 +785,6 @@ async function saveFileNative(blob, filename) {
       console.warn('Filesystem gagal, fallback ke download:', e);
     }
   }
-  // Fallback browser: download + simpan ke IndexedDB
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
   a.href = url; a.download = filename; a.click();
@@ -783,7 +811,7 @@ async function shareFile(blob, filename) {
 }
 
 /* ================================================================
-   PDF GENERATOR (jsPDF)
+   PDF GENERATOR
    ================================================================ */
 const LocalPDF = (() => {
   function hariTgl(s) {
@@ -801,18 +829,13 @@ const LocalPDF = (() => {
     const { jsPDF } = window.jspdf;
     const doc = new jsPDF({ unit: 'mm', format: [215, 330] });
     const prof = (await LocalDB.getInit()).profil;
-
-    // ==== HALAMAN 1 ====
     const pageW = 215, marginL = 15, marginR = 15;
     const contentW = pageW - marginL - marginR;
     let y = 15;
 
-    // Logo
     if (prof.logoPreview) {
       try { doc.addImage(prof.logoPreview, 15, y, 22, 22); } catch(e){}
     }
-
-    // Profil
     const profRows = [
       ['Nama', prof.nama], ['NIP', prof.nip],
       ['Pangkat/Gol. Ruang', prof.pangkat], ['Jabatan', prof.jabatan],
@@ -828,12 +851,10 @@ const LocalPDF = (() => {
     });
     y = Math.max(y + 22, py) + 4;
 
-    // Judul
     doc.setFont('helvetica', 'bold').setFontSize(11);
     doc.text('LAPORAN SKP HARIAN', pageW/2, y, { align: 'center' });
     y += 8;
 
-    // Tabel isi
     const rows = [
       ['Jenis RHK', d.rhk],
       ['Waktu Pelaksanaan', d.waktu + (d.autoTanggal ? '\n' + hariTgl(d.tanggal) : '')],
@@ -852,7 +873,6 @@ const LocalPDF = (() => {
       y += rowH;
     });
 
-    // Tanda tangan
     y += 12;
     const tmp = (d.tempat || prof.tempat || '').trim();
     const tglStr = (tmp ? tmp + ', ' : '') + tglIndo(d.tanggalSurat || d.tanggal);
@@ -871,7 +891,6 @@ const LocalPDF = (() => {
     doc.setFont('helvetica', 'normal');
     doc.text('NIP. ' + (prof.nip || ''), pageW - marginR, y, { align: 'right' });
 
-    // ==== HALAMAN 2 (foto) ====
     if (d.fotos && d.fotos.length) {
       doc.addPage([215, 330], 'portrait');
       y = 20;
@@ -883,9 +902,7 @@ const LocalPDF = (() => {
         const col = i % cols, row = Math.floor(i / cols);
         const x = marginL + col * (cw + gap);
         const yy = y + row * (ch + gap);
-        try {
-          doc.addImage('data:' + f.mime + ';base64,' + f.b64, 'JPEG', x, yy, cw, ch);
-        } catch(e){}
+        try { doc.addImage('data:' + f.mime + ';base64,' + f.b64, 'JPEG', x, yy, cw, ch); } catch(e){}
       });
     }
 
@@ -893,7 +910,6 @@ const LocalPDF = (() => {
     const blob = doc.output('blob');
     const saved = await saveFileNative(blob, filename);
 
-    // Simpan ke riwayat
     const id = 'skp_' + Date.now();
     await LocalDB.saveRiwayatEntry({
       id,
@@ -904,9 +920,7 @@ const LocalPDF = (() => {
       fileName: filename,
       createdAt: Date.now()
     });
-    // Simpan blob ke IndexedDB untuk re-share
     await LocalDB.saveFile(filename, blob);
-
     return { ok: true, id, name: filename, url: saved.path, replaced: false, blob };
   }
 
@@ -1022,11 +1036,10 @@ function go(tab){
   if(tab==='beranda')  loadBeranda();
   if(tab==='riwayat')  loadRiwayat();
   if(tab==='setting')  renderSetting();
-  if(tab==='profil')   fillProfil();
   if(tab==='absen'){   absInit(); loadAbsen(AB.ym); loadMasuk(MK.ym); }
 }
 document.querySelectorAll('#nav button').forEach(b=>b.onclick=()=>go(b.dataset.tab));
-$('#w-edit').onclick=()=>go('profil');
+$('#w-edit').onclick=()=>{go('setting'); switchSettingTab('profil');};
 
 /* ================================================================
    BERANDA
@@ -1091,12 +1104,10 @@ function drawBarChart(canvasId, labels, data) {
   const ctx = cv.getContext('2d');
   ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
   ctx.clearRect(0, 0, w, h);
-
   const pad = 24, gap = (w - pad * 2) / labels.length;
   const bw = gap * 0.6;
   const max = Math.max(1, ...data);
   const barH = h - pad * 2;
-
   ctx.strokeStyle = '#e1e9e7'; ctx.lineWidth = 1;
   for (let i = 0; i <= 4; i++) {
     const y = pad + barH * i / 4;
@@ -1189,17 +1200,13 @@ function exportModal() {
       <h3>Export SKP</h3>
       <p>Pilih format & rentang yang akan disimpan ke perangkat.</p>
       <div class="exp-opts">
-        <button class="exp-opt" data-fmt="pdf" data-scope="bulan">
-          <div class="e-ic">📄</div>
-          <div><b>PDF — Bulan ini</b><small>Simpan ke folder Download/Documents</small></div>
-        </button>
-        <button class="exp-opt" data-fmt="word" data-scope="bulan">
-          <div class="e-ic">📝</div>
-          <div><b>Word (.docx) — Bulan ini</b><small>Bisa diedit</small></div>
-        </button>
         <button class="exp-opt" data-fmt="pdf" data-scope="hari">
           <div class="e-ic">📄</div>
-          <div><b>PDF — 1 hari terpilih</b><small>Dari tanggal hari ini</small></div>
+          <div><b>PDF — Hari ini</b><small>Dari form Buat SKP saat ini</small></div>
+        </button>
+        <button class="exp-opt" data-fmt="word" data-scope="hari">
+          <div class="e-ic">📝</div>
+          <div><b>Word (.docx) — Hari ini</b><small>Bisa diedit</small></div>
         </button>
         <button class="exp-opt" data-fmt="backup" data-scope="all">
           <div class="e-ic">💾</div>
@@ -1230,29 +1237,14 @@ async function doExport(fmt, scope) {
       toast('✅ Backup tersimpan');
       return;
     }
-    if (scope === 'hari') {
-      const d = buildCurrentForExport();
-      if (!d) return;
-      if (fmt === 'pdf') {
-        const r = await LocalPDF.generate(d);
-        toast('✅ PDF tersimpan: ' + r.name);
-      } else {
-        const r = await LocalPDF.exportWord(d);
-        toast('✅ Word tersimpan: ' + r.name);
-      }
-      return;
-    }
-    // scope bulan → pakai yang terbaru
-    const list = (S.riwayat || []).filter(x => x.tanggal.indexOf(BH.ym) === 0);
-    if (!list.length) return toast('Belum ada SKP di bulan ini');
+    const d = buildCurrentForExport();
+    if (!d) return;
     if (fmt === 'pdf') {
-      // generate dari data terbaru (ambil 1 contoh)
-      toast('Membuat PDF dari ' + list.length + ' laporan...');
-      const first = list[0];
-      const entry = await LocalDB.getRiwayatEntry ? null : null;
-      // fallback: pakai data riwayat langsung
-      toast('Untuk multi-halaman, buka masing-masing di Riwayat');
-      return;
+      const r = await LocalPDF.generate(d);
+      toast('✅ PDF tersimpan: ' + r.name);
+    } else {
+      const r = await LocalPDF.exportWord(d);
+      toast('✅ Word tersimpan: ' + r.name);
     }
   } catch (e) {
     toast('Gagal export: ' + e.message);
@@ -1351,7 +1343,6 @@ async function saveSkp(d){
     S.riwayat = await LocalDB.getRiwayat();
     loadRiwayat();
     loadBeranda();
-    // simpan last untuk tombol share/word
     window._lastSkp = { d, r };
   }catch(e){toast('Gagal: '+e.message);console.error(e);}
   finally{b.disabled=false;b.innerHTML=ic('file')+'<span>Buat PDF &amp; Simpan</span>';}
@@ -1478,7 +1469,7 @@ function renderRiwayat(){
     }catch(e){toast('Gagal: '+e.message);}
   });
   $('#h-list').querySelectorAll('[data-del]').forEach(b=>b.onclick=async()=>{
-    const r=await askConfirm('Hapus dari riwayat?','Catatan riwayat ini akan dihapus.','Hapus juga file dari penyimpanan','Hapus');
+    const r=await askConfirm('Hapus dari riwayat?','Catatan riwayat ini akan dihapus.','','Hapus');
     if(!r.ok)return;
     try{await LocalDB.deleteRiwayat(b.dataset.del);S.riwayat=S.riwayat.filter(x=>x.id!==b.dataset.del);renderRiwayat();loadBeranda();toast('Dihapus');}catch(e){toast('Gagal: '+e.message);}
   });
@@ -1495,56 +1486,137 @@ $('#h-today').onclick=()=>{const t=todayStr();RH.ym=t.slice(0,7);renderRiwayat()
 $('#h-ref').onclick=()=>loadRiwayat(true);
 
 /* ================================================================
-   SETTING
+   SETTING (gabungan: RHK, Waktu, Profil)
    ================================================================ */
-const SCATS=[{key:'rhk',label:'Jenis RHK'},{key:'waktu',label:'Waktu'}];
-function renderSetting(){
-  if(!SCATS.some(c=>c.key===S.cat))S.cat='rhk';
-  $('#seg').innerHTML=SCATS.map(c=>`<button data-c="${c.key}" class="${c.key===S.cat?'on':''}">${c.label}</button>`).join('');
-  $('#seg').querySelectorAll('button').forEach(b=>b.onclick=()=>{S.cat=b.dataset.c;renderSetting();});
-  const L=$('#s-list'),list=S.settings[S.cat];
-  if(S.cat==='rhk'){
-    L.innerHTML=(list.length?'':'<div class="empty">Belum ada RHK. Tekan “Tambah RHK”.</div>')+list.map((r,i)=>`
-      <div class="rhk-card">
-        <div class="rhk-h"><input type="text" data-f="label" data-i="${i}" value="${esc(r.label)}" placeholder="RHK ${i+1}" aria-label="Label RHK"><span class="hint">Label hanya penanda, tidak tampil di PDF</span><button class="ib dng" data-d="${i}" title="Hapus RHK">${ic('trash')}</button></div>
-        <label>Kalimat RHK (tampil di laporan)</label>
-        <textarea data-f="text" data-i="${i}">${esc(r.text)}</textarea>
-        <label style="margin-top:12px">Jenis kegiatan untuk RHK ini</label>
-        ${r.kegiatan.map((k,j)=>`<div class="sitem"><textarea data-f="keg" data-i="${i}" data-j="${j}">${esc(k)}</textarea><button class="ib dng" data-dk="${i}:${j}" title="Hapus kegiatan">${ic('trash')}</button></div>`).join('')}
-        <button class="btn ghost sm" data-ak="${i}">${ic("plus")}Tambah kegiatan</button>
-        <label style="margin-top:14px">Output yang dihasilkan untuk RHK ini</label>
-        ${(r.output||[]).map((k,j)=>`<div class="sitem"><textarea data-f="out" data-i="${i}" data-j="${j}">${esc(k)}</textarea><button class="ib dng" data-do="${i}:${j}" title="Hapus output">${ic('trash')}</button></div>`).join('')}
-        <button class="btn ghost sm" data-ao="${i}">${ic("plus")}Tambah output</button>
-      </div>`).join('');
-    L.querySelectorAll('[data-f]').forEach(el=>{
-      if(el.tagName==='TEXTAREA')grow(el);
-      el.oninput=()=>{
-        const r=S.settings.rhk[+el.dataset.i],f=el.dataset.f;
-        if(f==='label')r.label=el.value;else if(f==='text')r.text=el.value;else if(f==='out')r.output[+el.dataset.j]=el.value;else r.kegiatan[+el.dataset.j]=el.value;
-        if(el.tagName==='TEXTAREA')grow(el);
-      };
-    });
-    L.querySelectorAll('[data-d]').forEach(b=>b.onclick=()=>{S.settings.rhk.splice(+b.dataset.d,1);renderSetting();});
-    L.querySelectorAll('[data-dk]').forEach(b=>b.onclick=()=>{const [i,j]=b.dataset.dk.split(':').map(Number);S.settings.rhk[i].kegiatan.splice(j,1);renderSetting();});
-    L.querySelectorAll('[data-ak]').forEach(b=>b.onclick=()=>{const r=S.settings.rhk[+b.dataset.ak];r.kegiatan.push('');renderSetting();const t=L.querySelectorAll(`[data-f="keg"][data-i="${b.dataset.ak}"]`);if(t.length)t[t.length-1].focus();});
-    L.querySelectorAll('[data-do]').forEach(b=>b.onclick=()=>{const [i,j]=b.dataset.do.split(':').map(Number);S.settings.rhk[i].output.splice(j,1);renderSetting();});
-    L.querySelectorAll('[data-ao]').forEach(b=>b.onclick=()=>{const r=S.settings.rhk[+b.dataset.ao];r.output=r.output||[];r.output.push('');renderSetting();const t=L.querySelectorAll(`[data-f="out"][data-i="${b.dataset.ao}"]`);if(t.length)t[t.length-1].focus();});
-    $('#s-add').lastChild.textContent='Tambah RHK';
-  }else{
-    L.innerHTML=list.length?list.map((t,i)=>`<div class="sitem"><textarea data-i="${i}">${esc(t)}</textarea><button class="ib dng" data-d="${i}" title="Hapus">${ic('trash')}</button></div>`).join(''):'<div class="empty">Belum ada kalimat. Tekan “Tambah kalimat”.</div>';
-    L.querySelectorAll('textarea').forEach(t=>{grow(t);t.oninput=()=>{S.settings[S.cat][+t.dataset.i]=t.value;grow(t);};});
-    L.querySelectorAll('[data-d]').forEach(b=>b.onclick=()=>{S.settings[S.cat].splice(+b.dataset.d,1);renderSetting();});
-    $('#s-add').lastChild.textContent='Tambah kalimat';
-  }
+function switchSettingTab(tab){
+  document.querySelectorAll('#st-tabs button').forEach(b=>b.classList.toggle('on',b.dataset.s===tab));
+  document.querySelectorAll('#tab-setting .jpanel').forEach(p=>p.classList.toggle('on',p.id==='sp-'+tab));
+  if(tab==='profil') fillProfil();
 }
-$('#s-add').onclick=()=>{
-  if(S.cat==='rhk'){const n=S.settings.rhk.length+1;S.settings.rhk.push({label:'RHK '+n,text:'',kegiatan:[''],output:['']});renderSetting();const t=$('#s-list').querySelectorAll('[data-f="text"]');if(t.length)t[t.length-1].focus();return;}
-  S.settings[S.cat].push('');renderSetting();const t=$('#s-list').querySelectorAll('textarea');if(t.length)t[t.length-1].focus();
+document.querySelectorAll('#st-tabs button').forEach(b=>b.onclick=()=>switchSettingTab(b.dataset.s));
+
+function renderSetting(){
+  renderRHKList();
+  renderWaktuList();
+}
+
+function renderRHKList(){
+  const L = $('#s-list-rhk');
+  const list = S.settings.rhk;
+  L.innerHTML = (list.length?'':'<div class="empty">Belum ada RHK. Tekan “Tambah RHK”.</div>') + list.map((r,i)=>`
+    <div class="rhk-card">
+      <div class="rhk-h"><input type="text" data-f="label" data-i="${i}" value="${esc(r.label)}" placeholder="RHK ${i+1}" aria-label="Label RHK"><span class="hint">Label hanya penanda</span><button class="ib dng" data-d="${i}" title="Hapus RHK">${ic('trash')}</button></div>
+      <label>Kalimat RHK (tampil di laporan)</label>
+      <textarea data-f="text" data-i="${i}">${esc(r.text)}</textarea>
+      <label style="margin-top:12px">Jenis kegiatan untuk RHK ini</label>
+      ${r.kegiatan.map((k,j)=>`<div class="sitem"><textarea data-f="keg" data-i="${i}" data-j="${j}">${esc(k)}</textarea><button class="ib dng" data-dk="${i}:${j}" title="Hapus kegiatan">${ic('trash')}</button></div>`).join('')}
+      <button class="btn ghost sm" data-ak="${i}">${ic("plus")}Tambah kegiatan</button>
+      <label style="margin-top:14px">Output yang dihasilkan untuk RHK ini</label>
+      ${(r.output||[]).map((k,j)=>`<div class="sitem"><textarea data-f="out" data-i="${i}" data-j="${j}">${esc(k)}</textarea><button class="ib dng" data-do="${i}:${j}" title="Hapus output">${ic('trash')}</button></div>`).join('')}
+      <button class="btn ghost sm" data-ao="${i}">${ic("plus")}Tambah output</button>
+    </div>`).join('');
+  L.querySelectorAll('[data-f]').forEach(el=>{
+    if(el.tagName==='TEXTAREA')grow(el);
+    el.oninput=()=>{
+      const r=S.settings.rhk[+el.dataset.i],f=el.dataset.f;
+      if(f==='label')r.label=el.value;else if(f==='text')r.text=el.value;else if(f==='out')r.output[+el.dataset.j]=el.value;else r.kegiatan[+el.dataset.j]=el.value;
+      if(el.tagName==='TEXTAREA')grow(el);
+    };
+  });
+  L.querySelectorAll('[data-d]').forEach(b=>b.onclick=()=>{S.settings.rhk.splice(+b.dataset.d,1);renderRHKList();});
+  L.querySelectorAll('[data-dk]').forEach(b=>b.onclick=()=>{const [i,j]=b.dataset.dk.split(':').map(Number);S.settings.rhk[i].kegiatan.splice(j,1);renderRHKList();});
+  L.querySelectorAll('[data-ak]').forEach(b=>b.onclick=()=>{const r=S.settings.rhk[+b.dataset.ak];r.kegiatan.push('');renderRHKList();const t=L.querySelectorAll(`[data-f="keg"][data-i="${b.dataset.ak}"]`);if(t.length)t[t.length-1].focus();});
+  L.querySelectorAll('[data-do]').forEach(b=>b.onclick=()=>{const [i,j]=b.dataset.do.split(':').map(Number);S.settings.rhk[i].output.splice(j,1);renderRHKList();});
+  L.querySelectorAll('[data-ao]').forEach(b=>b.onclick=()=>{const r=S.settings.rhk[+b.dataset.ao];r.output=r.output||[];r.output.push('');renderRHKList();const t=L.querySelectorAll(`[data-f="out"][data-i="${b.dataset.ao}"]`);if(t.length)t[t.length-1].focus();});
+}
+
+function renderWaktuList(){
+  const L = $('#s-list-waktu');
+  const list = S.settings.waktu;
+  L.innerHTML = list.length ? list.map((t,i)=>`<div class="sitem"><textarea data-i="${i}">${esc(t)}</textarea><button class="ib dng" data-d="${i}" title="Hapus">${ic('trash')}</button></div>`).join('') : '<div class="empty">Belum ada kalimat waktu. Tekan “Tambah kalimat”.</div>';
+  L.querySelectorAll('textarea').forEach(t=>{grow(t);t.oninput=()=>{S.settings.waktu[+t.dataset.i]=t.value;grow(t);};});
+  L.querySelectorAll('[data-d]').forEach(b=>b.onclick=()=>{S.settings.waktu.splice(+b.dataset.d,1);renderWaktuList();});
+}
+
+$('#s-add-rhk').onclick=()=>{
+  const n=S.settings.rhk.length+1;
+  S.settings.rhk.push({label:'RHK '+n,text:'',kegiatan:[''],output:['']});
+  renderRHKList();
+  const t=$('#s-list-rhk').querySelectorAll('[data-f="text"]');
+  if(t.length)t[t.length-1].focus();
 };
-$('#s-save').onclick=async()=>{
-  const b=$('#s-save');b.disabled=true;
-  try{S.settings=await LocalDB.saveSettings(S.settings);fillSelects(false);renderSetting();toast('Setting tersimpan ✓');}
+$('#s-add-waktu').onclick=()=>{
+  S.settings.waktu.push('');
+  renderWaktuList();
+  const t=$('#s-list-waktu').querySelectorAll('textarea');
+  if(t.length)t[t.length-1].focus();
+};
+$('#s-save-rhk').onclick=async()=>{
+  const b=$('#s-save-rhk');b.disabled=true;
+  try{S.settings=await LocalDB.saveSettings(S.settings);fillSelects(false);toast('RHK tersimpan ✓');}
   catch(e){toast('Gagal: '+e.message);}finally{b.disabled=false;}
+};
+$('#s-save-waktu').onclick=async()=>{
+  const b=$('#s-save-waktu');b.disabled=true;
+  try{S.settings=await LocalDB.saveSettings(S.settings);fillSelects(false);toast('Waktu tersimpan ✓');}
+  catch(e){toast('Gagal: '+e.message);}finally{b.disabled=false;}
+};
+
+/* ================================================================
+   PROFIL (dipanggil dari sub-tab Setting)
+   ================================================================ */
+const PF=['nama','nip','pangkat','jabatan','unit','atasan','tempat'];
+function fillProfil(){
+  PF.forEach(k=>$('#p-'+k).value=S.profil[k]||'');
+  renderUploads();
+}
+function renderUploads(){
+  const lg=S.logo?S.logo.dataUrl:(!S.rmLogo&&S.profil.logoPreview)||'';
+  const tg=S.ttd?S.ttd.dataUrl:(!S.rmTtd&&S.profil.ttdPreview)||'';
+  $('#logo-prev').innerHTML=lg?`<img src="${lg}">`:ic('image');
+  $('#ttd-prev').innerHTML=tg?`<img src="${tg}">`:ic('image');
+}
+$('#logo-in').onchange=async e=>{const f=e.target.files[0];if(!f)return;try{S.logo=await fileToData(f,500,'image/png');S.rmLogo=false;renderUploads();}catch(x){toast('Gagal membaca gambar');}e.target.value='';};
+$('#ttd-in').onchange=async e=>{const f=e.target.files[0];if(!f)return;try{S.ttd=await fileToData(f,600,'image/png');S.rmTtd=false;renderUploads();}catch(x){toast('Gagal membaca gambar');}e.target.value='';};
+$('#logo-rm').onclick=()=>{S.logo=null;S.rmLogo=true;renderUploads();};
+$('#ttd-rm').onclick=()=>{S.ttd=null;S.rmTtd=true;renderUploads();};
+$('#p-save').onclick=async()=>{
+  const p={share:true,logo:S.logo?{b64:S.logo.b64,mime:S.logo.mime}:null,ttd:S.ttd?{b64:S.ttd.b64,mime:S.ttd.mime}:null,removeLogo:S.rmLogo,removeTtd:S.rmTtd};
+  PF.forEach(k=>p[k]=$('#p-'+k).value);
+  const b=$('#p-save');b.disabled=true;
+  try{
+    S.profil=await LocalDB.saveProfil(p);
+    S.logo=S.ttd=null;S.rmLogo=S.rmTtd=false;
+    renderWho();if(!$('#f-tempat').value)$('#f-tempat').value=S.profil.tempat||'';
+    renderUploads();loadBeranda();
+    toast('Profil tersimpan ✓');
+  }catch(e){toast('Gagal: '+e.message);}
+  finally{b.disabled=false;}
+};
+
+$('#p-backup').onclick=async()=>{
+  try{
+    const data = await LocalDB.exportAll();
+    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+    const filename = `skp_backup_${todayStr()}.json`;
+    await saveFileNative(blob, filename);
+    toast('✅ Backup tersimpan');
+  }catch(e){toast('Gagal: '+e.message);}
+};
+$('#p-restore').onchange=async e=>{
+  const f=e.target.files[0];if(!f)return;
+  try{
+    const txt = await f.text();
+    const data = JSON.parse(txt);
+    const r = await askConfirm('Restore data?','Semua data saat ini akan diganti dengan file backup.','','Restore');
+    if(!r.ok)return;
+    await LocalDB.importAll(data);
+    toast('Data dipulihkan ✓');
+    const raw = await LocalDB.getInit();
+    S.profil = raw.profil; S.settings = raw.settings; S.riwayat = raw.riwayat;
+    renderWho(); fillProfil(); buildFields(); loadBeranda();
+  }catch(err){toast('Gagal restore: '+err.message);}
+  e.target.value='';
 };
 
 /* ================================================================
@@ -1565,7 +1637,7 @@ const sBadgeMasuk=k=>SHIFT_MASUK[k]?`<span class="bd c${k}">${SHIFT_MASUK[k].b}<
 
 document.querySelectorAll('#jtabs button').forEach(b=>b.onclick=()=>{
   document.querySelectorAll('#jtabs button').forEach(x=>x.classList.toggle('on',x===b));
-  document.querySelectorAll('.jpanel').forEach(p=>p.classList.toggle('on',p.id==='jp-'+b.dataset.j));
+  document.querySelectorAll('#tab-absen .jpanel').forEach(p=>p.classList.toggle('on',p.id==='jp-'+b.dataset.j));
 });
 
 const AB={ym:'',data:{},loaded:{},sel:'',busy:false};
@@ -1743,63 +1815,6 @@ $('#mk-rgo').onclick=()=>{
   const items=[];
   while(d<=end){items.push({tanggal:ymdOf(d),shift:k});d.setDate(d.getDate()+1);}
   saveAbsenItems(items,'masuk',items.length+' hari terisi ✓',$('#mk-rgo'));
-};
-
-/* ================================================================
-   PROFIL
-   ================================================================ */
-const PF=['nama','nip','pangkat','jabatan','unit','atasan','tempat'];
-function fillProfil(){
-  PF.forEach(k=>$('#p-'+k).value=S.profil[k]||'');
-  renderUploads();
-}
-function renderUploads(){
-  const lg=S.logo?S.logo.dataUrl:(!S.rmLogo&&S.profil.logoPreview)||'';
-  const tg=S.ttd?S.ttd.dataUrl:(!S.rmTtd&&S.profil.ttdPreview)||'';
-  $('#logo-prev').innerHTML=lg?`<img src="${lg}">`:ic('image');
-  $('#ttd-prev').innerHTML=tg?`<img src="${tg}">`:ic('image');
-}
-$('#logo-in').onchange=async e=>{const f=e.target.files[0];if(!f)return;try{S.logo=await fileToData(f,500,'image/png');S.rmLogo=false;renderUploads();}catch(x){toast('Gagal membaca gambar');}e.target.value='';};
-$('#ttd-in').onchange=async e=>{const f=e.target.files[0];if(!f)return;try{S.ttd=await fileToData(f,600,'image/png');S.rmTtd=false;renderUploads();}catch(x){toast('Gagal membaca gambar');}e.target.value='';};
-$('#logo-rm').onclick=()=>{S.logo=null;S.rmLogo=true;renderUploads();};
-$('#ttd-rm').onclick=()=>{S.ttd=null;S.rmTtd=true;renderUploads();};
-$('#p-save').onclick=async()=>{
-  const p={share:true,logo:S.logo?{b64:S.logo.b64,mime:S.logo.mime}:null,ttd:S.ttd?{b64:S.ttd.b64,mime:S.ttd.mime}:null,removeLogo:S.rmLogo,removeTtd:S.rmTtd};
-  PF.forEach(k=>p[k]=$('#p-'+k).value);
-  const b=$('#p-save');b.disabled=true;
-  try{
-    S.profil=await LocalDB.saveProfil(p);
-    S.logo=S.ttd=null;S.rmLogo=S.rmTtd=false;
-    renderWho();if(!$('#f-tempat').value)$('#f-tempat').value=S.profil.tempat||'';
-    renderUploads();loadBeranda();
-    toast('Profil tersimpan ✓');
-  }catch(e){toast('Gagal: '+e.message);}
-  finally{b.disabled=false;}
-};
-
-$('#p-backup').onclick=async()=>{
-  try{
-    const data = await LocalDB.exportAll();
-    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
-    const filename = `skp_backup_${todayStr()}.json`;
-    await saveFileNative(blob, filename);
-    toast('✅ Backup tersimpan');
-  }catch(e){toast('Gagal: '+e.message);}
-};
-$('#p-restore').onchange=async e=>{
-  const f=e.target.files[0];if(!f)return;
-  try{
-    const txt = await f.text();
-    const data = JSON.parse(txt);
-    const r = await askConfirm('Restore data?','Semua data saat ini akan diganti dengan file backup.','','Restore');
-    if(!r.ok)return;
-    await LocalDB.importAll(data);
-    toast('Data dipulihkan ✓');
-    const raw = await LocalDB.getInit();
-    S.profil = raw.profil; S.settings = raw.settings; S.riwayat = raw.riwayat;
-    renderWho(); fillProfil(); buildFields(); loadBeranda();
-  }catch(err){toast('Gagal restore: '+err.message);}
-  e.target.value='';
 };
 
 /* ================================================================
