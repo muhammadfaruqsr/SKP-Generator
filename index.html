@@ -1537,27 +1537,56 @@ function sigHtml(d){
 }
 function previewHtml(d){
   const p = S.profil;
-  const prof = [['Nama',p.nama],['NIP',p.nip],['Pangkat/Gol. Ruang',p.pangkat],['Jabatan',p.jabatan],['Unit Kerja',p.unit],['Atasan',p.atasan]];
+  const prof = [
+    ['Nama',p.nama], ['NIP',p.nip],
+    ['Pangkat/Gol. Ruang',p.pangkat], ['Jabatan',p.jabatan],
+    ['Unit Kerja',p.unit], ['Atasan',p.atasan]
+  ];
   const inner = prof.map(r=>`<tr><td style="width:105px">${esc(r[0])}</td><td style="width:12px">:</td><td>${pre(r[1])}</td></tr>`).join('');
+
   let body = '';
   d.reports.forEach((r, i) => {
-    let waktu = r.waktu; if (r.autoTanggal) waktu += '\n' + hariTgl(d.tanggal);
+    let waktu = r.waktu;
+    if (r.autoTanggal) waktu += '\n' + hariTgl(d.tanggal);
     const rows = [
       ['Jenis RHK', r.rhk],
       ['Waktu Pelaksanaan', waktu],
       ['Jenis Kegiatan', r.kegiatan],
       ['Output yang di hasilkan', r.output]
     ].map(([k,v]) => `<tr><td style="width:120px">${esc(k)}</td><td style="width:14px">:</td><td>${k==='Jenis RHK'&&r.rhkLabel?`<b>${esc(r.rhkLabel)}:</b> `:''}${pre(v)}</td></tr>`).join('');
-    body += `<div style="font-weight:700;margin:14px 0 6px">Laporan ${i+1}</div><table>${rows}</table>`;
+
+    body += `<div style="font-weight:700;margin:14px 0 6px;font-size:11px">Laporan ${i+1}</div>`;
+    body += `<table>${rows}</table>`;
+
+    // ==== DOKUMENTASI ====
     if (r.fotos && r.fotos.length) {
       let g = '';
       for (let k = 0; k < r.fotos.length; k += 2) {
-        g += '<tr>' + [0,1].map(x => `<td style="width:50%;border:0;text-align:center">${r.fotos[k+x]?`<img src="${r.fotos[k+x].dataUrl}" style="max-width:100%;max-height:120px">`:''}</td>`).join('') + '</tr>';
+        const foto1 = r.fotos[k];
+        const foto2 = r.fotos[k+1];
+        g += '<tr>';
+        g += `<td style="width:50%;height:120px;padding:4px;border:.75px solid #000;text-align:center;vertical-align:middle">${
+          foto1 ? `<img src="${foto1.dataUrl}" style="display:block;max-width:100%;max-height:112px;margin:0 auto;object-fit:contain">` : ''
+        }</td>`;
+        g += `<td style="width:50%;height:120px;padding:4px;border:.75px solid #000;text-align:center;vertical-align:middle">${
+          foto2 ? `<img src="${foto2.dataUrl}" style="display:block;max-width:100%;max-height:112px;margin:0 auto;object-fit:contain">` : ''
+        }</td>`;
+        g += '</tr>';
       }
-      body += `<div style="margin-top:8px;font-weight:700">Dokumentasi:</div><table class="ph">${g}</table>`;
+      body += `<div style="font-weight:700;margin:8px 0 4px;font-size:10px">Dokumentasi:</div>`;
+      body += `<table style="border-collapse:collapse;width:100%">${g}</table>`;
     }
   });
-  let html = `<div class="pg"><table><tr><td class="lg" style="width:120px">${p.logoPreview?`<img src="${p.logoPreview}">`:''}</td><td class="nb"><table>${inner}</table></td></tr></table><div style="height:14px"></div>${body}${sigHtml(d)}</div>`;
+
+  let html = `<div class="pg">
+    <table><tr>
+      <td class="lg" style="width:120px">${p.logoPreview?`<img src="${p.logoPreview}" style="max-width:100px;max-height:100px">`:''}</td>
+      <td class="nb"><table>${inner}</table></td>
+    </tr></table>
+    <div style="height:14px"></div>
+    ${body}
+    ${sigHtml(d)}
+  </div>`;
   return html;
 }
 function fitPv(){
