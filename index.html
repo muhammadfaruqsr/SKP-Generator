@@ -241,7 +241,14 @@ textarea{resize:none;overflow:hidden;min-height:76px}
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icon-192.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+  
 <!-- Library lokal — WAJIB ada di folder libs/ -->
+<!-- Plugin Capacitor (dimuat lokal dari www/libs, disiapkan saat build) -->
+<script src="libs/capacitor.js"></script>
+<script src="libs/plugin-filesystem.js"></script>
+<script src="libs/plugin-share.js"></script>
+<script src="libs/plugin-file-opener.js"></script>
 <script src="libs/jspdf.umd.min.js"></script>
 <script src="libs/docx.umd.js"></script>
 <script src="libs/pdf-lib.min.js"></script>
