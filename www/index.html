@@ -450,8 +450,20 @@ textarea{resize:none;overflow:hidden;min-height:76px}
     <button data-s="profil"><i data-ic="user"></i>Profil</button>
   </div>
 
-  <div class="jpanel on" id="sp-rhk">
-    <div class="card">
+      <div class="jpanel on" id="sp-rhk">
+  <div class="card">
+    <h2 style="margin-bottom:10px">Template RHK</h2>
+    <p class="sub">Pilih template untuk mengisi daftar RHK secara otomatis. Data masih bisa diedit setelahnya.</p>
+    <div class="row" style="gap:8px">
+      <button class="btn pri" id="tpl-asrama" style="flex:1">
+        <i data-ic="file"></i><span>Wali Asrama</span>
+      </button>
+      <button class="btn pri" id="tpl-asuh" style="flex:1">
+        <i data-ic="file"></i><span>Wali Asuh</span>
+      </button>
+    </div>
+  </div>
+  <div class="card">
       <h2>Daftar RHK</h2>
       <p class="sub">Tiap RHK punya jenis kegiatan dan output sendiri. Label hanya penanda, tidak tampil di PDF.</p>
       <div id="s-list-rhk"></div>
@@ -561,6 +573,190 @@ const CATS=[
   {key:'kegiatan',label:'Jenis Kegiatan'},
   {key:'output',label:'Output yang dihasilkan'}
 ];
+/* ================================================================
+   TEMPLATE RHK — WALI ASUH & WALI ASRAMA
+   ================================================================ */
+const TEMPLATES = {
+  wali_asrama: {
+    label: 'Wali Asrama',
+    desc: 'Pembinaan penghuni asrama, keagamaan, life skills, & tata tertib',
+    rhk: [
+      {
+        label: 'RHK 1',
+        text: 'Melaksanakan penyusunan rencana kegiatan pembinaan penghuni asrama dan tata-tertib serta melaksanakan kegiatan pembinaan penghuni asrama pada Sekolah Rakyat sesuai dengan ketentuan yang berlaku',
+        kegiatan: [
+          'Memimpin dan memantau kegiatan keagamaan pagi (shalat berjamaah/doa pagi) serta memantau kedisiplinan siswa bangun tepat waktu.',
+          'Memantau kebersihan kamar, kelengkapan seragam, dan kesiapan siswa berangkat ke sekolah sesuai tata tertib.',
+          'Mendampingi siswa saat makan siang serta kepulangan dari sekolah.',
+          'Memfasilitasi dan mendampingi kegiatan keterampilan hidup (life skills), olahraga, atau pelatihan mandiri siswa.',
+          'Mendampingi jam belajar mandiri, menegakkan tata tertib jam tenang, serta melakukan bimbingan/konseling jika ada pelanggaran disiplin.'
+        ],
+        output: [
+          'Peserta didik mampu menerapkan nilai-nilai keagamaan, kedisiplinan, tanggung jawab, kemandirian, serta pola hidup bersih dan tertib dalam kehidupan sehari-hari di lingkungan asrama. Peserta didik juga mampu mengikuti rutinitas dan tata tertib asrama, menjaga kebersihan serta kerapian lingkungan, mengembangkan keterampilan hidup (life skills), berpartisipasi dalam kegiatan olahraga, serta melaksanakan kegiatan belajar mandiri secara tertib dan bertanggung jawab. Selain itu, peserta didik mampu menunjukkan perilaku positif, kepatuhan terhadap tata tertib, dan sikap saling menghargai sehingga tercipta kehidupan asrama yang aman, nyaman, tertib, dan kondusif.'
+        ]
+      },
+      {
+        label: 'RHK 2',
+        text: 'Menyediakan dokumen pemeliharaan fasilitas asrama yang sesuai dengan ketentuan',
+        kegiatan: [
+          'Melakukan pemeriksaan (inspeksi) kondisi fisik kamar, fasilitas asrama, sanitasi, dan mencatat kerusakan fasilitas.',
+          'Mengajukan permohonan perbaikan ke unit Sarpras/Sekolah Rakyat.',
+          'Mendampingi dan mengawasi teknisi saat proses pemeliharaan/perbaikan berlangsung.',
+          'Menyusun jadwal pemeliharaan berkala (misal: jadwal servis AC, pembersihan tandon air, fogging, atau pengecatan).'
+        ],
+        output: [
+          'Tersedianya dokumen pemeliharaan fasilitas asrama yang memuat hasil pemeriksaan kondisi fisik kamar, sarana dan prasarana, serta fasilitas sanitasi, termasuk pencatatan kerusakan dan kebutuhan perbaikan. Terlaksananya koordinasi pengajuan perbaikan kepada unit Sarana dan Prasarana, pendampingan serta pengawasan proses pemeliharaan fasilitas, dan penyusunan jadwal pemeliharaan secara berkala guna memastikan seluruh fasilitas asrama tetap terawat, berfungsi dengan baik, aman, dan layak digunakan untuk menunjang kenyamanan serta aktivitas peserta didik.'
+        ]
+      },
+      {
+        label: 'RHK 3',
+        text: 'Menyediakan laporan pembinaan penghuni asrama berupa kegiatan keagamaan dan keterampilan hidup yang sesuai dengan ketentuan.',
+        kegiatan: [
+          'Memfasilitasi dan mendampingi kegiatan keterampilan hidup (life skills), olahraga, atau pelatihan mandiri siswa.',
+          'Memimpin dan memantau kegiatan keagamaan pagi (shalat berjamaah/doa pagi) serta memantau kedisiplinan siswa bangun tepat waktu.',
+          'Mendampingi kegiatan ibadah sore/malam dan makan malam bersama.',
+          'Melaksanakan Pembinaan dalam kegiatan Refleksi'
+        ],
+        output: [
+          'Peserta didik mampu menerapkan nilai-nilai keagamaan melalui pembiasaan ibadah secara rutin, baik pada pagi, sore, maupun malam hari, serta menunjukkan sikap disiplin dalam menjalankan aktivitas harian di asrama. Peserta didik juga mampu mengembangkan keterampilan hidup (life skills), kemandirian, tanggung jawab, dan kerja sama melalui kegiatan olahraga maupun pelatihan mandiri. Selain itu, peserta didik mampu mengikuti kegiatan makan bersama dan refleksi sebagai sarana pembentukan karakter, penguatan nilai-nilai positif, evaluasi diri, serta peningkatan kesadaran dalam berperilaku sesuai dengan tata tertib dan norma yang berlaku di lingkungan asrama.'
+        ]
+      },
+      {
+        label: 'RHK 4',
+        text: 'Menyediakan laporan penerapan disiplin dan pelaksanaan tata tertib asrama yang sesuai ketentuan dan dievaluasi secara berkala.',
+        kegiatan: [
+          'Memantau kebersihan kamar, kelengkapan seragam, dan kesiapan siswa berangkat ke sekolah sesuai tata tertib.',
+          'Mendampingi jam belajar mandiri, menegakkan tata tertib jam tenang, serta melakukan bimbingan/konseling jika ada pelanggaran disiplin.',
+          'Memeriksa presensi (absensi) akhir malam, memastikan keamanan area asrama, dan mengunci pintu.'
+        ],
+        output: [
+          'Peserta didik mampu menerapkan kedisiplinan dan mematuhi tata tertib asrama dalam kehidupan sehari-hari, meliputi menjaga kebersihan dan kerapian kamar, menggunakan seragam sesuai ketentuan, serta mengikuti jadwal kegiatan secara tertib dan bertanggung jawab. Peserta didik juga mampu melaksanakan kegiatan belajar mandiri dengan disiplin, menjaga ketenangan dan ketertiban lingkungan asrama, serta meningkatkan kesadaran terhadap pentingnya kepatuhan terhadap peraturan. Selain itu, terlaksananya pemantauan presensi dan keamanan asrama pada malam hari guna menciptakan lingkungan hunian yang aman, tertib, nyaman, dan kondusif.'
+        ]
+      },
+      {
+        label: 'RHK 5',
+        text: 'Menyediakan laporan pelaksanaan tugas dan kewajiban wali asrama kepada Kepala Sekolah secara lengkap dan tepat waktu.',
+        kegiatan: [
+          'Mengolah catatan harian, mendokumentasikan kegiatan, dan menyusun draft laporan berkala untuk Kepala Sekolah.',
+          'Mendampingi Siswa ke Unit Kesehatan ketika ada Siswa yang sakit dan berkoordinasi dengan petugas kesehatan',
+          'Menyusun rekapitulasi kejadian/kegiatan selama seminggu (catatan pelanggaran disiplin, perkembangan siswa, dan rekapitulasi fasilitas rusak/perbaikan).',
+          'Menyusun laporan kronologi jika terjadi kejadian khusus/darurat (misal: siswa sakit berat, pelanggaran berat tata tertib, kerusakan fasilitas mendadak/bencana).'
+        ],
+        output: [
+          'Tersedianya laporan pelaksanaan tugas dan kewajiban wali asrama yang disusun secara sistematis, lengkap, dan tepat waktu sebagai bentuk pertanggungjawaban kepada Kepala Sekolah. Laporan mencakup dokumentasi kegiatan harian, rekapitulasi perkembangan dan kedisiplinan peserta didik, pendampingan serta koordinasi penanganan kesehatan siswa, dan pencatatan kondisi fasilitas asrama. Selain itu, tersusunnya laporan kronologi kejadian khusus maupun keadaan darurat sebagai bahan evaluasi dan tindak lanjut, guna mendukung pelaksanaan pengelolaan dan pembinaan asrama yang tertib, efektif, dan akuntabel.'
+        ]
+      },
+      {
+        label: 'RHK 6',
+        text: 'Menyediakan laporan koordinasi dengan koordinator asrama (peserta didik yang diberi tanggung jawab secara berkala) sesuai dengan ketentuan',
+        kegiatan: [
+          'Melakukan koordinasi berkala dengan Koordinator Asrama (peserta didik pengurus) terkait kondisi penghuni dan inventaris.',
+          'Mengadakan pertemuan berkala (mingguan/dwimingguan) dengan Koordinator Asrama (ketua asrama/ketua kamar dari peserta didik) untuk membicarakan kedisiplinan, kebersihan, dan agenda kegiatan',
+          'Menerima laporan/masukan dari koordinator siswa mengenai kendala antar-penghuni dan memberikan bimbingan serta pengarahan kepemimpinan (mentoring).',
+          'Mencatat keluhan, usulan, atau temuan pelanggaran yang dilaporkan oleh koordinator siswa untuk segera ditindaklanjuti oleh Wali Asrama.'
+        ],
+        output: [
+          'Tersedianya laporan koordinasi dengan koordinator asrama yang memuat hasil komunikasi, pemantauan, dan evaluasi terkait kondisi peserta didik, kedisiplinan, kebersihan, serta pengelolaan inventaris asrama. Terlaksananya pertemuan dan koordinasi secara berkala untuk membahas kendala, menerima masukan, serta menindaklanjuti berbagai permasalahan yang terjadi di lingkungan asrama. Selain itu, peserta didik yang diberikan tanggung jawab sebagai pengurus asrama mampu mengembangkan kemampuan kepemimpinan, komunikasi, kerja sama, dan tanggung jawab melalui pendampingan serta arahan dari wali asrama guna mendukung terciptanya lingkungan asrama yang tertib, harmonis, dan kondusif.'
+        ]
+      },
+      {
+        label: 'RHK 7',
+        text: 'Melaksanakan tugas-tugas kedinasan lainnya yang diperintahkan oleh atasan',
+        kegiatan: [
+          'Membawa dan mendampingi siswa yang sakit ke Puskesmas/Rumah Sakit di luar jam kerja, atau menangani situasi darurat di lingkungan sekolah.',
+          'Hadir mewakili Kepala Sekolah/Asrama dalam rapat koordinasi dengan instansi luar (RT/RW lokal, Puskesmas, Komite Sekolah, atau Dinas Pendidikan).',
+          'Melaksanakan piket tambahan pada hari libur nasional, libur semester, atau penjagaan khusus keamanan lingkungan sekolah/asrama.',
+          'Menjadi panitia pelaksana Penerimaan Peserta Didik Baru (PPDB), Hari Besar Nasional, atau peringatan keagamaan di sekolah',
+          'Melaksanakan Upacara Bendera setiap Hari Senin atau Upacara Hari Besar lainnya'
+        ],
+        output: [
+          'Terlaksananya tugas kedinasan lainnya sesuai arahan dan perintah atasan, meliputi pendampingan peserta didik dalam penanganan kondisi kesehatan maupun situasi darurat, pelaksanaan koordinasi dan komunikasi dengan instansi terkait, serta dukungan terhadap pengamanan dan pengawasan lingkungan sekolah maupun asrama. Selain itu, terlaksananya dukungan terhadap berbagai kegiatan kelembagaan, kepanitiaan kegiatan sekolah, penerimaan peserta didik baru, peringatan hari besar nasional dan keagamaan, serta pelaksanaan upacara bendera secara tertib dan sesuai ketentuan. Seluruh tugas dilaksanakan dengan penuh tanggung jawab, disiplin, dan profesionalisme guna mendukung kelancaran penyelenggaraan pendidikan dan operasional Sekolah Rakyat.'
+        ]
+      }
+    ]
+  },
+  wali_asuh: {
+    label: 'Wali Asuh',
+    desc: 'Bimbingan belajar, kemandirian, ibadah, dan pendampingan peserta didik',
+    rhk: [
+      {
+        label: 'RHK 1',
+        text: 'Tersedianya laporan bimbingan dan pengajaran peserta didik Sekolah Rakyat yang sesuai dengan ketentuan.',
+        kegiatan: [
+          'Mendampingi dan membimbing peserta didik dalam mengerjakan tugas sekolah.',
+          'Memberikan bimbingan belajar tambahan sesuai kebutuhan peserta didik.',
+          'Memantau perkembangan akademik dan hasil belajar peserta didik.',
+          'Membantu peserta didik memahami materi pelajaran yang belum dikuasai.',
+          'Berkoordinasi dengan guru mata pelajaran terkait perkembangan dan kesulitan belajar peserta didik.',
+          'Mendokumentasikan hasil bimbingan dan perkembangan belajar peserta didik.'
+        ],
+        output: [
+          'Tersedianya laporan bimbingan dan pengajaran peserta didik yang memuat pelaksanaan pendampingan belajar, pemberian bimbingan akademik, serta pemantauan perkembangan hasil belajar peserta didik. Peserta didik mampu meningkatkan pemahaman terhadap materi pembelajaran, menyelesaikan tugas sekolah secara mandiri, serta mengembangkan kebiasaan belajar yang teratur dan bertanggung jawab. Selain itu, terlaksananya koordinasi dengan guru mata pelajaran dalam mengidentifikasi dan mengatasi kesulitan belajar peserta didik guna mendukung peningkatan prestasi dan pencapaian hasil belajar secara optimal.'
+        ]
+      },
+      {
+        label: 'RHK 2',
+        text: 'Tersedianya laporan kemandirian peserta didik melalui pembinaan dan pendampingan berkelanjutan sesuai dengan ketentuan.',
+        kegiatan: [
+          'Membimbing peserta didik dalam merapikan tempat tidur dan menjaga kebersihan kamar.',
+          'Melatih peserta didik mengelola perlengkapan pribadi dan kebutuhan sehari-hari.',
+          'Membiasakan peserta didik mencuci, merawat, dan menyimpan pakaian secara mandiri.',
+          'Membimbing peserta didik mengatur waktu dan jadwal kegiatan harian.',
+          'Melatih peserta didik bertanggung jawab terhadap tugas dan kewajiban pribadi.',
+          'Memantau perkembangan kemandirian dan tanggung jawab peserta didik.'
+        ],
+        output: [
+          'Tersedianya laporan pembinaan dan pendampingan kemandirian peserta didik yang memuat perkembangan kemampuan dalam mengelola kebutuhan pribadi dan melaksanakan aktivitas sehari-hari. Peserta didik mampu menjaga kebersihan dan kerapian diri serta lingkungan, merawat perlengkapan pribadi, mengatur waktu, dan melaksanakan tanggung jawab tanpa selalu bergantung pada bantuan orang lain. Selain itu, peserta didik mampu menunjukkan sikap disiplin, tanggung jawab, inisiatif, dan kemandirian dalam menjalankan rutinitas sehari-hari melalui pembinaan dan pendampingan secara berkelanjutan.'
+        ]
+      },
+      {
+        label: 'RHK 3',
+        text: 'Tersedianya laporan pendampingan, bimbingan, motivasi, dan pembinaan peserta didik dalam aspek ibadah, belajar, dan aktivitas sehari-hari sesuai dengan ketentuan.',
+        kegiatan: [
+          'Mendampingi peserta didik dalam melaksanakan ibadah sesuai agama dan kepercayaan masing-masing.',
+          'Memberikan motivasi dan arahan dalam meningkatkan semangat belajar peserta didik.',
+          'Melakukan pendampingan dan pembinaan dalam kegiatan harian peserta didik.',
+          'Memberikan nasihat dan penguatan karakter terkait sikap, perilaku, dan sopan santun.',
+          'Melaksanakan komunikasi dan pendekatan personal untuk mengetahui permasalahan peserta didik.',
+          'Mendokumentasikan hasil pendampingan dan perkembangan perilaku peserta didik.'
+        ],
+        output: [
+          'Tersedianya laporan pendampingan, bimbingan, motivasi, dan pembinaan peserta didik yang mencakup aspek keagamaan, pembelajaran, serta aktivitas sehari-hari. Peserta didik mampu meningkatkan kesadaran dan konsistensi dalam menjalankan ibadah sesuai agama dan kepercayaan masing-masing, memiliki motivasi belajar yang lebih baik, serta menunjukkan perilaku positif dalam kehidupan sehari-hari. Selain itu, peserta didik mampu mengembangkan karakter yang religius, disiplin, santun, bertanggung jawab, dan menghargai sesama melalui pendampingan serta pembinaan secara berkelanjutan.'
+        ]
+      },
+      {
+        label: 'RHK 4',
+        text: 'Tersedianya laporan bimbingan spiritual dan emosional, penerapan disiplin, kesehatan, dan kegiatan belajar peserta didik sesuai dengan ketentuan.',
+        kegiatan: [
+          'Memberikan bimbingan spiritual dan penguatan nilai-nilai moral kepada peserta didik.',
+          'Melakukan pendekatan personal dan pendampingan terhadap kondisi emosional peserta didik.',
+          'Membimbing peserta didik dalam menerapkan kedisiplinan dan mematuhi tata tertib.',
+          'Memantau kondisi kesehatan, kebersihan diri, dan pola hidup sehat peserta didik.',
+          'Memantau kehadiran dan keterlibatan peserta didik dalam kegiatan pembelajaran.',
+          'Melakukan pendampingan dan koordinasi dengan pihak terkait apabila ditemukan permasalahan peserta didik.'
+        ],
+        output: [
+          'Tersedianya laporan bimbingan spiritual dan emosional, penerapan disiplin, kesehatan, serta kegiatan belajar peserta didik yang memuat hasil pemantauan dan pelaksanaan pembinaan secara berkala. Peserta didik mampu mengembangkan nilai-nilai spiritual, mengelola emosi dengan baik, menunjukkan perilaku disiplin, serta mematuhi tata tertib yang berlaku. Peserta didik juga mampu menerapkan pola hidup sehat, menjaga kebersihan diri, dan mengikuti kegiatan pembelajaran secara tertib dan bertanggung jawab. Selain itu, teridentifikasinya permasalahan spiritual, emosional, kesehatan, maupun pembelajaran peserta didik sehingga dapat dilakukan pendampingan dan koordinasi dengan pihak terkait secara tepat.'
+        ]
+      },
+      {
+        label: 'RHK 5',
+        text: 'Tersedianya laporan pendampingan peserta didik berkebutuhan khusus sesuai dengan ketentuan.',
+        kegiatan: [
+          'Mengidentifikasi kebutuhan dan karakteristik peserta didik berkebutuhan khusus.',
+          'Mendampingi peserta didik dalam mengikuti kegiatan pembelajaran dan aktivitas harian.',
+          'Membantu peserta didik dalam memenuhi kebutuhan pribadi sesuai tingkat kemandiriannya.',
+          'Memberikan bimbingan dan motivasi sesuai kemampuan serta kebutuhan individual peserta didik.',
+          'Berkoordinasi dengan guru, tenaga pendidik, dan tenaga ahli terkait perkembangan peserta didik.',
+          'Memantau dan mendokumentasikan perkembangan serta kendala yang dialami peserta didik.'
+        ],
+        output: [
+          'Tersedianya laporan pendampingan peserta didik berkebutuhan khusus yang memuat hasil identifikasi kebutuhan, pelaksanaan pendampingan, perkembangan kemampuan, serta kendala yang dihadapi peserta didik dalam kegiatan pembelajaran dan aktivitas sehari-hari. Peserta didik berkebutuhan khusus memperoleh pendampingan sesuai karakteristik, kemampuan, dan kebutuhan individual sehingga mampu berpartisipasi dalam kegiatan pendidikan dan kehidupan sehari-hari secara optimal. Selain itu, peserta didik mendapatkan dukungan dalam mengembangkan kemampuan komunikasi, interaksi sosial, kemandirian, dan keterampilan sesuai potensinya. Terlaksananya koordinasi dengan guru, tenaga pendidik, serta pihak terkait guna memastikan pendampingan yang tepat, berkelanjutan, dan sesuai kebutuhan peserta didik.'
+        ]
+      }
+    ]
+  }
+};
 const BLN=['Jan','Feb','Mar','Apr','Mei','Jun','Jul','Agu','Sep','Okt','Nov','Des'];
 const BLN_FULL=['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
 const HARI3=['Min','Sen','Sel','Rab','Kam','Jum','Sab'];
@@ -633,10 +829,17 @@ const LocalDB = (() => {
   return {
     async getInit() {
       const profil = (await get('kv', 'profil'))?.v || {
-        nama: '', nip: '', pangkat: '', jabatan: '', unit: '',
-        atasan: '', tempat: '', share: true,
-        logoPreview: null, ttdPreview: null
-      };
+  nama: 'Muhammad Faruq Alghifari, S.Pd.',
+  nip: '200107312026211xxx',
+  pangkat: 'Penata Muda/IX',
+  jabatan: 'Penata Layanan Operasional - Wali Asrama',
+  unit: 'SRT 01 Sumedang',
+  atasan: 'Cece Enjang Kartiwa, S.Pd., M.M.',
+  tempat: 'Sumedang',
+  share: true,
+  logoPreview: null,
+  ttdPreview: null
+};
       const settings = (await get('kv', 'settings'))?.v || {
         rhk: [], waktu: [], kegiatan: [], output: []
       };
@@ -2009,6 +2212,33 @@ $('#s-add-waktu').onclick = () => {
   const t = $('#s-list-waktu').querySelectorAll('textarea');
   if (t.length) t[t.length-1].focus();
 };
+  
+async function applyTemplate(key) {
+  const tpl = TEMPLATES[key];
+  if (!tpl) return;
+
+  const r = await askConfirm(
+    'Terapkan Template ' + tpl.label + '?',
+    'Daftar RHK saat ini akan diganti dengan ' + tpl.rhk.length + ' RHK dari template "' + tpl.label + '". Data yang sudah ada akan hilang.',
+    '',
+    'Terapkan'
+  );
+  if (!r.ok) return;
+
+  S.settings.rhk = tpl.rhk.map(item => ({
+    label: item.label,
+    text: item.text,
+    kegiatan: [...item.kegiatan],
+    output: [...item.output]
+  }));
+
+  S.settings = await LocalDB.saveSettings(S.settings);
+  renderRHKList();
+  toast('✅ Template ' + tpl.label + ' diterapkan (' + tpl.rhk.length + ' RHK)');
+}
+
+$('#tpl-asrama').onclick = () => applyTemplate('wali_asrama');
+$('#tpl-asuh').onclick   = () => applyTemplate('wali_asuh');
 $('#s-save-rhk').onclick = async()=>{
   const b = $('#s-save-rhk'); b.disabled = true;
   try { S.settings = await LocalDB.saveSettings(S.settings); toast('RHK tersimpan ✓'); }
